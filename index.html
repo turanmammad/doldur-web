@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doldur — Azərbaycanda elektromobil şarj xəritəsi</title>
+<meta name="description" content="Azərbaycandakı bütün EV şarj operatorları bir xəritədə: canlı status, tam xərc hesablaması, marşrut planı. Charge.az, iVolt, E-lektra, TOK, Azərişıq, Azpetrol.">
+<link rel="canonical" href="https://doldur.pro-tech.az/">
+<meta name="theme-color" content="#0B1518">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doldur">
+<meta property="og:locale" content="az_AZ">
+<meta property="og:title" content="Doldur — Ən yaxın deyil, ən sərfəli">
+<meta property="og:description" content="Bütün şarj operatorları bir xəritədə. 5 saniyəyə bil: harada şarj edim, nə qədər ödəyəcəyəm, işləyəcəkmi.">
+<meta property="og:url" content="https://doldur.pro-tech.az/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Archivo:wght@700&display=swap">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0B1518}
+a{color:#12E28C;text-decoration:none}
+a:hover{color:#5CEFB4}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+<style>
+.h-7f5a1190:hover{background:#5CEFB4;color:#0B1518}
+.h-929f3cd4:hover{color:#E9EFED}
+/* 🔴 Dizayn yalnız masaüstü üçündür (sabit `repeat(3,1fr)`, `1.1fr .9fr`,
+   `1fr 1fr`). Real saytda mobil MƏCBURİDİR — Google mobil-first indeksləyir.
+   Rənglər, şrift və boşluqlar DƏYİŞMİR; yalnız sütunlar birləşir. */
+@media (max-width: 900px){
+  [data-grid]{grid-template-columns:1fr !important}
+  #yuxari{padding-top:48px !important}
+  header nav{display:none !important}
+  h1{font-size:38px !important}
+  h2{font-size:26px !important}
+}
+@media (max-width: 520px){
+  #endir [data-actions]{flex-direction:column;align-items:stretch}
+  #endir [data-actions] button{justify-content:center}
+}
+/* 🔴 Üfüqi daşma qadağandır: bir enli element bütün mətni kəsir.
+   Ölçüldü — `#xerc` birləşmədikdə səhifə 390px-də oxunmaz olurdu. */
+html,body{max-width:100%;overflow-x:hidden}
+img,svg{max-width:100%}
+/* Klaviatura ilə gəzinti görünən olmalıdır — əlçatanlıq tələbi. */
+a:focus-visible,button:focus-visible{outline:2px solid #12E28C;outline-offset:3px;border-radius:8px}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:#0B1518;color:#E9EFED;font-family:'Geist',Inter,system-ui,sans-serif">
+
+  <header style="position:sticky;top:0;z-index:20;background:rgba(11,21,24,.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(233,239,237,.07)">
+    <div style="max-width:1080px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:28px">
+      <a href="#yuxari" style="display:flex;align-items:center;gap:9px">
+        <span style="width:12px;height:22px;border-radius:4px;border:1.5px solid #12E28C;position:relative;overflow:hidden;display:inline-block"><span style="position:absolute;left:0;right:0;bottom:0;height:62%;background:#12E28C"></span></span>
+        <span style="position:relative;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.02em;line-height:1;color:#E9EFED"><span style="color:rgba(233,239,237,.25)">Doldur</span><span style="position:absolute;inset:0;color:#E9EFED;clip-path:inset(50% 0 0 0)">Doldur</span></span>
+      </a>
+      <nav style="display:flex;gap:22px;margin-left:auto;font-size:14px;font-weight:500">
+        <a href="#nece" style="color:#8CA0A4" class="h-929f3cd4">Necə işləyir</a>
+        <a href="#xerc" style="color:#8CA0A4" class="h-929f3cd4">Tam xərc</a>
+        <a href="#operatorlar" style="color:#8CA0A4" class="h-929f3cd4">Operatorlar</a>
+        <a href="#bloq" style="color:#8CA0A4" class="h-929f3cd4">Bloq</a>
+        <a href="#sual" style="color:#8CA0A4" class="h-929f3cd4">Suallar</a>
+      </nav>
+      <a href="#endir" style="min-height:40px;display:inline-flex;align-items:center;padding:0 18px;border-radius:10px;background:#12E28C;color:#0B1518;font-size:14px;font-weight:600" class="h-7f5a1190">Tətbiqi endir</a>
+    </div>
+  </header>
+
+  <section id="yuxari" style="max-width:1080px;margin:0 auto;padding:80px 24px 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center" data-grid>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#12E28C">Azərbaycanda EV şarj xəritəsi</div>
+      <h1 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:52px;letter-spacing:-0.02em;line-height:1.08">Ən yaxın deyil —<br><span style="color:#12E28C">ən sərfəli</span></h1>
+      <p style="margin:0;font-size:17px;line-height:1.55;color:#8CA0A4;max-width:440px;text-wrap:pretty">Bütün şarj operatorları bir xəritədə. 5 saniyəyə bil: harada şarj edim, nə qədər ödəyəcəyəm, işləyəcəkmi.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#endir" style="min-height:52px;display:inline-flex;align-items:center;padding:0 26px;border-radius:10px;background:#12E28C;color:#0B1518;font-size:16px;font-weight:600" class="h-7f5a1190">Tətbiqi endir</a>
+        <a href="#nece" style="min-height:52px;display:inline-flex;align-items:center;padding:0 26px;border-radius:10px;background:#16262A;border:1px solid rgba(18,226,140,.25);color:#12E28C;font-size:16px;font-weight:500">Necə işləyir</a>
+      </div>
+      <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#6B7B80;font-variant-numeric:tabular-nums">
+        <span>6 operator</span><span>3 dil</span><span>24 marka · 70+ model</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div style="width:280px;height:520px;border-radius:32px;background:#0E1B1F;border:1px solid rgba(233,239,237,.1);box-shadow:0 24px 64px rgba(0,0,0,.4);position:relative;overflow:hidden">
+        <div style="position:absolute;left:0;right:0;top:26%;height:6px;background:rgba(233,239,237,.05)"></div>
+        <div style="position:absolute;top:0;bottom:0;left:58%;width:5px;background:rgba(233,239,237,.05);transform:rotate(6deg)"></div>
+        <div style="position:absolute;left:18%;top:20%;width:40px;height:44px;border-radius:8px 8px 14px 14px;background:#16262A;border:3px solid #12E28C;box-shadow:0 0 0 4px rgba(18,226,140,.16);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px">120</div>
+        <div style="position:absolute;left:60%;top:34%;width:34px;height:38px;border-radius:7px 7px 12px 12px;background:#16262A;border:1.5px solid #12E28C;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px">22</div>
+        <div style="position:absolute;left:36%;top:50%;width:34px;height:38px;border-radius:7px 7px 12px 12px;background:#16262A;border:3px solid #F2A93B;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px">60</div>
+        <div style="position:absolute;left:14px;right:14px;bottom:14px;border-radius:12px;background:#16262A;border:1px solid rgba(18,226,140,.15);padding:12px 14px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;font-weight:600">Charge.az — Nərimanov</div>
+          <div style="display:flex;gap:9px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8CA0A4"><span style="color:#E9EFED;font-weight:600;font-size:15px;white-space:nowrap">6,80 ₼</span><span>~26 dəq</span><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;display:inline-block"></span><span style="color:#12E28C">Boş</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nece" style="border-top:1px solid rgba(233,239,237,.06);background:#0E1B1F">
+    <div style="max-width:1080px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:36px">
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Necə işləyir</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" data-grid>
+        
+          <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">01</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Xəritəni aç</span>
+            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">Bütün operatorların stansiyaları fiş-formalı markerlərlə: güc, status, soket uyğunluğu bir baxışda.</span>
+          </div>
+        
+          <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">02</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Tam xərci gör</span>
+            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">Enerji + yol + gözləmə + parkinq. Hesablama açıqdır — hansı rəqəm haradan gəlir, görürsən.</span>
+          </div>
+        
+          <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">03</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Get və şarj et</span>
+            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">Naviqasiya Waze/Google/Apple-a ötürülür, şarj operatorun tətbiqində başlayır. Sonra bir toxunuşla rəy ver.</span>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <section id="xerc" style="max-width:1080px;margin:0 auto;padding:72px 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center" data-grid>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Tam xərc — gizli rəqəm yoxdur</h2>
+      <p style="margin:0;font-size:16px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Kilovat qiyməti aldadıcıdır. Doldur enerji, yol, gözləmə ehtimalı və parkinqi birlikdə hesablayır — və hesablamanı açıq göstərir.</p>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;color:#E9EFED">
+        <li style="display:flex;gap:10px;align-items:center"><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;flex-shrink:0"></span>Maşınına görə real şarj əyrisi</li>
+        <li style="display:flex;gap:10px;align-items:center"><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;flex-shrink:0"></span>Soket uyğunluğu + adapter xəbərdarlığı</li>
+        <li style="display:flex;gap:10px;align-items:center"><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;flex-shrink:0"></span>Uzun yolda batareyaya görə dayanacaq planı</li>
+      </ul>
+    </div>
+    <div style="background:#1E3136;border:1px solid rgba(18,226,140,.18);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px;max-width:380px;justify-self:center;width:100%">
+      <div style="display:flex;align-items:baseline;gap:16px"><span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:34px;font-variant-numeric:tabular-nums;white-space:nowrap">6,80 ₼</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#8CA0A4">~26 dəq</span></div>
+      <svg width="100%" height="32" viewBox="0 0 260 32" preserveAspectRatio="none" style="display:block"><polyline points="0,27 30,24 60,14 90,6 120,5 160,8 200,15 260,25" style="fill:none;stroke:#12E28C;stroke-width:2"></polyline></svg>
+      <div style="display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;border-top:1px solid rgba(233,239,237,.1);padding-top:12px">
+        <div style="display:flex;justify-content:space-between"><span style="color:#8CA0A4">Enerji · 34,2 kWh × 0,29 ₼</span><span>9,92 ₼</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#8CA0A4">Yol · 2,1 km əlavə</span><span>0,31 ₼</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#8CA0A4">Parkinq · 2 saat pulsuz</span><span>0,00 ₼</span></div>
+        <div style="display:flex;justify-content:space-between;font-weight:600;border-top:1px solid rgba(233,239,237,.15);padding-top:8px;font-size:14px"><span>Cəmi</span><span>10,23 ₼</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="operatorlar" style="border-top:1px solid rgba(233,239,237,.06);background:#0E1B1F">
+    <div style="max-width:1080px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Bütün operatorlar, tək xəritə</h2>
+      <p style="margin:0;font-size:15px;color:#8CA0A4;max-width:560px;line-height:1.55;text-wrap:pretty">Doldur şarj satmır — düzgün məlumat verir və səni operatorun öz tətbiqinə yönləndirir. Ona görə tərəfsizik.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        
+          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Charge.az</span>
+        
+          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">iVolt</span>
+        
+          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">E-lektra</span>
+        
+          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">TOK</span>
+        
+          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Azərişıq</span>
+        
+          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Azpetrol</span>
+        
+      </div>
+    </div>
+  </section>
+
+  <section id="bloq" style="max-width:1080px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Bloq</h2>
+      <p style="margin:0;font-size:15px;color:#8CA0A4;max-width:560px;line-height:1.55;text-wrap:pretty">EV sürücüləri üçün praktik bələdçilər — sual axtaranlar bizi buradan tapır.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" data-grid>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
+          <button data-toggle="panel-1" style="cursor:pointer;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;text-align:left;padding:22px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7B80">Bələdçi · 6 dəq</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;line-height:1.3">Bakıda EV şarj etmək: 2026 qiymət müqayisəsi</span>
+            <span style="font-size:13px;color:#12E28C;font-weight:500">Oxu +</span>
+          </button>
+          <div id="panel-1" hidden style="padding:0 22px 22px;font-size:14px;line-height:1.6;color:#8CA0A4;text-wrap:pretty">Charge.az, iVolt, TOK və digərlərinin kWh tarifləri, parkinq şərtləri və real tam xərc — eyni 30 kWh sessiya üçün operator-operator müqayisə.</div>
+        </div>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
+          <button data-toggle="panel-2" style="cursor:pointer;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;text-align:left;padding:22px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7B80">Bələdçi · 4 dəq</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;line-height:1.3">GB/T, CCS2, Type 2 — hansı soket sənin maşınındır?</span>
+            <span style="font-size:13px;color:#12E28C;font-weight:500">Oxu +</span>
+          </button>
+          <div id="panel-2" hidden style="padding:0 22px 22px;font-size:14px;line-height:1.6;color:#8CA0A4;text-wrap:pretty">Çin idxalı maşınların çoxu GB/T ilə gəlir, EU idxalı CCS2 ilə. Marka-model üzrə soket cədvəli və adapter lazım olan hallar.</div>
+        </div>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
+          <button data-toggle="panel-3" style="cursor:pointer;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;text-align:left;padding:22px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7B80">Yol qeydi · 5 dəq</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;line-height:1.3">Bakı–Qəbələ elektromobillə: dayanacaq planı</span>
+            <span style="font-size:13px;color:#12E28C;font-weight:500">Oxu +</span>
+          </button>
+          <div id="panel-3" hidden style="padding:0 22px 22px;font-size:14px;line-height:1.6;color:#8CA0A4;text-wrap:pretty">218 km, 1 şarj dayanacağı, cəmi 6,20 ₼ enerji xərci. Hansı faizlə çıxmaq, harada dayanmaq və qışda nəyə diqqət etmək.</div>
+        </div>
+      
+    </div>
+  </section>
+
+  <section id="sual" style="max-width:760px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Suallar</h2>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
+          <button data-toggle="panel-4" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Doldur pulludur?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
+          <div id="panel-4" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Xeyr. Xəritə, qiymətlər, marşrut planı — hamısı pulsuzdur. Doldur şarj satmır, məlumat verir.</div>
+        </div>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
+          <button data-toggle="panel-5" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Şarjı Doldurdan başlada bilərəm?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
+          <div id="panel-5" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Doldur səni operatorun öz tətbiqinə və ya QR ödənişinə yönləndirir. Beləcə hər operatorla işləyir və tərəfsiz qalır.</div>
+        </div>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
+          <button data-toggle="panel-6" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Statuslar nə qədər dəqiqdir?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
+          <div id="panel-6" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Operator API-ları + icma rəyləri. Status 15 dəqiqədən köhnədirsə, bunu açıq göstəririk — heç vaxt köhnə datanı təzə kimi satmırıq.</div>
+        </div>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
+          <button data-toggle="panel-7" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Maşınım siyahıda yoxdursa?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
+          <div id="panel-7" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">24 marka, 70+ model var — Çin idxalı GB/T soketləri ilə birlikdə. Yoxdursa, batareya həcmini əl ilə yaza bilərsən.</div>
+        </div>
+      
+        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
+          <button data-toggle="panel-8" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">İnternetsiz işləyir?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
+          <div id="panel-8" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Bəli. Xəritə keşdən açılır, son bilinən statuslar &quot;N dəq əvvəl&quot; işarəsi ilə göstərilir.</div>
+        </div>
+      
+    </div>
+  </section>
+
+  <section id="endir" style="border-top:1px solid rgba(233,239,237,.06);background:#0E1B1F">
+    <div style="max-width:1080px;margin:0 auto;padding:64px 24px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;position:relative">
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:30px;letter-spacing:-0.02em">Tətbiqi endir</h2>
+      <p style="margin:0;font-size:15px;color:#8CA0A4;max-width:420px;line-height:1.5">Pulsuz · az / ru / en · internetsiz də işləyir.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" data-actions>
+        <button data-store="play" style="cursor:pointer;min-height:52px;display:inline-flex;align-items:center;gap:10px;padding:0 26px;border-radius:10px;background:#12E28C;border:none;color:#0B1518;font-family:'Geist',sans-serif;font-size:16px;font-weight:600"><svg width="18" height="18" viewBox="0 0 20 20" style="display:block"><path d="M4 2.5L15.5 10L4 17.5Z" style="fill:#0B1518;stroke:none"></path></svg>Google Play</button>
+        <button data-store="ios" style="cursor:pointer;min-height:52px;display:inline-flex;align-items:center;gap:10px;padding:0 26px;border-radius:10px;background:#16262A;border:1px solid rgba(18,226,140,.25);color:#12E28C;font-family:'Geist',sans-serif;font-size:16px;font-weight:500"><svg width="18" height="18" viewBox="0 0 20 20" style="display:block"><path d="M13.5 10.5C13.5 8 15.5 7 15.5 7C15.5 7 14.4 5.2 12.2 5.2C10.9 5.2 10.2 5.9 9.5 5.9C8.7 5.9 7.8 5.2 6.7 5.2C4.6 5.2 3 7.1 3 10C3 13.5 5.6 17 7.2 17C8 17 8.5 16.4 9.5 16.4C10.5 16.4 10.9 17 11.8 17C13.3 17 15 14.2 15.4 12.8C15.4 12.8 13.5 12.3 13.5 10.5Z M11.8 3.8C12.4 3 12.3 2 12.3 2C12.3 2 11.2 2.1 10.5 3C9.9 3.7 10 4.7 10 4.7C10 4.7 11.2 4.6 11.8 3.8Z" style="fill:#12E28C;stroke:none"></path></svg>App Store</button>
+      </div>
+      
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid rgba(233,239,237,.06)">
+    <div style="max-width:1080px;margin:0 auto;padding:32px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;font-size:13px;color:#6B7B80">
+      <span style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:17px;border-radius:3px;border:1.5px solid #12E28C;position:relative;overflow:hidden;display:inline-block"><span style="position:absolute;left:0;right:0;bottom:0;height:62%;background:#12E28C"></span></span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;color:#8CA0A4">Doldur</span></span>
+      <span>© 2026 · doldur.pro-tech.az</span>
+      <span style="display:flex;align-items:center;gap:10px;padding-left:24px;border-left:1px solid rgba(233,239,237,.1)">
+        <span style="width:24px;height:24px;border-radius:4px;background:#F6F5F2;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 20 20" style="display:block"><path d="M7.5 3L5.5 17 M14.5 3L12.5 17 M3.5 7.5H17 M3 12.5H16.5" style="fill:none;stroke:#0D1117;stroke-width:2.2;stroke-linecap:round"></path></svg></span>
+        <span style="display:flex;flex-direction:column;gap:1px;line-height:1.3"><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;color:#E9EFED">PROTECH</span><span style="font-size:11px;color:#6B7B80">Doldur — Protech LLC məhsuludur</span></span>
+      </span>
+      <nav style="margin-left:auto;display:flex;gap:18px">
+        <a href="#bloq" style="color:#8CA0A4">Bloq</a>
+        <a href="#sual" style="color:#8CA0A4">Suallar</a>
+        <a href="#yuxari" style="color:#8CA0A4">Yuxarı ↑</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+<script>
+// Akkordeon — bir anda yalnız biri açıq (dizayndakı davranış).
+(function () {
+  var toggles = document.querySelectorAll('[data-toggle]');
+  function marks(btn, open) {
+    // Dizaynda işarə mətnidir: bloqda «Oxu +» / «Bağla −», FAQ-da «+» / «−».
+    var span = btn.querySelector('span:last-child');
+    if (!span) return;
+    var t = span.textContent.trim();
+    if (t === 'Oxu +' || t === 'Bağla −') span.textContent = open ? 'Bağla −' : 'Oxu +';
+    else if (t === '+' || t === '−') span.textContent = open ? '−' : '+';
+  }
+  toggles.forEach(function (btn) {
+    var panel = document.getElementById(btn.getAttribute('data-toggle'));
+    if (!panel) return;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', panel.id);
+    btn.addEventListener('click', function () {
+      var willOpen = panel.hasAttribute('hidden');
+      // Eyni qrupdakı digərlərini bağla.
+      toggles.forEach(function (other) {
+        var op = document.getElementById(other.getAttribute('data-toggle'));
+        if (op && op !== panel && op.parentElement.parentElement === panel.parentElement.parentElement) {
+          op.setAttribute('hidden', '');
+          other.setAttribute('aria-expanded', 'false');
+          marks(other, false);
+        }
+      });
+      if (willOpen) panel.removeAttribute('hidden');
+      else panel.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', String(willOpen));
+      marks(btn, willOpen);
+    });
+  });
+
+  // Mağaza düymələri. 🔴 Link YOXDURSA uydurma URL açmırıq — izah veririk.
+  var STORE = { play: null, ios: null };
+  var toast;
+  function say(msg) {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.setAttribute('role', 'status');
+      toast.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);' +
+        'background:#16262A;border:1px solid rgba(233,239,237,.14);border-radius:10px;' +
+        'padding:10px 18px;font-size:13px;color:#E9EFED;z-index:50;max-width:90vw;text-align:center';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.display = 'block';
+    clearTimeout(say._t);
+    say._t = setTimeout(function () { toast.style.display = 'none'; }, 2600);
+  }
+  document.querySelectorAll('[data-store]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var url = STORE[btn.getAttribute('data-store')];
+      if (url) window.open(url, '_blank', 'noopener');
+      else say(btn.getAttribute('data-store') === 'play'
+        ? 'Google Play səhifəsi buraxılışda aktivləşəcək'
+        : 'App Store səhifəsi buraxılışda aktivləşəcək');
+    });
+  });
+})();
+</script>
+</body>
+</html>
