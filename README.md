@@ -20,6 +20,6 @@ cd ~/projects/doldur
 bash tools/deploy_site.sh
 ```
 
-Buradakı fayllara birbaşa edilən düzəliş növbəti qurulmada **İTİR**.
+Buradakı fayllara birbaşa edilən düzəliş növbəti qurulmada **İTİR** (`rsync --delete`).
 
 Detal: `~/projects/doldur/docs/site.md`
