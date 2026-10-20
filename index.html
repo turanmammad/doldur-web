@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Doldur — elektromobil şarj xərci və stansiya xəritəsi</title>
-<meta name="description" content="Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 523 aktiv stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt və Charge.az-da.">
+<meta name="description" content="Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 596 aktiv stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt şəbəkəsində.">
 <link rel="canonical" href="https://doldur.pro-tech.az/">
 <link rel="alternate" hreflang="az" href="https://doldur.pro-tech.az/">
 <link rel="alternate" hreflang="x-default" href="https://doldur.pro-tech.az/">
@@ -23,7 +23,7 @@
 <meta name="twitter:image" content="https://doldur.pro-tech.az/og.png?v=2">
 <meta name="apple-itunes-app" content="app-id=6804632387">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "Doldur — EV şarj xərci", "operatingSystem": "iOS 15+, Android", "applicationCategory": "TravelApplication", "inLanguage": ["az", "ru", "en"], "description": "Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 523 aktiv stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt və Charge.az-da.", "url": "https://doldur.pro-tech.az/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AZN"}, "publisher": {"@type": "Organization", "name": "Protech LLC", "email": "info@pro-tech.az"}, "sameAs": ["https://play.google.com/store/apps/details?id=az.doldur", "https://apps.apple.com/az/app/id6804632387"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "Doldur — EV şarj xərci", "operatingSystem": "iOS 15+, Android", "applicationCategory": "TravelApplication", "inLanguage": ["az", "ru", "en"], "description": "Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 596 aktiv stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt şəbəkəsində.", "url": "https://doldur.pro-tech.az/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AZN"}, "publisher": {"@type": "Organization", "name": "Protech LLC", "email": "info@pro-tech.az"}, "sameAs": ["https://play.google.com/store/apps/details?id=az.doldur", "https://apps.apple.com/az/app/id6804632387"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Archivo:wght@700&display=swap">
@@ -115,7 +115,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #12E28C;outline-offset:3p
           <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
             <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">01</span>
             <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Xəritəni aç</span>
-            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">523 aktiv stansiya fiş-formalı markerlərlə: güc, soket uyğunluğu və — operator verirsə — canlı status.</span>
+            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">596 aktiv stansiya fiş-formalı markerlərlə: güc, soket uyğunluğu və — operator verirsə — canlı status.</span>
           </div>
         
           <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
@@ -239,7 +239,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #12E28C;outline-offset:3p
       
         <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
           <button data-toggle="panel-6" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Statuslar nə qədər dəqiqdir?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
-          <div id="panel-6" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Canlı status yalnız operator onu açıq verəndə var (hazırda iVolt və Charge.az). Digər stansiyalarda «bilinmir» yazırıq. Status 15 dəqiqədən köhnədirsə, bunu açıq göstəririk — köhnə datanı təzə kimi satmırıq.</div>
+          <div id="panel-6" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Canlı status yalnız operator onu açıq verəndə var (hazırda iVolt şəbəkəsində). Digər stansiyalarda «bilinmir» yazırıq. Status 15 dəqiqədən köhnədirsə, bunu açıq göstəririk — köhnə datanı təzə kimi satmırıq.</div>
         </div>
       
         <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
