@@ -35,7 +35,7 @@ export const FooterView = (v) => (v.showFooter ? html`
       </div>
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:18px;border-top:1px solid ${v.c.border};font-size:13px;color:${v.c.faint}">
         <span>© 2026 · doldur.pro-tech.az</span>
-        <span style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;letter-spacing:.04em;color:${v.c.text}">PROTECH</span>məhsulu</span>
+        <span style="display:inline-flex;align-items:center;gap:10px"><span aria-hidden="true" style="width:24px;height:24px;border-radius:4px;background:#F6F5F2;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 20 20" style="display:block"><path d="M7.5 3L5.5 17 M14.5 3L12.5 17 M3.5 7.5H17 M3 12.5H16.5" style="fill:none;stroke:#0D1117;stroke-width:2.2;stroke-linecap:round"></path></svg></span><span style="display:flex;flex-direction:column;gap:1px;line-height:1.3"><span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;color:${v.c.text}">PROTECH</span><span style="font-size:11px;color:${v.c.muted}">Doldur — Protech LLC məhsuludur</span></span></span>
         <span style="margin-left:auto">Doldur şarj satmır — məlumat verir.</span>
       </div>
     </div>
