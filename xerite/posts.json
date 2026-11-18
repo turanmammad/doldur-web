@@ -1,63 +1,372 @@
 {
-  "_comment": "QARALAMA — təsisçinin baxışı üçün. Rəqəm yazılmır: live_* blokları səhifə açılanda canlı bazadan qurulur (app.js → expandBlock). Bloklar: p, h, l, t [başlıqlar, sətirlər], tip, live_summary, live_prices, live_example, live_sockets.",
+  "_comment": "GENERASIYA OLUNUR — tools/build_blog.py. Əl ilə redaktə etmə: mənbə content/blog/. «url» — statik yazı (/bloq/…); «blocks» yalnız tətbiqdaxili canlı versiyası olan yazılardadır (canlı bloklar app.js → expandBlock).",
   "posts": [
     {
       "slug": "ev-sarj-qiymetleri-operator-operator",
       "cat": "Qiymətlər",
       "glyph": "₼/kWh",
       "date": "2026-11-18",
-      "author": "Doldur",
+      "author": "Doldur redaksiyası",
       "title": "Azərbaycanda EV şarj qiymətləri — operator-operator",
-      "ex": "Hər operatorun tarif aralığı, neçə stansiyada qiymət məlumatı olduğu və 20→80% şarjın təxmini dəyəri — rəqəmlər bu səhifə açılanda Doldur bazasından hesablanır.",
+      "ex": "Hər operatorun tarif aralığı, neçə stansiyada qiymət məlumatı olduğu və 20→80% şarjın təxmini dəyəri — 18 noyabr 2026 tarixinə Doldur bazasından.",
+      "url": "/bloq/ev-sarj-qiymetleri-operator-operator/",
+      "img": "/bloq/img/ev-sarj-qiymetleri-operator-operator/cover.webp",
+      "readMin": 5,
       "blocks": [
-        ["p", "Bu yazıdakı rəqəmlər əl ilə yazılmayıb: səhifəni açdığın anda Doldur xəritəsindəki stansiyalardan sayılır. Ona görə sabah açsan, operator tarifi dəyişibsə, rəqəm də dəyişəcək."],
-        ["h", "Bu gün bazada nə var"],
-        ["live_summary"],
-        ["h", "Operator-operator tariflər"],
-        ["live_prices"],
-        ["p", "«Tarifli / cəmi» sütunu göstərir ki, operatorun neçə stansiyası üçün qiymət məlumatımız var. Qiyməti bilinməyən stansiyada Doldur rəqəm göstərmir — «Qiymət bilinmir» yazır."],
-        ["h", "20%-dən 80%-ə şarj nə qədər tutar"],
-        ["live_example"],
-        ["p", "Doldur tam xərci belə hesablayır: batareyaya lazım olan enerji şəbəkə itkisi ilə (90% səmərəlilik) bölünür və tariflə vurulur; stansiya sənin yerindən uzaqdırsa, ora gediş-dönüş yolunun enerjisi də əlavə olunur; operator parkinq və ya sessiya haqqı alırsa, onlar da ayrıca sətirdə görünür."],
-        ["tip", "Xəritədə maşınını seç — siyahı hər stansiya üçün öz batareyana görə tam xərci və şarj müddətini göstərəcək."],
-        ["h", "Qiymətə nə vaxt şübhə etməli"],
-        ["l", [
-          "Stansiya kartında «Qiymət N gün əvvəl yoxlanılıb» yazılırsa, tarif o vaxtdan dəyişmiş ola bilər.",
-          "Ödənişi həmişə operatorun öz tətbiqi edir — son qiyməti orada yoxla.",
-          "Doldur şarj satmır və qiyməti özü təyin etmir; yalnız toplanmış məlumatı göstərir."
-        ]]
+        [
+          "p",
+          "Bu yazıdakı rəqəmlər əl ilə yazılmayıb: səhifəni açdığın anda Doldur xəritəsindəki stansiyalardan sayılır. Ona görə sabah açsan, operator tarifi dəyişibsə, rəqəm də dəyişəcək."
+        ],
+        [
+          "h",
+          "Bu gün bazada nə var"
+        ],
+        [
+          "live_summary"
+        ],
+        [
+          "h",
+          "Operator-operator tariflər"
+        ],
+        [
+          "live_prices"
+        ],
+        [
+          "p",
+          "«Tarifli / cəmi» sütunu göstərir ki, operatorun neçə stansiyası üçün qiymət məlumatımız var. Qiyməti bilinməyən stansiyada Doldur rəqəm göstərmir — «Qiymət bilinmir» yazır."
+        ],
+        [
+          "h",
+          "20%-dən 80%-ə şarj nə qədər tutar"
+        ],
+        [
+          "live_example"
+        ],
+        [
+          "p",
+          "Doldur tam xərci belə hesablayır: batareyaya lazım olan enerji şəbəkə itkisi ilə (90% səmərəlilik) bölünür və tariflə vurulur; stansiya sənin yerindən uzaqdırsa, ora gediş-dönüş yolunun enerjisi də əlavə olunur; operator parkinq və ya sessiya haqqı alırsa, onlar da ayrıca sətirdə görünür."
+        ],
+        [
+          "tip",
+          "Xəritədə maşınını seç — siyahı hər stansiya üçün öz batareyana görə tam xərci və şarj müddətini göstərəcək."
+        ],
+        [
+          "h",
+          "Qiymətə nə vaxt şübhə etməli"
+        ],
+        [
+          "l",
+          [
+            "Stansiya kartında «Qiymət N gün əvvəl yoxlanılıb» yazılırsa, tarif o vaxtdan dəyişmiş ola bilər.",
+            "Ödənişi həmişə operatorun öz tətbiqi edir — son qiyməti orada yoxla.",
+            "Doldur şarj satmır və qiyməti özü təyin etmir; yalnız toplanmış məlumatı göstərir."
+          ]
+        ]
       ]
+    },
+    {
+      "slug": "baki-elektromobil-sarj-menteqeleri",
+      "cat": "Bələdçi",
+      "glyph": "Bakı",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Bakıda elektromobil şarj məntəqələri — xəritə və statistika",
+      "ex": "Bakı mərkəzindən 20 km radiusda neçə stansiya var, kimindir, neçəsində sürətli DC şarj və canlı status var — 18 noyabr 2026 tarixinə Doldur məlumatı.",
+      "url": "/bloq/baki-elektromobil-sarj-menteqeleri/",
+      "img": "/bloq/img/baki-elektromobil-sarj-menteqeleri/cover.webp",
+      "readMin": 5
     },
     {
       "slug": "soket-novleri-ccs2-gbt-type2",
       "cat": "Bələdçi",
       "glyph": "GB/T",
       "date": "2026-11-18",
-      "author": "Doldur",
+      "author": "Doldur redaksiyası",
       "title": "Soket növləri: CCS2, GB/T, Type 2 — maşınına hansı uyğundur",
-      "ex": "Stansiyaya getməzdən əvvəl maşınının yuvasını bil. Əsas standartlar, AC ilə DC fərqi və adapterlə bağlı vacib məhdudiyyət.",
+      "ex": "Stansiyaya getməzdən əvvəl maşınının yuvasını bil. Əsas standartlar, AC ilə DC fərqi, Doldur bazasında hansı soketdən neçə stansiyada olduğu və adapterlə bağlı məhdudiyyət.",
+      "url": "/bloq/soket-novleri-ccs2-gbt-type2/",
+      "img": "/bloq/img/soket-novleri-ccs2-gbt-type2/cover.webp",
+      "readMin": 5,
       "blocks": [
-        ["p", "Elektromobil iki cür doldurulur: AC (dəyişən cərəyan) — yavaş, adətən evdə və ya parkinqdə; DC (sabit cərəyan) — sürətli, yol kənarında. Hər birinin öz fişi var və maşının yuvası hansı fişi qəbul etdiyini müəyyən edir."],
-        ["h", "Əsas soket növləri"],
-        ["t", ["Soket", "Cərəyan", "Harada istifadə olunur"], [
-          ["Type 2", "AC", "Avropa standartı (IEC 62196-2); ictimai AC stansiyaların əksəriyyəti"],
-          ["CCS2", "DC", "Avropa sürətli şarj standartı; Type 2 yuvasının altına iki DC kontakt əlavə olunub"],
-          ["GB/T AC", "AC", "Çin milli standartı (GB/T 20234); Çin bazarı üçün buraxılan maşınlar"],
-          ["GB/T DC", "DC", "Çin standartının sürətli şarj fişi — AC fişindən ayrıca, daha böyük yuvadır"],
-          ["CHAdeMO", "DC", "Yapon standartı; bəzi köhnə Yapon modellərində"]
-        ]],
-        ["h", "Maşınımın yuvası hansıdır"],
-        ["l", [
-          "CCS2 yuvalı maşın həm CCS2 (DC), həm də Type 2 (AC) fişini qəbul edir — CCS2 yuvasının üst hissəsi elə Type 2-dir.",
-          "Çin bazarı üçün buraxılan maşında adətən iki ayrı yuva olur: GB/T AC və GB/T DC.",
-          "Ən etibarlı yol: maşının şarj qapağına bax və ya istehsalçının sənədini oxu."
-        ]],
-        ["h", "Bu gün Doldur xəritəsində"],
-        ["live_sockets"],
-        ["h", "Adapter haqqında vacib qeyd"],
-        ["p", "Type 2 → GB/T kimi adapterlər yalnız AC şarj üçündür: onunla GB/T DC sürətli stansiyasında şarj etmək olmur. DC adapterləri isə maşından və stansiyadan asılı olaraq işləməyə bilər. Ona görə Doldur veb versiyası «uyğun» deyəndə yalnız maşının öz yuvasını nəzərə alır — adapter fərz etmir."],
-        ["tip", "Xəritədə maşınını seç və «Maşınıma uyğun soket» filtrini aç — siyahıda yalnız sənin yuvana uyğun konnektoru olan stansiyalar qalacaq."]
+        [
+          "p",
+          "Elektromobil iki cür doldurulur: AC (dəyişən cərəyan) — yavaş, adətən evdə və ya parkinqdə; DC (sabit cərəyan) — sürətli, yol kənarında. Hər birinin öz fişi var və maşının yuvası hansı fişi qəbul etdiyini müəyyən edir."
+        ],
+        [
+          "h",
+          "Əsas soket növləri"
+        ],
+        [
+          "t",
+          [
+            "Soket",
+            "Cərəyan",
+            "Harada istifadə olunur"
+          ],
+          [
+            [
+              "Type 2",
+              "AC",
+              "Avropa standartı (IEC 62196-2); ictimai AC stansiyaların əksəriyyəti"
+            ],
+            [
+              "CCS2",
+              "DC",
+              "Avropa sürətli şarj standartı; Type 2 yuvasının altına iki DC kontakt əlavə olunub"
+            ],
+            [
+              "GB/T AC",
+              "AC",
+              "Çin milli standartı (GB/T 20234); Çin bazarı üçün buraxılan maşınlar"
+            ],
+            [
+              "GB/T DC",
+              "DC",
+              "Çin standartının sürətli şarj fişi — AC fişindən ayrıca, daha böyük yuvadır"
+            ],
+            [
+              "CHAdeMO",
+              "DC",
+              "Yapon standartı; bəzi köhnə Yapon modellərində"
+            ]
+          ]
+        ],
+        [
+          "h",
+          "Maşınımın yuvası hansıdır"
+        ],
+        [
+          "l",
+          [
+            "CCS2 yuvalı maşın həm CCS2 (DC), həm də Type 2 (AC) fişini qəbul edir — CCS2 yuvasının üst hissəsi elə Type 2-dir.",
+            "Çin bazarı üçün buraxılan maşında adətən iki ayrı yuva olur: GB/T AC və GB/T DC.",
+            "Ən etibarlı yol: maşının şarj qapağına bax və ya istehsalçının sənədini oxu."
+          ]
+        ],
+        [
+          "h",
+          "Bu gün Doldur xəritəsində"
+        ],
+        [
+          "live_sockets"
+        ],
+        [
+          "h",
+          "Adapter haqqında vacib qeyd"
+        ],
+        [
+          "p",
+          "Type 2 → GB/T kimi adapterlər yalnız AC şarj üçündür: onunla GB/T DC sürətli stansiyasında şarj etmək olmur. DC adapterləri isə maşından və stansiyadan asılı olaraq işləməyə bilər. Ona görə Doldur veb versiyası «uyğun» deyəndə yalnız maşının öz yuvasını nəzərə alır — adapter fərz etmir."
+        ],
+        [
+          "tip",
+          "Xəritədə maşınını seç və «Maşınıma uyğun soket» filtrini aç — siyahıda yalnız sənin yuvana uyğun konnektoru olan stansiyalar qalacaq."
+        ]
       ]
+    },
+    {
+      "slug": "ac-ve-dc-sarj-ferqi",
+      "cat": "Texnologiya",
+      "glyph": "AC/DC",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "AC və DC şarj: fərq nədir və hansını nə vaxt seçməli",
+      "ex": "AC və DC şarjın texniki fərqi, Azərbaycandakı konnektorların gücə görə bölgüsü, 36 kWh-ın neçə dəqiqəyə dolduğu və tariflərin AC/DC üzrə müqayisəsi.",
+      "url": "/bloq/ac-ve-dc-sarj-ferqi/",
+      "img": "/bloq/img/ac-ve-dc-sarj-ferqi/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "30-kwh-sarj-nece-basa-gelir",
+      "cat": "Qiymətlər",
+      "glyph": "30 kWh",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "30 kWh şarj neçəyə başa gəlir — real tariflərlə hesablama",
+      "ex": "Batareyaya 30 kWh enerji yığmaq üçün sayğacdan nə qədər keçir və bu, hər operatorun tarifi ilə neçə manat edir — 18 noyabr 2026 tarixinə Doldur məlumatı ilə.",
+      "url": "/bloq/30-kwh-sarj-nece-basa-gelir/",
+      "img": "/bloq/img/30-kwh-sarj-nece-basa-gelir/cover.webp",
+      "readMin": 4
+    },
+    {
+      "slug": "baki-qebele-elektromobille",
+      "cat": "Yol qeydi",
+      "glyph": "210 km",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Bakı–Qəbələ elektromobillə: yol boyu şarj stansiyaları və plan",
+      "ex": "Şamaxı və İsmayıllı üzərindən gedən yolda neçə stansiya var, kimindir, hansı soketlə və Qəbələyə çatanda harada şarj etmək olar — xəritə və cədvəllə.",
+      "url": "/bloq/baki-qebele-elektromobille/",
+      "img": "/bloq/img/baki-qebele-elektromobille/cover.webp",
+      "readMin": 7
+    },
+    {
+      "slug": "baki-gence-elektromobille",
+      "cat": "Yol qeydi",
+      "glyph": "349 km",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Bakı–Gəncə elektromobillə: yol boyu şarj stansiyaları və dayanacaq planı",
+      "ex": "Şamaxı, Göyçay və Yevlax üzərindən gedən uzun yolda stansiyalar harada sıxdır, harada seyrəkdir və Gəncədə hansı sürətli məntəqələr var — xəritə və cədvəllə.",
+      "url": "/bloq/baki-gence-elektromobille/",
+      "img": "/bloq/img/baki-gence-elektromobille/cover.webp",
+      "readMin": 8
+    },
+    {
+      "slug": "baki-quba-qusar-elektromobille",
+      "cat": "Yol qeydi",
+      "glyph": "181 km",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Bakı–Quba–Qusar elektromobillə: yol boyu stansiyalar və uzun boşluq",
+      "ex": "Şimal yolunda stansiyalar əsasən Sumqayıt–Yaşma hissəsində və Quba ətrafında toplanıb; arada uzun boşluq var. Harada doldurmalı — xəritə və cədvəllə.",
+      "url": "/bloq/baki-quba-qusar-elektromobille/",
+      "img": "/bloq/img/baki-quba-qusar-elektromobille/cover.webp",
+      "readMin": 6
+    },
+    {
+      "slug": "baki-lenkeran-elektromobille",
+      "cat": "Yol qeydi",
+      "glyph": "241 km",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Bakı–Lənkəran elektromobillə: stansiyalar, boşluqlar və plan",
+      "ex": "Ələt, Salyan və Biləsuvar üzərindən cənuba gedən yolda stansiyalar çoxdur, amma onların bir hissəsində soket növü məlum deyil. Bu, planı necə dəyişir — xəritə və cədvəllə.",
+      "url": "/bloq/baki-lenkeran-elektromobille/",
+      "img": "/bloq/img/baki-lenkeran-elektromobille/cover.webp",
+      "readMin": 6
+    },
+    {
+      "slug": "baki-seki-elektromobille",
+      "cat": "Yol qeydi",
+      "glyph": "289 km",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Bakı–Şəki elektromobillə: Qəbələ üzərindən yol və şarj planı",
+      "ex": "Şamaxı, İsmayıllı və Qəbələ üzərindən Şəkiyə gedən yolda son böyük şarj nöqtəsi Qəbələdir. Şəkidə isə seçim azdır — nəyi əvvəlcədən planlamalı.",
+      "url": "/bloq/baki-seki-elektromobille/",
+      "img": "/bloq/img/baki-seki-elektromobille/cover.webp",
+      "readMin": 7
+    },
+    {
+      "slug": "elektromobili-evde-sarj-etmek",
+      "cat": "Bələdçi",
+      "glyph": "7,4 kW",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Elektromobili evdə şarj etmək: təhlükəsizlik qaydaları və real müddət",
+      "ex": "Evdə şarj ən rahat yoldur, amma elektrik xəttinə ciddi yükdür. İstehsalçıların xəbərdarlıqları, beynəlxalq standartlar və gücə görə real şarj müddəti.",
+      "url": "/bloq/elektromobili-evde-sarj-etmek/",
+      "img": "/bloq/img/elektromobili-evde-sarj-etmek/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "qisda-elektromobil-yurusu",
+      "cat": "Texnologiya",
+      "glyph": "−7 °C",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Qışda elektromobil: yürüş niyə azalır, şarj necə dəyişir və nə etməli",
+      "ex": "Soyuq havada yürüşün azalması mif deyil, ölçülmüş faktdır. Rəqəmlər mənbədən, praktik addımlar isə qış səfərini planlamaq üçün.",
+      "url": "/bloq/qisda-elektromobil-yurusu/",
+      "img": "/bloq/img/qisda-elektromobil-yurusu/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "batareya-20-80-faiz",
+      "cat": "Texnologiya",
+      "glyph": "20–80%",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Batareyanı 20–80% aralığında saxlamaq niyə məsləhət görülür",
+      "ex": "«Həmişə 100%-ə doldur» yoxsa «80%-də dayan»? İstehsalçıların öz tövsiyələri, LFP batareyanın istisnası və Doldur-un hesablamalarında niyə 20→80% götürüldüyü.",
+      "url": "/bloq/batareya-20-80-faiz/",
+      "img": "/bloq/img/batareya-20-80-faiz/cover.webp",
+      "readMin": 4
+    },
+    {
+      "slug": "operator-tetbiqi-ile-sarj",
+      "cat": "Bələdçi",
+      "glyph": "QR",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Hər operatorun tətbiqi ilə şarjı necə başlatmaq — operator-operator bələdçi",
+      "ex": "Azərbaycanda şarjı Doldur yox, operatorun öz tətbiqi başladır. Hansı operatorun tətbiqi var, şarj QR ilə, yoxsa tətbiqdən başlayır və tətbiqlər nə vəd edir — App Store təsvirlərindən.",
+      "url": "/bloq/operator-tetbiqi-ile-sarj/",
+      "img": "/bloq/img/operator-tetbiqi-ile-sarj/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "canli-status-nedir",
+      "cat": "Texnologiya",
+      "glyph": "Canlı",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Şarj stansiyasının canlı statusu nədir və hansı operatorlarda var",
+      "ex": "Xəritədə yaşıl nöqtə həmişə «boşdur» demək deyil. Canlı status haradan gəlir, kimdə var, kimdə yoxdur və bir anlıq status nə deyir — 18 noyabr 2026 tarixinə Doldur məlumatı.",
+      "url": "/bloq/canli-status-nedir/",
+      "img": "/bloq/img/canli-status-nedir/cover.webp",
+      "readMin": 4
+    },
+    {
+      "slug": "gbt-adapter-cin-elektromobilleri",
+      "cat": "Bələdçi",
+      "glyph": "→GB/T",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Çin istehsalı elektromobillər üçün GB/T və adapterlər: nə işləyir, nə işləmir",
+      "ex": "Çin bazarı üçün buraxılan maşının iki yuvası var: GB/T AC və GB/T DC. Azərbaycanda hansından neçə stansiya var, Type 2 → GB/T adapteri nəyə imkan verir və DC adapterində nə risklidir.",
+      "url": "/bloq/gbt-adapter-cin-elektromobilleri/",
+      "img": "/bloq/img/gbt-adapter-cin-elektromobilleri/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "byd-sarj-beledcisi",
+      "cat": "Bələdçi",
+      "glyph": "BYD",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "BYD sahibləri üçün şarj bələdçisi: model-model yuva, güc və xərc",
+      "ex": "Doldur kataloqunda BYD-nin 28 model və versiyası var: bir qismi CCS2, bir qismi GB/T yuvalıdır. Öz BYD-ni tap, uyğun stansiyanı seç və şarjın neçəyə başa gələcəyini bil.",
+      "url": "/bloq/byd-sarj-beledcisi/",
+      "img": "/bloq/img/byd-sarj-beledcisi/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "tesla-azerbaycanda-sarj",
+      "cat": "Bələdçi",
+      "glyph": "NACS",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Tesla ilə Azərbaycanda şarj: CCS2, NACS və uyğun stansiyalar",
+      "ex": "Tesla-nın hansı yuvası olduğu onun hansı bazar üçün buraxıldığından asılıdır. CCS2 yuvalı Tesla üçün Azərbaycanda neçə stansiya var, NACS yuvalı üçün nə qədər — və hansı güclə.",
+      "url": "/bloq/tesla-azerbaycanda-sarj/",
+      "img": "/bloq/img/tesla-azerbaycanda-sarj/cover.webp",
+      "readMin": 5
+    },
+    {
+      "slug": "sarj-stansiyasinda-etiket-qaydalari",
+      "cat": "Bələdçi",
+      "glyph": "P",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Şarj stansiyasında etiket və növbə: hamının vaxtına hörmət edən qaydalar",
+      "ex": "İctimai şarj məntəqəsi paylaşılan yerdir. Bir anlıq real məşğulluq rəqəmi, rezerv və növbə funksiyaları və hamının vaxtına qənaət edən sadə qaydalar.",
+      "url": "/bloq/sarj-stansiyasinda-etiket-qaydalari/",
+      "img": "/bloq/img/sarj-stansiyasinda-etiket-qaydalari/cover.webp",
+      "readMin": 4
+    },
+    {
+      "slug": "doldur-ile-serfeli-stansiya",
+      "cat": "Bələdçi",
+      "glyph": "₼ + km",
+      "date": "2026-11-18",
+      "author": "Doldur redaksiyası",
+      "title": "Doldur ilə ən sərfəli şarj stansiyasını necə tapmaq — addım-addım",
+      "ex": "«Sərfəli» yalnız ucuz tarif deyil: yol, vaxt və soket uyğunluğu da var. Doldur bunları necə birləşdirir və sən xəritədə hansı düymələrə basmalısan.",
+      "url": "/bloq/doldur-ile-serfeli-stansiya/",
+      "img": "/bloq/img/doldur-ile-serfeli-stansiya/cover.webp",
+      "readMin": 5
     }
   ]
 }
