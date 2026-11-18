@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doldur — EV şarj xəritəsi</title>
+<meta name="description" content="Azərbaycandakı bütün elektromobil şarj stansiyaları bir xəritədə: canlı status, tarif, maşınına uyğun soket və tam xərc hesabı. Marşrut planı, operatorlar, bələdçilər.">
+<link rel="canonical" href="https://doldur.pro-tech.az/xerite/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0B1518">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doldur">
+<meta property="og:locale" content="az_AZ">
+<meta property="og:title" content="Doldur — EV şarj xəritəsi">
+<meta property="og:description" content="Bütün operatorlar, tək xəritə: canlı status, tarif və maşınına görə tam xərc.">
+<meta property="og:url" content="https://doldur.pro-tech.az/xerite/">
+<meta property="og:image" content="https://doldur.pro-tech.az/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Doldur — EV şarj xəritəsi">
+<meta name="twitter:description" content="Bütün operatorlar, tək xəritə: canlı status, tarif və maşınına görə tam xərc.">
+<meta name="twitter:image" content="https://doldur.pro-tech.az/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://doldur-relay.pro-tech.az" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button,input,select,textarea{font-family:inherit}
+button{-webkit-tap-highlight-color:transparent}
+button:disabled{cursor:default}
+a{text-decoration:none}
+:focus-visible{outline:2px solid #12E28C;outline-offset:2px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0;margin:-1px}
+.dn-scroll{scrollbar-width:none}
+.dn-scroll::-webkit-scrollbar{display:none}
+@keyframes dPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+@keyframes dIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (min-width:960px){.d-aside{max-height:calc(100vh - 104px);overflow:auto;padding-right:4px}}
+@media (max-width:959px){.d-map{order:-1;height:420px!important;min-height:420px!important;max-height:none!important}.d-hide-t{display:none!important}}
+@media (max-width:900px){.d-nav{order:3;flex-basis:100%!important}}
+@media (max-width:720px){.d-h1{font-size:30px!important}.d-hide-m{display:none!important}.d-map{height:380px!important;min-height:380px!important}.d-th{display:none!important}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Xəritə markerləri: aşağı zumda pin əvəzinə rəngli nöqtə (563 pin üst-üstə düşməsin) */
+.dm-dot{display:none;width:12px;height:12px;border-radius:999px;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.dm-low .dm-pin .dm-head,.dm-low .dm-pin .dm-stem{display:none!important}
+.dm-low .dm-pin .dm-dot{display:block}
+.dm-low .dm-pin.dm-on .dm-head,.dm-low .dm-pin.dm-on .dm-stem{display:flex!important}
+.dm-low .dm-pin.dm-on .dm-stem{display:block!important}
+.dm-low .dm-pin.dm-on .dm-dot{display:none}
+.maplibregl-canvas:focus-visible{outline:none}
+</style>
+<script>
+// Tema yüklənmədən fon rəngi (ağ yanıb-sönmə olmasın).
+try { var t = JSON.parse(localStorage.getItem('doldur.theme') || '"light"'); var d = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches); document.documentElement.style.background = d ? '#0B1518' : '#E9EFED'; } catch (e) {}
+</script>
+<script>
+// ?debug=1 — xətaları DOM-a yazır (headless yoxlama üçün); adi istifadədə heç nə etmir.
+if (/[?&]debug=1/.test(location.search)) { window.__errs = []; var push = function (m) { window.__errs.push(String(m)); var el = document.getElementById('__err'); if (!el) { el = document.createElement('pre'); el.id = '__err'; el.style.display = 'none'; (document.body || document.documentElement).appendChild(el); } el.textContent = window.__errs.join('\n'); };
+  addEventListener('error', function (e) { push('error: ' + (e.message || (e.target && (e.target.src || e.target.href)) || e)); }, true);
+  addEventListener('unhandledrejection', function (e) { push('rejection: ' + (e.reason && (e.reason.stack || e.reason.message) || e.reason)); });
+  var ce = console.error; console.error = function () { push('console.error: ' + Array.prototype.join.call(arguments, ' ')); ce.apply(console, arguments); }; }
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10.24.3",
+    "preact/hooks": "https://esm.sh/preact@10.24.3/hooks",
+    "htm": "https://esm.sh/htm@3.1.1",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.45.4"
+  }
+}
+</script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<noscript><p style="font-family:system-ui,sans-serif;padding:24px">Doldur xəritəsi üçün JavaScript lazımdır. Mobil tətbiq: <a href="https://play.google.com/store/apps/details?id=az.doldur">Google Play</a> · <a href="https://apps.apple.com/az/app/id6804632387">App Store</a></p></noscript>
+</body>
+</html>

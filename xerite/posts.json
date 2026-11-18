@@ -1,0 +1,63 @@
+{
+  "_comment": "QARALAMA — təsisçinin baxışı üçün. Rəqəm yazılmır: live_* blokları səhifə açılanda canlı bazadan qurulur (app.js → expandBlock). Bloklar: p, h, l, t [başlıqlar, sətirlər], tip, live_summary, live_prices, live_example, live_sockets.",
+  "posts": [
+    {
+      "slug": "ev-sarj-qiymetleri-operator-operator",
+      "cat": "Qiymətlər",
+      "glyph": "₼/kWh",
+      "date": "2026-11-18",
+      "author": "Doldur",
+      "title": "Azərbaycanda EV şarj qiymətləri — operator-operator",
+      "ex": "Hər operatorun tarif aralığı, neçə stansiyada qiymət məlumatı olduğu və 20→80% şarjın təxmini dəyəri — rəqəmlər bu səhifə açılanda Doldur bazasından hesablanır.",
+      "blocks": [
+        ["p", "Bu yazıdakı rəqəmlər əl ilə yazılmayıb: səhifəni açdığın anda Doldur xəritəsindəki stansiyalardan sayılır. Ona görə sabah açsan, operator tarifi dəyişibsə, rəqəm də dəyişəcək."],
+        ["h", "Bu gün bazada nə var"],
+        ["live_summary"],
+        ["h", "Operator-operator tariflər"],
+        ["live_prices"],
+        ["p", "«Tarifli / cəmi» sütunu göstərir ki, operatorun neçə stansiyası üçün qiymət məlumatımız var. Qiyməti bilinməyən stansiyada Doldur rəqəm göstərmir — «Qiymət bilinmir» yazır."],
+        ["h", "20%-dən 80%-ə şarj nə qədər tutar"],
+        ["live_example"],
+        ["p", "Doldur tam xərci belə hesablayır: batareyaya lazım olan enerji şəbəkə itkisi ilə (90% səmərəlilik) bölünür və tariflə vurulur; stansiya sənin yerindən uzaqdırsa, ora gediş-dönüş yolunun enerjisi də əlavə olunur; operator parkinq və ya sessiya haqqı alırsa, onlar da ayrıca sətirdə görünür."],
+        ["tip", "Xəritədə maşınını seç — siyahı hər stansiya üçün öz batareyana görə tam xərci və şarj müddətini göstərəcək."],
+        ["h", "Qiymətə nə vaxt şübhə etməli"],
+        ["l", [
+          "Stansiya kartında «Qiymət N gün əvvəl yoxlanılıb» yazılırsa, tarif o vaxtdan dəyişmiş ola bilər.",
+          "Ödənişi həmişə operatorun öz tətbiqi edir — son qiyməti orada yoxla.",
+          "Doldur şarj satmır və qiyməti özü təyin etmir; yalnız toplanmış məlumatı göstərir."
+        ]]
+      ]
+    },
+    {
+      "slug": "soket-novleri-ccs2-gbt-type2",
+      "cat": "Bələdçi",
+      "glyph": "GB/T",
+      "date": "2026-11-18",
+      "author": "Doldur",
+      "title": "Soket növləri: CCS2, GB/T, Type 2 — maşınına hansı uyğundur",
+      "ex": "Stansiyaya getməzdən əvvəl maşınının yuvasını bil. Əsas standartlar, AC ilə DC fərqi və adapterlə bağlı vacib məhdudiyyət.",
+      "blocks": [
+        ["p", "Elektromobil iki cür doldurulur: AC (dəyişən cərəyan) — yavaş, adətən evdə və ya parkinqdə; DC (sabit cərəyan) — sürətli, yol kənarında. Hər birinin öz fişi var və maşının yuvası hansı fişi qəbul etdiyini müəyyən edir."],
+        ["h", "Əsas soket növləri"],
+        ["t", ["Soket", "Cərəyan", "Harada istifadə olunur"], [
+          ["Type 2", "AC", "Avropa standartı (IEC 62196-2); ictimai AC stansiyaların əksəriyyəti"],
+          ["CCS2", "DC", "Avropa sürətli şarj standartı; Type 2 yuvasının altına iki DC kontakt əlavə olunub"],
+          ["GB/T AC", "AC", "Çin milli standartı (GB/T 20234); Çin bazarı üçün buraxılan maşınlar"],
+          ["GB/T DC", "DC", "Çin standartının sürətli şarj fişi — AC fişindən ayrıca, daha böyük yuvadır"],
+          ["CHAdeMO", "DC", "Yapon standartı; bəzi köhnə Yapon modellərində"]
+        ]],
+        ["h", "Maşınımın yuvası hansıdır"],
+        ["l", [
+          "CCS2 yuvalı maşın həm CCS2 (DC), həm də Type 2 (AC) fişini qəbul edir — CCS2 yuvasının üst hissəsi elə Type 2-dir.",
+          "Çin bazarı üçün buraxılan maşında adətən iki ayrı yuva olur: GB/T AC və GB/T DC.",
+          "Ən etibarlı yol: maşının şarj qapağına bax və ya istehsalçının sənədini oxu."
+        ]],
+        ["h", "Bu gün Doldur xəritəsində"],
+        ["live_sockets"],
+        ["h", "Adapter haqqında vacib qeyd"],
+        ["p", "Type 2 → GB/T kimi adapterlər yalnız AC şarj üçündür: onunla GB/T DC sürətli stansiyasında şarj etmək olmur. DC adapterləri isə maşından və stansiyadan asılı olaraq işləməyə bilər. Ona görə Doldur veb versiyası «uyğun» deyəndə yalnız maşının öz yuvasını nəzərə alır — adapter fərz etmir."],
+        ["tip", "Xəritədə maşınını seç və «Maşınıma uyğun soket» filtrini aç — siyahıda yalnız sənin yuvana uyğun konnektoru olan stansiyalar qalacaq."]
+      ]
+    }
+  ]
+}
