@@ -1,7 +1,7 @@
 // Doldur veb — əsas komponent. Dizayn mənbəyi: Claude Design «Doldur Veb.dc.html»
 // (`class Component` → bu Preact sinfi; şablon → views/*.js). Nümunə data YOXDUR:
 // hər rəqəm canlı Supabase-dən (mobil tətbiqin eyni RPC-ləri) və ya ondan hesablanır.
-import { Component, render } from 'preact';
+import { Component, render } from 'https://esm.sh/preact@10.24.3';
 import { html } from './lib/h.js';
 import * as L from './lib/logic.js';
 import * as api from './lib/api.js';

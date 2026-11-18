@@ -1,4 +1,4 @@
-import { h } from 'preact';
-import htm from 'htm';
+import { h } from 'https://esm.sh/preact@10.24.3';
+import htm from 'https://esm.sh/htm@3.1.1';
 
 export const html = htm.bind(h);

@@ -1,0 +1,11 @@
+/* Doldur — öz-hostlu, «ə Ə ₼» üçün yamaqlanmış şriftlər (18.11.2026).
+   Google Fonts Manrope-da «Ə», Geist-də «₼» YOXDUR (fontTools cmap ilə ölçülüb).
+   ₼ Manrope-da da yoxdur → font-family zəncirində Geist ikinci gəlir. */
+@font-face{font-family:'Manrope';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/site/fonts/Manrope-SemiBold.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/site/fonts/Manrope-Bold.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:800;font-display:swap;src:url(/assets/site/fonts/Manrope-ExtraBold.woff2) format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/site/fonts/Geist-Regular.woff2) format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/site/fonts/Geist-Medium.woff2) format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/site/fonts/Geist-SemiBold.woff2) format('woff2')}
+@font-face{font-family:'Geist Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/site/fonts/GeistMono-Medium.woff2) format('woff2')}
+@font-face{font-family:'Geist Mono';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/site/fonts/GeistMono-SemiBold.woff2) format('woff2')}

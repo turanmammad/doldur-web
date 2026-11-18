@@ -1,360 +1,367 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="az" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Doldur — elektromobil şarj xərci və stansiya xəritəsi</title>
-<meta name="description" content="Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 500-dən çox aktiv stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt, E-lektra və Electrify.az şəbəkələrində.">
+<title>Doldur — EV şarj xəritəsi və tam şarj xərci, Azərbaycan</title>
+<meta name="description" content="Azərbaycanda 560-dan çox EV şarj stansiyası bir xəritədə: tarif, canlı status və maşınına görə tam xərc. Brauzerdə aç və ya pulsuz tətbiqi yüklə.">
 <link rel="canonical" href="https://doldur.pro-tech.az/">
 <link rel="alternate" hreflang="az" href="https://doldur.pro-tech.az/">
 <link rel="alternate" hreflang="x-default" href="https://doldur.pro-tech.az/">
-<meta name="theme-color" content="#0B1518">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#E9EFED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1518" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Doldur">
 <meta property="og:locale" content="az_AZ">
 <meta property="og:title" content="Doldur — Ən yaxın deyil, ən sərfəli">
-<meta property="og:description" content="Ən yaxın deyil — ən sərfəli. Maşınına görə tam şarj xərci, batareyaya görə marşrut planı. Pulsuz, az / ru / en.">
+<meta property="og:description" content="Ən yaxın deyil — ən sərfəli. Maşınına görə tam şarj xərci, batareyaya görə marşrut planı. Brauzerdə və pulsuz tətbiqdə.">
 <meta property="og:url" content="https://doldur.pro-tech.az/">
 <meta property="og:image" content="https://doldur.pro-tech.az/og.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Doldur — Ən yaxın deyil, ən sərfəli">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Doldur — Ən yaxın deyil, ən sərfəli">
+<meta name="twitter:description" content="Ən yaxın deyil — ən sərfəli. Maşınına görə tam şarj xərci, batareyaya görə marşrut planı. Brauzerdə və pulsuz tətbiqdə.">
 <meta name="twitter:image" content="https://doldur.pro-tech.az/og.png?v=2">
 <meta name="apple-itunes-app" content="app-id=6804632387">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "Doldur — EV şarj xərci", "operatingSystem": "iOS 15+, Android", "applicationCategory": "TravelApplication", "inLanguage": ["az", "ru", "en"], "description": "Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 500-dən çox aktiv stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt, E-lektra və Electrify.az şəbəkələrində.", "url": "https://doldur.pro-tech.az/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AZN"}, "publisher": {"@type": "Organization", "name": "Protech LLC", "email": "info@pro-tech.az"}, "sameAs": ["https://play.google.com/store/apps/details?id=az.doldur", "https://apps.apple.com/az/app/id6804632387"]}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Archivo:wght@700&display=swap">
-<style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#0B1518}
-a{color:#12E28C;text-decoration:none}
-a:hover{color:#5CEFB4}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-</style>
-<style>
-.h-7f5a1190:hover{background:#5CEFB4;color:#0B1518}
-.h-929f3cd4:hover{color:#E9EFED}
-/* 🔴 Dizayn yalnız masaüstü üçündür (sabit `repeat(3,1fr)`, `1.1fr .9fr`,
-   `1fr 1fr`). Real saytda mobil MƏCBURİDİR — Google mobil-first indeksləyir.
-   Rənglər, şrift və boşluqlar DƏYİŞMİR; yalnız sütunlar birləşir. */
-@media (max-width: 900px){
-  [data-grid]{grid-template-columns:1fr !important}
-  #yuxari{padding-top:48px !important}
-  header nav{display:none !important}
-  h1{font-size:38px !important}
-  h2{font-size:26px !important}
-}
-@media (max-width: 520px){
-  #endir [data-actions]{flex-direction:column;align-items:stretch}
-  #endir [data-actions] button,#endir [data-actions] a{justify-content:center}
-}
-/* 🔴 Üfüqi daşma qadağandır: bir enli element bütün mətni kəsir.
-   Ölçüldü — `#xerc` birləşmədikdə səhifə 390px-də oxunmaz olurdu. */
-html,body{max-width:100%;overflow-x:hidden}
-img,svg{max-width:100%}
-/* Klaviatura ilə gəzinti görünən olmalıdır — əlçatanlıq tələbi. */
-a:focus-visible,button:focus-visible{outline:2px solid #12E28C;outline-offset:3px;border-radius:8px}
-</style>
-<script>window.sentryOnLoad=function(){Sentry.init({environment:"production",sendDefaultPii:false,ignoreErrors:[/ResizeObserver loop/,/Non-Error promise rejection/]})};</script><script src="https://js-de.sentry-cdn.com/67c959ea0eea3c2336de9f8ceab495d4.min.js" crossorigin="anonymous"></script></head>
+<script>(function(){var d=document.documentElement;d.className+=' js';var t='light';try{var q=/[?&]theme=(light|dark|system)\b/.exec(location.search);if(q)localStorage.setItem('doldur.theme',JSON.stringify(q[1]));t=JSON.parse(localStorage.getItem('doldur.theme')||'"light"')}catch(e){}var k=t==='dark'||(t==='system'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);d.setAttribute('data-theme',k?'dark':'light')})();</script>
+<link rel="preload" href="/assets/site/fonts/Manrope-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/site/fonts/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site/site.css?v=20261118">
+<link rel="preconnect" href="https://doldur-relay.pro-tech.az" crossorigin>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://doldur.pro-tech.az/#org","name":"Protech LLC","email":"info@pro-tech.az","telephone":"+994993695333","brand":{"@type":"Brand","name":"Doldur"}},{"@type":"WebSite","@id":"https://doldur.pro-tech.az/#site","url":"https://doldur.pro-tech.az/","name":"Doldur","inLanguage":"az","publisher":{"@id":"https://doldur.pro-tech.az/#org"}},{"@type":"MobileApplication","@id":"https://doldur.pro-tech.az/#app","name":"Doldur — EV şarj xərci","operatingSystem":"iOS, Android","applicationCategory":"TravelApplication","inLanguage":["az","ru","en"],"description":"Elektromobil şarjı neçəyə başa gələcək — şarjdan əvvəl bil. Azərbaycanda 560-dan çox stansiya, 87 marka maşın üçün tam xərc və marşrut planı. Canlı status iVolt, ELEKTRA AZ və Electrify.az şəbəkələrində.","url":"https://doldur.pro-tech.az/","installUrl":["https://play.google.com/store/apps/details?id=az.doldur","https://apps.apple.com/az/app/id6804632387"],"sameAs":["https://play.google.com/store/apps/details?id=az.doldur","https://apps.apple.com/az/app/id6804632387"],"offers":{"@type":"Offer","price":"0","priceCurrency":"AZN"},"publisher":{"@id":"https://doldur.pro-tech.az/#org"}},{"@type":"WebApplication","@id":"https://doldur.pro-tech.az/xerite/#webapp","name":"Doldur — EV şarj xəritəsi (veb)","url":"https://doldur.pro-tech.az/xerite/","applicationCategory":"TravelApplication","browserRequirements":"JavaScript","operatingSystem":"Brauzer","offers":{"@type":"Offer","price":"0","priceCurrency":"AZN"},"publisher":{"@id":"https://doldur.pro-tech.az/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Doldur pulludur?","acceptedAnswer":{"@type":"Answer","text":"Xeyr. Xəritə, qiymətlər, marşrut planı — hamısı pulsuzdur. Doldur şarj satmır, məlumat verir."}},{"@type":"Question","name":"Şarjı Doldurdan başlada bilərəm?","acceptedAnswer":{"@type":"Answer","text":"Xeyr. Doldur şarjı uzaqdan başlatmır və ödəniş qəbul etmir. Şarjı stansiyada operatorun öz tətbiqi ilə başladırsan; Doldur harada və neçəyə olacağını əvvəlcədən göstərir, sonra kWh və məbləği jurnala yazmağa kömək edir."}},{"@type":"Question","name":"Statuslar nə qədər dəqiqdir?","acceptedAnswer":{"@type":"Answer","text":"Canlı status yalnız operator onu açıq verəndə var (hazırda iVolt, ELEKTRA AZ və Electrify.az şəbəkələrində). Digər stansiyalarda «bilinmir» yazırıq. Status 15 dəqiqədən köhnədirsə, bunu açıq göstəririk — köhnə datanı təzə kimi satmırıq."}},{"@type":"Question","name":"Maşınım siyahıda yoxdursa?","acceptedAnswer":{"@type":"Answer","text":"87 marka, 438 model var — Çin idxalı GB/T soketləri ilə birlikdə. Yoxdursa, batareya həcmini əl ilə yaza bilərsən."}},{"@type":"Question","name":"İnternetsiz işləyir?","acceptedAnswer":{"@type":"Answer","text":"Bəli. Xəritə keşdən açılır, son bilinən statuslar \"N dəq əvvəl\" işarəsi ilə göstərilir."}},{"@type":"Question","name":"Tətbiqi yükləmədən istifadə edə bilərəm?","acceptedAnswer":{"@type":"Answer","text":"Bəli. Xəritə, stansiyanın tam xərci, marşrut planı və operatorlar brauzerdə doldur.pro-tech.az/xerite/ ünvanında açılır — bunlar üçün qeydiyyat lazım deyil."}}]}</script>
+<script>window.sentryOnLoad=function(){Sentry.init({environment:"production",sendDefaultPii:false,ignoreErrors:[/ResizeObserver loop/,/Non-Error promise rejection/]})};</script><script src="https://js-de.sentry-cdn.com/67c959ea0eea3c2336de9f8ceab495d4.min.js" crossorigin="anonymous"></script>
+</head>
 <body>
-<div style="min-height:100vh;background:#0B1518;color:#E9EFED;font-family:'Geist',Inter,system-ui,sans-serif">
+<a class="skip" href="#esas">Məzmuna keç</a>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="/" aria-label="Doldur — ana səhifə">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span class="logo-word" aria-hidden="true"><span class="g">Doldur</span><span class="f">Doldur</span></span>
+    </a>
+    <nav class="nav" aria-label="Əsas menyu">
+      <a href="/xerite/">Xəritə</a>
+      <a href="/xerite/?p=route">Marşrut</a>
+      <a href="#operatorlar">Operatorlar</a>
+      <a href="/xerite/?p=blog">Bloq</a>
+      <a href="#suallar">Suallar</a>
+    </nav>
+    <div class="hdr-act">
+      <button type="button" class="icon-btn" id="theme-btn" aria-label="Tünd rejimə keç"><svg class="i-moon" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 12.2A7 7 0 0 1 7.8 3.5A7 7 0 1 0 16.5 12.2Z" style="fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round"/></svg><svg class="i-sun" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" style="fill:none;stroke:currentColor;stroke-width:1.7"/><path d="M10 1.8V4 M10 16V18.2 M1.8 10H4 M16 10H18.2 M4.2 4.2L5.8 5.8 M14.2 14.2L15.8 15.8 M4.2 15.8L5.8 14.2 M14.2 5.8L15.8 4.2" style="fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"/></svg></button>
+      <a class="btn btn-ghost btn-sm hdr-store" href="#endir">Tətbiqi endir</a>
+      <a class="btn btn-primary btn-sm" href="/xerite/?p=login">Daxil ol</a>
+    </div>
+  </div>
+</header>
+<main id="esas">
+  <span id="yuxari"></span>
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Azərbaycanda EV şarj xəritəsi</p>
+          <h1 id="h1" style="margin-top:14px">Ən yaxın deyil — <span class="hl">ən sərfəli</span></h1>
+          <p class="lead">Şarjdan əvvəl bil: harada, neçə manata, hansı tətbiqlə. Maşınına görə tam xərc və batareyaya görə marşrut planı.</p>
+          <div class="cta">
+            <a class="btn btn-primary btn-lg" href="/xerite/"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round"><path d="M2.5 5L7.5 3L12.5 5L17.5 3V15L12.5 17L7.5 15L2.5 17Z M7.5 3V15 M12.5 5V17"/></svg>Xəritəni aç</a>
+            <a class="btn btn-ghost btn-lg" href="https://play.google.com/store/apps/details?id=az.doldur" target="_blank" rel="noopener" data-store="play"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 2.5L15.5 10L4 17.5Z"/></svg>Google Play</a>
+            <a class="btn btn-ghost btn-lg" href="https://apps.apple.com/az/app/id6804632387" target="_blank" rel="noopener" data-store="ios"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 10.5C13.5 8 15.5 7 15.5 7C15.5 7 14.4 5.2 12.2 5.2C10.9 5.2 10.2 5.9 9.5 5.9C8.7 5.9 7.8 5.2 6.7 5.2C4.6 5.2 3 7.1 3 10C3 13.5 5.6 17 7.2 17C8 17 8.5 16.4 9.5 16.4C10.5 16.4 10.9 17 11.8 17C13.3 17 15 14.2 15.4 12.8C15.4 12.8 13.5 12.3 13.5 10.5Z M11.8 3.8C12.4 3 12.3 2 12.3 2C12.3 2 11.2 2.1 10.5 3C9.9 3.7 10 4.7 10 4.7C10 4.7 11.2 4.6 11.8 3.8Z"/></svg>App Store</a>
+          </div>
+          <p class="cta-note">Xəritə brauzerdə qeydiyyatsız açılır · tətbiq pulsuzdur · az / ru / en</p>
+        </div>
+        <div class="live card" id="live" data-state="static" aria-live="polite">
+          <div class="live-top">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="live-title">Ən ucuz boş DC stansiyalar</span>
+            <span class="live-stamp">18 noyabr 2026, 17:10</span>
+          </div>
+          <ul class="live-list">
+        <li><a class="st" href="/xerite/?s=a80fe332-88d7-41f5-ab0d-d247eda6e12a">
+          <span class="st-logo"><img src="/assets/site/operators/electrify_az.png" alt="" width="40" height="40" loading="lazy"></span>
+          <span class="st-main"><span class="st-name">Dernegul M/S</span>
+            <span class="st-meta"><span>Electrify.az</span><span class="tag tag-dc">DC 320 kW</span><span class="tag tag-ok">1 boş</span></span></span>
+          <span class="st-price"><b>0,28 ₼</b><span>hər kWh · 40 kWh ≈ 11,20 ₼</span></span>
+        </a></li>
+        <li><a class="st" href="/xerite/?s=4d002feb-64be-403a-b515-2ceacd5ec4cd">
+          <span class="st-logo"><img src="/assets/site/operators/elektra.png" alt="" width="40" height="40" loading="lazy"></span>
+          <span class="st-main"><span class="st-name">BAKU AUTO MALL BABƏK PROSPEKTİ</span>
+            <span class="st-meta"><span>ELEKTRA AZ</span><span class="tag tag-dc">DC 60 kW</span><span class="tag tag-ok">2 boş</span></span></span>
+          <span class="st-price"><b>0,28 ₼</b><span>hər kWh · 40 kWh ≈ 11,20 ₼</span></span>
+        </a></li>
+        <li><a class="st" href="/xerite/?s=864d7c37-fd4f-4987-b10d-8824844bb4af">
+          <span class="st-logo"><img src="/assets/site/operators/ivolt.png" alt="" width="40" height="40" loading="lazy"></span>
+          <span class="st-main"><span class="st-name">iVOLT Dərnəgül HUB</span>
+            <span class="st-meta"><span>iVolt</span><span class="tag tag-dc">DC 180 kW</span><span class="tag tag-ok">17 boş</span></span></span>
+          <span class="st-price"><b>0,30 ₼</b><span>hər kWh · 40 kWh ≈ 12,00 ₼</span></span>
+        </a></li>
+          </ul>
+          <div class="live-foot">
+            <p class="note live-src">Ölçü: 18 noyabr 2026, 17:10 (Bakı). Boş DC yuvası, son 60 dəqiqədə yenilənmiş status və təsdiqli tarifi olan stansiyalar.</p>
+            <a class="btn btn-ghost btn-sm" href="/xerite/">Hamısı xəritədə</a>
+          </div>
+        </div>
+      </div>
+      <div class="stats" role="list">
+        <div class="stat card" role="listitem"><b>560+</b><span>stansiya bir xəritədə</span></div>
+        <div class="stat card" role="listitem"><b>11</b><span>operator — hamısı tək xəritədə</span></div>
+        <div class="stat card" role="listitem"><b>170+</b><span>stansiyada canlı status: iVolt, ELEKTRA AZ, Electrify.az</span></div>
+        <div class="stat card" role="listitem"><b>87 · 438</b><span>marka · model kataloqda, GB/T daxil</span></div>
+      </div>
+      <p class="note stats-src">Rəqəmlər Doldur bazasındandır, 18 noyabr 2026 tarixinə.</p>
+    </div>
+  </section>
 
-  <header style="position:sticky;top:0;z-index:20;background:rgba(11,21,24,.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(233,239,237,.07)">
-    <div style="max-width:1080px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:28px">
-      <a href="#yuxari" style="display:flex;align-items:center;gap:9px">
-        <span style="width:12px;height:22px;border-radius:4px;border:1.5px solid #12E28C;position:relative;overflow:hidden;display:inline-block"><span style="position:absolute;left:0;right:0;bottom:0;height:62%;background:#12E28C"></span></span>
-        <span style="position:relative;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.02em;line-height:1;color:#E9EFED"><span style="color:rgba(233,239,237,.25)">Doldur</span><span style="position:absolute;inset:0;color:#E9EFED;clip-path:inset(50% 0 0 0)">Doldur</span></span>
+  <section id="nece" aria-labelledby="h-nece">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">3 addım</p>
+        <h2 class="sec" id="h-nece">Necə işləyir</h2>
+      </div>
+      <ol class="steps" style="list-style:none;margin:0;padding:0">
+        <li class="step card"><span class="step-n">01</span><h3>Xəritəni aç</h3><p>560-dan çox stansiya fiş-formalı markerlərlə: güc, soket uyğunluğu və — operator verirsə — canlı status.</p></li>
+        <li class="step card"><span class="step-n">02</span><h3>Tam xərci gör</h3><p>Enerji + yol + gözləmə. Hesablama açıqdır — hansı rəqəm haradan gəlir, görürsən.</p></li>
+        <li class="step card"><span class="step-n">03</span><h3>Get və şarj et</h3><p>Naviqasiya Waze/Google/Apple-a ötürülür, şarj operatorun tətbiqində başlayır. Sonra bir toxunuşla rəy ver.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="xerc" aria-labelledby="h-xerc">
+    <div class="wrap cost-grid">
+      <div>
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="eyebrow">Tam xərc</p>
+          <h2 class="sec" id="h-xerc">Tam xərc — gizli rəqəm yoxdur</h2>
+          <p class="lead">Kilovat qiyməti aldadıcıdır. Doldur enerji, yol və gözləmə ehtimalını birlikdə hesablayır — və hesablamanı açıq göstərir.</p>
+        </div>
+        <ul class="checks">
+          <li>Maşınına görə real şarj əyrisi</li>
+          <li>Soket uyğunluğu + adapter xəbərdarlığı</li>
+          <li>Uzun yolda batareyaya görə dayanacaq planı</li>
+        </ul>
+        <div class="range card">
+          <p><b>40 kWh şarj: 7,60 ₼-dan 16,00 ₼-dək.</b></p>
+          <p>Bazadakı tariflər stansiyadan asılı olaraq 0,19–0,40 ₼/kWh arasındadır (18 noyabr 2026). Eyni şarj ən yaxın stansiyada iki dəfə baha ola bilər — ona görə Doldur yaxınlığı yox, tam xərci sıralayır.</p>
+        </div>
+      </div>
+      <div class="bill card" aria-labelledby="h-bill">
+        <div class="bill-head">
+          <div>
+            <p class="eyebrow" style="font-size:11px">Nümunə hesablama</p>
+            <h3 id="h-bill" style="margin-top:6px">BYD Atto 3 · 20% → 80%</h3>
+            <p class="bill-car">60,5 kWh batareya · ELEKTRA AZ DC 120 kW · 0,28 ₼/kWh</p>
+          </div>
+          <div class="bill-total"><b>11,45 ₼</b><span>ödəniş</span></div>
+        </div>
+        <dl class="bill-rows">
+          <div class="bill-row"><dt>Enerji · 40,3 kWh × 0,28 ₼</dt><dd>11,29 ₼</dd></div>
+          <div class="bill-row"><dt>Yol · 2 km kənara (gediş-dönüş 4 km)</dt><dd>0,16 ₼</dd></div>
+          <div class="bill-row sum"><dt>Cəmi ödəniş</dt><dd>11,45 ₼</dd></div>
+          <div class="bill-row time"><dt>Vaxt · şarj ~33 dəq + yol 10 dəq</dt><dd>43 dəq</dd></div>
+          <div class="bill-row time"><dt>Stansiya məşğuldursa · gözləmə ehtimalı</dt><dd>+20 dəq</dd></div>
+        </dl>
+        <p class="note">40,3 kWh = batareyaya düşən 36,3 kWh ÷ 90% şarj səmərəliliyi. Vaxt pula yazılmır, amma sıralamada nəzərə alınır. Tarif: ELEKTRA AZ, 18 noyabr 2026. Hesablama Doldurun öz xərc mühərriki ilə aparılıb.</p>
+        <a class="btn btn-primary" href="/xerite/">Öz maşınınla hesabla</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="operatorlar" aria-labelledby="h-ops">
+    <div class="wrap">
+      <div class="sec-head-row">
+        <div class="sec-head">
+          <p class="eyebrow">Tərəfsiz müqayisə</p>
+          <h2 class="sec" id="h-ops">Operatorlar, tək xəritə</h2>
+          <p class="lead">Doldur şarj satmır — düzgün məlumat verir və səni operatorun öz tətbiqinə yönləndirir. Ona görə tərəfsizik.</p>
+        </div>
+        <a class="link-arrow" href="/xerite/?p=ops">Tarif və tətbiqləri müqayisə et <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></a>
+      </div>
+      <div class="ops">
+      <a class="op card" href="/xerite/?op=iVolt">
+        <img class="op-logo" src="/assets/site/operators/ivolt.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">iVolt</span>
+          <span class="op-meta"><span class="mono">101 stansiya</span><span class="tag tag-ok">canlı status</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
       </a>
-      <nav style="display:flex;gap:22px;margin-left:auto;font-size:14px;font-weight:500">
-        <a href="#nece" style="color:#8CA0A4" class="h-929f3cd4">Necə işləyir</a>
-        <a href="#xerc" style="color:#8CA0A4" class="h-929f3cd4">Tam xərc</a>
-        <a href="/xerite/" style="color:#12E28C;font-weight:600" class="h-929f3cd4">Xəritə</a>
-<a href="#operatorlar" style="color:#8CA0A4" class="h-929f3cd4">Operatorlar</a>
-        <a href="#bloq" style="color:#8CA0A4" class="h-929f3cd4">Bloq</a>
-        <a href="#sual" style="color:#8CA0A4" class="h-929f3cd4">Suallar</a>
+      <a class="op card" href="/xerite/?op=Az%C9%99ri%C5%9F%C4%B1q">
+        <img class="op-logo" src="/assets/site/operators/azerisiq.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">Azərişıq</span>
+          <span class="op-meta"><span class="mono">84 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=E-lektra">
+        <img class="op-logo" src="/assets/site/operators/elektra.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">ELEKTRA AZ</span>
+          <span class="op-meta"><span class="mono">66 stansiya</span><span class="tag tag-ok">canlı status</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=TOK">
+        <img class="op-logo" src="/assets/site/operators/tok.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">TOK</span>
+          <span class="op-meta"><span class="mono">53 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=Charge.az">
+        <img class="op-logo" src="/assets/site/operators/charge_az.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">Charge.az</span>
+          <span class="op-meta"><span class="mono">42 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=Touch%20Station">
+        <img class="op-logo" src="/assets/site/operators/touch_station.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">Touch Station</span>
+          <span class="op-meta"><span class="mono">39 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=Gofar">
+        <img class="op-logo" src="/assets/site/operators/gofar.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">Gofar</span>
+          <span class="op-meta"><span class="mono">26 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=Electrify.az">
+        <img class="op-logo" src="/assets/site/operators/electrify_az.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">Electrify.az</span>
+          <span class="op-meta"><span class="mono">8 stansiya</span><span class="tag tag-ok">canlı status</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=ENRG.az">
+        <img class="op-logo" src="/assets/site/operators/enrg.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">ENRG.az</span>
+          <span class="op-meta"><span class="mono">7 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=Sigma%20Charge">
+        <img class="op-logo" src="/assets/site/operators/sigma.png" alt="" width="44" height="44" loading="lazy">
+        <span class="op-main"><span class="op-name">Sigma Charge</span>
+          <span class="op-meta"><span class="mono">4 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      <a class="op card" href="/xerite/?op=Tesla">
+        <span class="op-logo st-logo" aria-hidden="true" style="width:44px;height:44px;border-radius:12px;background:var(--surface2);color:var(--text)">TE</span>
+        <span class="op-main"><span class="op-name">Tesla</span>
+          <span class="op-meta"><span class="mono">1 stansiya</span></span></span>
+        <span class="op-arrow"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></span>
+      </a>
+      </div>
+      <div class="ops-foot">
+        <p class="note">Stansiya sayı Doldur bazasındandır (18 noyabr 2026): adı bilinən operatorlarda 431, daha 132 stansiyanın operatoru mənbədə göstərilməyib — onlar da xəritədədir. «Canlı status» — operator boş/məşğul məlumatını açıq verir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="bloq" aria-labelledby="h-bloq">
+    <div class="wrap">
+      <div class="sec-head-row">
+        <div class="sec-head">
+          <p class="eyebrow">Doldur bloqu</p>
+          <h2 class="sec" id="h-bloq">EV sürücüləri üçün praktik bələdçilər</h2>
+          <p class="lead">Soketlər, qiymətlər və uzun yol planları — qısa, dəqiq, Azərbaycan reallığına uyğun.</p>
+        </div>
+        <a class="link-arrow" href="/xerite/?p=blog">Bütün yazılar <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 10H16 M11 5L16 10L11 15"/></svg></a>
+      </div>
+      <div class="posts">
+        <a class="post card" href="/xerite/?p=post&amp;slug=ev-sarj-qiymetleri-operator-operator">
+          <span class="post-cover c1" aria-hidden="true">₼/kWh</span>
+          <span class="post-body"><span class="post-cat">Qiymətlər</span>
+            <h3>Azərbaycanda EV şarj qiymətləri — operator-operator</h3>
+            <p>Hər operatorun tarif aralığı, neçə stansiyada qiymət məlumatı olduğu və 20→80% şarjın təxmini dəyəri — rəqəmlər bu səhifə açılanda Doldur bazasından hesablanır.</p>
+            <span class="post-go">Yazını oxu →</span></span>
+        </a>
+        <a class="post card" href="/xerite/?p=post&amp;slug=soket-novleri-ccs2-gbt-type2">
+          <span class="post-cover c2" aria-hidden="true">GB/T</span>
+          <span class="post-body"><span class="post-cat">Bələdçi</span>
+            <h3>Soket növləri: CCS2, GB/T, Type 2 — maşınına hansı uyğundur</h3>
+            <p>Stansiyaya getməzdən əvvəl maşınının yuvasını bil. Əsas standartlar, AC ilə DC fərqi və adapterlə bağlı vacib məhdudiyyət.</p>
+            <span class="post-go">Yazını oxu →</span></span>
+        </a>
+        <a class="post card" href="/xerite/?p=route">
+          <span class="post-cover c3" aria-hidden="true">Bakı →</span>
+          <span class="post-body"><span class="post-cat">Marşrut planı</span>
+            <h3>Uzun yol: batareyaya görə dayanacaq planı</h3>
+            <p>Hansı faizlə çıxmaq, harada dayanmaq və qışda nəyə diqqət etmək. Öz maşının üçün dəqiq planı marşrut qurub gör.</p>
+            <span class="post-go">Marşrutu vebdə qur →</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="suallar" aria-labelledby="h-faq">
+    <span id="sual"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Suallar</p>
+        <h2 class="sec" id="h-faq">Tez-tez soruşulanlar</h2>
+      </div>
+      <div class="faq">
+      <details><summary>Doldur pulludur?</summary><p>Xeyr. Xəritə, qiymətlər, marşrut planı — hamısı pulsuzdur. Doldur şarj satmır, məlumat verir.</p></details>
+      <details><summary>Şarjı Doldurdan başlada bilərəm?</summary><p>Xeyr. Doldur şarjı uzaqdan başlatmır və ödəniş qəbul etmir. Şarjı stansiyada operatorun öz tətbiqi ilə başladırsan; Doldur harada və neçəyə olacağını əvvəlcədən göstərir, sonra kWh və məbləği jurnala yazmağa kömək edir.</p></details>
+      <details><summary>Statuslar nə qədər dəqiqdir?</summary><p>Canlı status yalnız operator onu açıq verəndə var (hazırda iVolt, ELEKTRA AZ və Electrify.az şəbəkələrində). Digər stansiyalarda «bilinmir» yazırıq. Status 15 dəqiqədən köhnədirsə, bunu açıq göstəririk — köhnə datanı təzə kimi satmırıq.</p></details>
+      <details><summary>Maşınım siyahıda yoxdursa?</summary><p>87 marka, 438 model var — Çin idxalı GB/T soketləri ilə birlikdə. Yoxdursa, batareya həcmini əl ilə yaza bilərsən.</p></details>
+      <details><summary>İnternetsiz işləyir?</summary><p>Bəli. Xəritə keşdən açılır, son bilinən statuslar "N dəq əvvəl" işarəsi ilə göstərilir.</p></details>
+      <details><summary>Tətbiqi yükləmədən istifadə edə bilərəm?</summary><p>Bəli. Xəritə, stansiyanın tam xərci, marşrut planı və operatorlar brauzerdə doldur.pro-tech.az/xerite/ ünvanında açılır — bunlar üçün qeydiyyat lazım deyil.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="endir" aria-labelledby="h-endir">
+    <div class="wrap">
+      <div class="dl card">
+        <div>
+          <h2 id="h-endir">Tətbiqi endir</h2>
+          <p>Pulsuz · az / ru / en · internetsiz də işləyir.</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary btn-lg" href="https://play.google.com/store/apps/details?id=az.doldur" target="_blank" rel="noopener" data-store="play"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 2.5L15.5 10L4 17.5Z"/></svg>Google Play</a>
+          <a class="btn btn-ghost btn-lg" href="https://apps.apple.com/az/app/id6804632387" target="_blank" rel="noopener" data-store="ios"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 10.5C13.5 8 15.5 7 15.5 7C15.5 7 14.4 5.2 12.2 5.2C10.9 5.2 10.2 5.9 9.5 5.9C8.7 5.9 7.8 5.2 6.7 5.2C4.6 5.2 3 7.1 3 10C3 13.5 5.6 17 7.2 17C8 17 8.5 16.4 9.5 16.4C10.5 16.4 10.9 17 11.8 17C13.3 17 15 14.2 15.4 12.8C15.4 12.8 13.5 12.3 13.5 10.5Z M11.8 3.8C12.4 3 12.3 2 12.3 2C12.3 2 11.2 2.1 10.5 3C9.9 3.7 10 4.7 10 4.7C10 4.7 11.2 4.6 11.8 3.8Z"/></svg>App Store</a>
+          <a class="btn btn-ghost btn-lg" href="/xerite/"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round"><path d="M2.5 5L7.5 3L12.5 5L17.5 3V15L12.5 17L7.5 15L2.5 17Z M7.5 3V15 M12.5 5V17"/></svg>Brauzerdə aç</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="ftr">
+  <div class="ftr-in">
+    <div class="ftr-cols">
+      <div class="ftr-brand">
+        <a class="logo" href="/" aria-label="Doldur — ana səhifə" style="gap:8px"><span class="logo-mark" aria-hidden="true"></span><span style="font-family:var(--f-display);font-weight:700;font-size:19px">Doldur</span></a>
+        <p>Azərbaycanda EV şarj xəritəsi. Ən yaxın deyil — ən sərfəli.</p>
+        <div class="cta" style="margin-top:4px">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=az.doldur" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 2.5L15.5 10L4 17.5Z"/></svg>Google Play</a>
+          <a class="btn btn-ghost" href="https://apps.apple.com/az/app/id6804632387" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 10.5C13.5 8 15.5 7 15.5 7C15.5 7 14.4 5.2 12.2 5.2C10.9 5.2 10.2 5.9 9.5 5.9C8.7 5.9 7.8 5.2 6.7 5.2C4.6 5.2 3 7.1 3 10C3 13.5 5.6 17 7.2 17C8 17 8.5 16.4 9.5 16.4C10.5 16.4 10.9 17 11.8 17C13.3 17 15 14.2 15.4 12.8C15.4 12.8 13.5 12.3 13.5 10.5Z M11.8 3.8C12.4 3 12.3 2 12.3 2C12.3 2 11.2 2.1 10.5 3C9.9 3.7 10 4.7 10 4.7C10 4.7 11.2 4.6 11.8 3.8Z"/></svg>App Store</a>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-label="Məhsul">
+        <span class="ftr-h">Məhsul</span>
+        <a href="/xerite/">Xəritə</a>
+        <a href="/xerite/?p=route">Marşrut planı</a>
+        <a href="/xerite/?p=ops">Operatorlar</a>
       </nav>
-      <a href="#endir" style="min-height:40px;display:inline-flex;align-items:center;padding:0 18px;border-radius:10px;background:#12E28C;color:#0B1518;font-size:14px;font-weight:600" class="h-7f5a1190">Tətbiqi endir</a>
-    </div>
-  </header>
-
-  <section id="yuxari" style="max-width:1080px;margin:0 auto;padding:80px 24px 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center" data-grid>
-    <div style="display:flex;flex-direction:column;gap:22px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#12E28C">Azərbaycanda EV şarj xəritəsi</div>
-      <h1 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:52px;letter-spacing:-0.02em;line-height:1.08">Ən yaxın deyil —<br><span style="color:#12E28C">ən sərfəli</span></h1>
-      <p style="margin:0;font-size:17px;line-height:1.55;color:#8CA0A4;max-width:440px;text-wrap:pretty">Şarjdan əvvəl bil: harada, neçə manata, hansı tətbiqlə. Maşınına görə tam xərc və batareyaya görə marşrut planı.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="https://play.google.com/store/apps/details?id=az.doldur" data-store="play" target="_blank" rel="noopener" style="cursor:pointer;text-decoration:none;min-height:52px;display:inline-flex;align-items:center;gap:10px;padding:0 26px;border-radius:10px;background:#12E28C;border:none;color:#0B1518;font-family:'Geist',sans-serif;font-size:16px;font-weight:600"><svg width="18" height="18" viewBox="0 0 20 20" style="display:block"><path d="M4 2.5L15.5 10L4 17.5Z" style="fill:#0B1518;stroke:none"></path></svg>Google Play</a>
-        <a href="https://apps.apple.com/az/app/id6804632387" data-store="ios" target="_blank" rel="noopener" style="cursor:pointer;text-decoration:none;min-height:52px;display:inline-flex;align-items:center;gap:10px;padding:0 26px;border-radius:10px;background:#16262A;border:1px solid rgba(18,226,140,.25);color:#12E28C;font-family:'Geist',sans-serif;font-size:16px;font-weight:500"><svg width="18" height="18" viewBox="0 0 20 20" style="display:block"><path d="M13.5 10.5C13.5 8 15.5 7 15.5 7C15.5 7 14.4 5.2 12.2 5.2C10.9 5.2 10.2 5.9 9.5 5.9C8.7 5.9 7.8 5.2 6.7 5.2C4.6 5.2 3 7.1 3 10C3 13.5 5.6 17 7.2 17C8 17 8.5 16.4 9.5 16.4C10.5 16.4 10.9 17 11.8 17C13.3 17 15 14.2 15.4 12.8C15.4 12.8 13.5 12.3 13.5 10.5Z M11.8 3.8C12.4 3 12.3 2 12.3 2C12.3 2 11.2 2.1 10.5 3C9.9 3.7 10 4.7 10 4.7C10 4.7 11.2 4.6 11.8 3.8Z" style="fill:#12E28C;stroke:none"></path></svg>App Store</a>
-        <a href="#nece" style="min-height:52px;display:inline-flex;align-items:center;padding:0 26px;border-radius:10px;background:#16262A;border:1px solid rgba(18,226,140,.25);color:#12E28C;font-size:16px;font-weight:500">Necə işləyir</a>
-      </div>
-      <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#6B7B80;font-variant-numeric:tabular-nums">
-        <span>11 operator</span><span>3 dil</span><span>87 marka · 438 model</span>
+      <nav class="ftr-col" aria-label="Resurslar">
+        <span class="ftr-h">Resurslar</span>
+        <a href="/xerite/?p=blog">Bloq</a>
+        <a href="#suallar">Suallar</a>
+        <a href="/mexfilik/">Məxfilik siyasəti</a>
+        <a href="/sertler/">İstifadə şərtləri</a>
+      </nav>
+      <div class="ftr-col wide">
+        <span class="ftr-h">Əlaqə</span>
+        <a href="mailto:info@pro-tech.az">info@pro-tech.az</a>
+        <a href="tel:+994993695333" class="mono">+994 99 369 53 33</a>
+        <span style="padding:4px 0;color:var(--muted)">Protech LLC</span>
       </div>
     </div>
-    <div style="display:flex;justify-content:center">
-      <div style="width:280px;height:520px;border-radius:32px;background:#0E1B1F;border:1px solid rgba(233,239,237,.1);box-shadow:0 24px 64px rgba(0,0,0,.4);position:relative;overflow:hidden">
-        <div style="position:absolute;left:0;right:0;top:26%;height:6px;background:rgba(233,239,237,.05)"></div>
-        <div style="position:absolute;top:0;bottom:0;left:58%;width:5px;background:rgba(233,239,237,.05);transform:rotate(6deg)"></div>
-        <div style="position:absolute;left:18%;top:20%;width:40px;height:44px;border-radius:8px 8px 14px 14px;background:#16262A;border:3px solid #12E28C;box-shadow:0 0 0 4px rgba(18,226,140,.16);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px">120</div>
-        <div style="position:absolute;left:60%;top:34%;width:34px;height:38px;border-radius:7px 7px 12px 12px;background:#16262A;border:1.5px solid #12E28C;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px">22</div>
-        <div style="position:absolute;left:36%;top:50%;width:34px;height:38px;border-radius:7px 7px 12px 12px;background:#16262A;border:3px solid #F2A93B;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px">60</div>
-        <div style="position:absolute;left:14px;right:14px;bottom:14px;border-radius:12px;background:#16262A;border:1px solid rgba(18,226,140,.15);padding:12px 14px;display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:12px;font-weight:600">Charge.az — Nərimanov</div>
-          <div style="display:flex;gap:9px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8CA0A4"><span style="color:#E9EFED;font-weight:600;font-size:15px;white-space:nowrap">9,20 ₼</span><span>~26 dəq</span><span style="width:7px;height:7px;border-radius:2px;background:#6B7B80;display:inline-block"></span><span style="color:#8CA0A4;white-space:nowrap">bilinmir</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="nece" style="border-top:1px solid rgba(233,239,237,.06);background:#0E1B1F">
-    <div style="max-width:1080px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:36px">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Necə işləyir</h2>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" data-grid>
-        
-          <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">01</span>
-            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Xəritəni aç</span>
-            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">500-dən çox aktiv stansiya fiş-formalı markerlərlə: güc, soket uyğunluğu və — operator verirsə — canlı status.</span>
-          </div>
-        
-          <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">02</span>
-            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Tam xərci gör</span>
-            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">Enerji + yol + gözləmə. Hesablama açıqdır — hansı rəqəm haradan gəlir, görürsən.</span>
-          </div>
-        
-          <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#12E28C">03</span>
-            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.01em">Get və şarj et</span>
-            <span style="font-size:14px;line-height:1.5;color:#8CA0A4;text-wrap:pretty">Naviqasiya Waze/Google/Apple-a ötürülür, şarj operatorun tətbiqində başlayır. Sonra bir toxunuşla rəy ver.</span>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="xerc" style="max-width:1080px;margin:0 auto;padding:72px 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center" data-grid>
-    <div style="display:flex;flex-direction:column;gap:16px">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Tam xərc — gizli rəqəm yoxdur</h2>
-      <p style="margin:0;font-size:16px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Kilovat qiyməti aldadıcıdır. Doldur enerji, yol və gözləmə ehtimalını birlikdə hesablayır — və hesablamanı açıq göstərir.</p>
-      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;color:#E9EFED">
-        <li style="display:flex;gap:10px;align-items:center"><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;flex-shrink:0"></span>Maşınına görə real şarj əyrisi</li>
-        <li style="display:flex;gap:10px;align-items:center"><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;flex-shrink:0"></span>Soket uyğunluğu + adapter xəbərdarlığı</li>
-        <li style="display:flex;gap:10px;align-items:center"><span style="width:7px;height:7px;border-radius:2px;background:#12E28C;flex-shrink:0"></span>Uzun yolda batareyaya görə dayanacaq planı</li>
-      </ul>
-    </div>
-    <div style="background:#1E3136;border:1px solid rgba(18,226,140,.18);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px;max-width:380px;justify-self:center;width:100%">
-      <div style="display:flex;align-items:baseline;gap:16px"><span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:34px;font-variant-numeric:tabular-nums;white-space:nowrap">9,20 ₼</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#8CA0A4">~26 dəq</span></div>
-      <svg width="100%" height="32" viewBox="0 0 260 32" preserveAspectRatio="none" style="display:block"><polyline points="0,27 30,24 60,14 90,6 120,5 160,8 200,15 260,25" style="fill:none;stroke:#12E28C;stroke-width:2"></polyline></svg>
-      <div style="display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;border-top:1px solid rgba(233,239,237,.1);padding-top:12px">
-        <div style="display:flex;justify-content:space-between"><span style="color:#8CA0A4">Enerji · 34,2 kWh × 0,26 ₼</span><span>8,89 ₼</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:#8CA0A4">Yol · 2,1 km əlavə</span><span>0,31 ₼</span></div>
-        
-        <div style="display:flex;justify-content:space-between;font-weight:600;border-top:1px solid rgba(233,239,237,.15);padding-top:8px;font-size:14px"><span>Cəmi</span><span>9,20 ₼</span></div><div style="font-family:'Geist',sans-serif;font-size:11px;line-height:1.5;color:#6B7B80">Nümunə hesablama · Charge.az tarifi 0,26 ₼/kWh (04.11.2026)</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="operatorlar" style="border-top:1px solid rgba(233,239,237,.06);background:#0E1B1F">
-    <div style="max-width:1080px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:24px">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Operatorlar, tək xəritə</h2>
-      <p style="margin:0;font-size:15px;color:#8CA0A4;max-width:560px;line-height:1.55;text-wrap:pretty">Doldur şarj satmır — düzgün məlumat verir və səni operatorun öz tətbiqinə yönləndirir. Ona görə tərəfsizik.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">E-lektra</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">iVolt</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Azərişıq</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">TOK</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Charge.az</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Touch Station</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Gofar</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Electrify.az</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">ENRG.az</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Sigma Charge</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">ENRG.az</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Sigma Charge</span>
-        
-          <span style="padding:12px 20px;border-radius:999px;background:#16262A;border:1px solid rgba(233,239,237,.1);font-size:15px;font-weight:500">Tesla</span>
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="bloq" style="max-width:1080px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:24px">
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Bloq</h2>
-      <p style="margin:0;font-size:15px;color:#8CA0A4;max-width:560px;line-height:1.55;text-wrap:pretty">EV sürücüləri üçün praktik bələdçilər — sual axtaranlar bizi buradan tapır.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" data-grid>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
-          <button data-toggle="panel-1" style="cursor:pointer;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;text-align:left;padding:22px;display:flex;flex-direction:column;gap:10px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7B80">Bələdçi · 6 dəq</span>
-            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;line-height:1.3">Bakıda EV şarj etmək: 2026 qiymət müqayisəsi</span>
-            <span style="font-size:13px;color:#12E28C;font-weight:500">Oxu +</span>
-          </button>
-          <div id="panel-1" hidden style="padding:0 22px 22px;font-size:14px;line-height:1.6;color:#8CA0A4;text-wrap:pretty">Charge.az, iVolt, TOK və digərlərinin kWh tarifləri və real tam xərc — eyni 30 kWh sessiya üçün operator-operator müqayisə.<br><a href="/xerite/?p=post&amp;slug=ev-sarj-qiymetleri-operator-operator" style="display:inline-block;margin-top:10px;color:#12E28C;font-weight:600;text-decoration:none">Yazını oxu (canlı qiymətlər) →</a></div>
-        </div>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
-          <button data-toggle="panel-2" style="cursor:pointer;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;text-align:left;padding:22px;display:flex;flex-direction:column;gap:10px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7B80">Bələdçi · 4 dəq</span>
-            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;line-height:1.3">GB/T, CCS2, Type 2 — hansı soket sənin maşınındır?</span>
-            <span style="font-size:13px;color:#12E28C;font-weight:500">Oxu +</span>
-          </button>
-          <div id="panel-2" hidden style="padding:0 22px 22px;font-size:14px;line-height:1.6;color:#8CA0A4;text-wrap:pretty">Çin idxalı maşınların çoxu GB/T ilə gəlir, EU idxalı CCS2 ilə. Marka-model üzrə soket cədvəli və adapter lazım olan hallar.<br><a href="/xerite/?p=post&amp;slug=soket-novleri-ccs2-gbt-type2" style="display:inline-block;margin-top:10px;color:#12E28C;font-weight:600;text-decoration:none">Yazını oxu →</a></div>
-        </div>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
-          <button data-toggle="panel-3" style="cursor:pointer;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;text-align:left;padding:22px;display:flex;flex-direction:column;gap:10px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7B80">Yol qeydi · 5 dəq</span>
-            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;line-height:1.3">Bakı–Qəbələ elektromobillə: dayanacaq planı</span>
-            <span style="font-size:13px;color:#12E28C;font-weight:500">Oxu +</span>
-          </button>
-          <div id="panel-3" hidden style="padding:0 22px 22px;font-size:14px;line-height:1.6;color:#8CA0A4;text-wrap:pretty">Hansı faizlə çıxmaq, harada dayanmaq və qışda nəyə diqqət etmək. Öz maşının üçün dəqiq planı tətbiqdə marşrut qurub gör.<br><a href="/xerite/?p=route" style="display:inline-block;margin-top:10px;color:#12E28C;font-weight:600;text-decoration:none">Marşrutu vebdə qur →</a></div>
-        </div>
-      
-    </div>
-  </section>
-
-  <section id="sual" style="max-width:760px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:20px">
-    <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em">Suallar</h2>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
-          <button data-toggle="panel-4" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Doldur pulludur?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
-          <div id="panel-4" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Xeyr. Xəritə, qiymətlər, marşrut planı — hamısı pulsuzdur. Doldur şarj satmır, məlumat verir.</div>
-        </div>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
-          <button data-toggle="panel-5" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Şarjı Doldurdan başlada bilərəm?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
-          <div id="panel-5" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Xeyr. Doldur şarjı uzaqdan başlatmır və ödəniş qəbul etmir. Şarjı stansiyada operatorun öz tətbiqi ilə başladırsan; Doldur harada və neçəyə olacağını əvvəlcədən göstərir, sonra kWh və məbləği jurnala yazmağa kömək edir.</div>
-        </div>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
-          <button data-toggle="panel-6" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Statuslar nə qədər dəqiqdir?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
-          <div id="panel-6" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Canlı status yalnız operator onu açıq verəndə var (hazırda iVolt, E-lektra və Electrify.az şəbəkələrində). Digər stansiyalarda «bilinmir» yazırıq. Status 15 dəqiqədən köhnədirsə, bunu açıq göstəririk — köhnə datanı təzə kimi satmırıq.</div>
-        </div>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
-          <button data-toggle="panel-7" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">Maşınım siyahıda yoxdursa?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
-          <div id="panel-7" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">87 marka, 438 model var — Çin idxalı GB/T soketləri ilə birlikdə. Yoxdursa, batareya həcmini əl ilə yaza bilərsən.</div>
-        </div>
-      
-        <div style="background:#16262A;border:1px solid rgba(233,239,237,.07);border-radius:12px;overflow:hidden">
-          <button data-toggle="panel-8" style="cursor:pointer;width:100%;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;background:none;border:none;color:#E9EFED;font-family:'Geist',sans-serif;font-size:15px;font-weight:500;text-align:left">İnternetsiz işləyir?<span style="font-family:'JetBrains Mono',monospace;color:#12E28C;flex-shrink:0">+</span></button>
-          <div id="panel-8" hidden style="padding:0 20px 18px;font-size:14px;line-height:1.55;color:#8CA0A4;text-wrap:pretty">Bəli. Xəritə keşdən açılır, son bilinən statuslar &quot;N dəq əvvəl&quot; işarəsi ilə göstərilir.</div>
-        </div>
-      
-    </div>
-  </section>
-
-  <section id="endir" style="border-top:1px solid rgba(233,239,237,.06);background:#0E1B1F">
-    <div style="max-width:1080px;margin:0 auto;padding:64px 24px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;position:relative">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:30px;letter-spacing:-0.02em">Tətbiqi endir</h2>
-      <p style="margin:0;font-size:15px;color:#8CA0A4;max-width:420px;line-height:1.5">Pulsuz · az / ru / en · internetsiz də işləyir.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" data-actions>
-        <a href="https://play.google.com/store/apps/details?id=az.doldur" data-store="play" target="_blank" rel="noopener" style="cursor:pointer;text-decoration:none;min-height:52px;display:inline-flex;align-items:center;gap:10px;padding:0 26px;border-radius:10px;background:#12E28C;border:none;color:#0B1518;font-family:'Geist',sans-serif;font-size:16px;font-weight:600"><svg width="18" height="18" viewBox="0 0 20 20" style="display:block"><path d="M4 2.5L15.5 10L4 17.5Z" style="fill:#0B1518;stroke:none"></path></svg>Google Play</a>
-        <a href="https://apps.apple.com/az/app/id6804632387" data-store="ios" target="_blank" rel="noopener" style="cursor:pointer;text-decoration:none;min-height:52px;display:inline-flex;align-items:center;gap:10px;padding:0 26px;border-radius:10px;background:#16262A;border:1px solid rgba(18,226,140,.25);color:#12E28C;font-family:'Geist',sans-serif;font-size:16px;font-weight:500"><svg width="18" height="18" viewBox="0 0 20 20" style="display:block"><path d="M13.5 10.5C13.5 8 15.5 7 15.5 7C15.5 7 14.4 5.2 12.2 5.2C10.9 5.2 10.2 5.9 9.5 5.9C8.7 5.9 7.8 5.2 6.7 5.2C4.6 5.2 3 7.1 3 10C3 13.5 5.6 17 7.2 17C8 17 8.5 16.4 9.5 16.4C10.5 16.4 10.9 17 11.8 17C13.3 17 15 14.2 15.4 12.8C15.4 12.8 13.5 12.3 13.5 10.5Z M11.8 3.8C12.4 3 12.3 2 12.3 2C12.3 2 11.2 2.1 10.5 3C9.9 3.7 10 4.7 10 4.7C10 4.7 11.2 4.6 11.8 3.8Z" style="fill:#12E28C;stroke:none"></path></svg>App Store</a>
-      </div>
-      
-    </div>
-  </section>
-
-  <footer style="border-top:1px solid rgba(233,239,237,.06)">
-    <div style="max-width:1080px;margin:0 auto;padding:32px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;font-size:13px;color:#6B7B80">
-      <span style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:17px;border-radius:3px;border:1.5px solid #12E28C;position:relative;overflow:hidden;display:inline-block"><span style="position:absolute;left:0;right:0;bottom:0;height:62%;background:#12E28C"></span></span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;color:#8CA0A4">Doldur</span></span>
+    <div class="ftr-bottom">
       <span>© 2026 · doldur.pro-tech.az</span>
-      <span style="display:flex;align-items:center;gap:10px;padding-left:24px;border-left:1px solid rgba(233,239,237,.1)">
-        <span style="width:24px;height:24px;border-radius:4px;background:#F6F5F2;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 20 20" style="display:block"><path d="M7.5 3L5.5 17 M14.5 3L12.5 17 M3.5 7.5H17 M3 12.5H16.5" style="fill:none;stroke:#0D1117;stroke-width:2.2;stroke-linecap:round"></path></svg></span>
-        <span style="display:flex;flex-direction:column;gap:1px;line-height:1.3"><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;color:#E9EFED">PROTECH</span><span style="font-size:11px;color:#6B7B80">Doldur — Protech LLC məhsuludur</span></span>
-      </span>
-      <nav style="margin-left:auto;display:flex;gap:18px">
-        <a href="#bloq" style="color:#8CA0A4">Bloq</a>
-        <a href="#sual" style="color:#8CA0A4">Suallar</a>
-        <a href="#yuxari" style="color:#8CA0A4">Yuxarı ↑</a>
-      </nav>
+      <span class="pt"><b>PROTECH</b>məhsulu</span>
+      <span class="end">Doldur şarj satmır — məlumat verir.</span>
     </div>
-  </footer>
-</div>
-<script>
-// Akkordeon — bir anda yalnız biri açıq (dizayndakı davranış).
-(function () {
-  var toggles = document.querySelectorAll('[data-toggle]');
-  function marks(btn, open) {
-    // Dizaynda işarə mətnidir: bloqda «Oxu +» / «Bağla −», FAQ-da «+» / «−».
-    var span = btn.querySelector('span:last-child');
-    if (!span) return;
-    var t = span.textContent.trim();
-    if (t === 'Oxu +' || t === 'Bağla −') span.textContent = open ? 'Bağla −' : 'Oxu +';
-    else if (t === '+' || t === '−') span.textContent = open ? '−' : '+';
-  }
-  toggles.forEach(function (btn) {
-    var panel = document.getElementById(btn.getAttribute('data-toggle'));
-    if (!panel) return;
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', panel.id);
-    btn.addEventListener('click', function () {
-      var willOpen = panel.hasAttribute('hidden');
-      // Eyni qrupdakı digərlərini bağla.
-      toggles.forEach(function (other) {
-        var op = document.getElementById(other.getAttribute('data-toggle'));
-        if (op && op !== panel && op.parentElement.parentElement === panel.parentElement.parentElement) {
-          op.setAttribute('hidden', '');
-          other.setAttribute('aria-expanded', 'false');
-          marks(other, false);
-        }
-      });
-      if (willOpen) panel.removeAttribute('hidden');
-      else panel.setAttribute('hidden', '');
-      btn.setAttribute('aria-expanded', String(willOpen));
-      marks(btn, willOpen);
-    });
-  });
-
-  // Mağaza düymələri <a href>-dir (24.09): link varsa brauzer özü açır.
-  // 🔴 Link YOXDURSA (href="#") uydurma URL açmırıq — izah veririk.
-  var STORE = { play: "https://play.google.com/store/apps/details?id=az.doldur", ios: "https://apps.apple.com/az/app/id6804632387" };
-  var toast;
-  function say(msg) {
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.setAttribute('role', 'status');
-      toast.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);' +
-        'background:#16262A;border:1px solid rgba(233,239,237,.14);border-radius:10px;' +
-        'padding:10px 18px;font-size:13px;color:#E9EFED;z-index:50;max-width:90vw;text-align:center';
-      document.body.appendChild(toast);
-    }
-    toast.textContent = msg;
-    toast.style.display = 'block';
-    clearTimeout(say._t);
-    say._t = setTimeout(function () { toast.style.display = 'none'; }, 2600);
-  }
-  document.querySelectorAll('[data-store]').forEach(function (btn) {
-    btn.addEventListener('click', function (ev) {
-      var url = STORE[btn.getAttribute('data-store')];
-      if (url) return;
-      ev.preventDefault();
-      say(btn.getAttribute('data-store') === 'play'
-        ? 'Google Play səhifəsi buraxılışda aktivləşəcək'
-        : 'App Store səhifəsi buraxılışda aktivləşəcək');
-    });
-  });
-})();
-</script>
+  </div>
+</footer>
+<script src="/assets/site/site.js?v=20261118" defer></script>
 </body>
 </html>

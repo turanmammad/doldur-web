@@ -1,6 +1,6 @@
 // Doldur veb — Supabase sorğuları. Hər sorğu mobil tətbiqin
 // `app/lib/data/*_repository.dart` fayllarındakı ilə EYNİDİR (ad, parametr, sıra).
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
 import { SUPABASE_URL, SUPABASE_KEY, RELAY_BASE } from './config.js';
 
 export const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {

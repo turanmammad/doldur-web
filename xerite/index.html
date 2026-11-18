@@ -19,10 +19,9 @@
 <meta name="twitter:title" content="Doldur — EV şarj xəritəsi">
 <meta name="twitter:description" content="Bütün operatorlar, tək xəritə: canlı status, tarif və maşınına görə tam xərc.">
 <meta name="twitter:image" content="https://doldur.pro-tech.az/og.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://doldur-relay.pro-tech.az" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/site/fonts.css">
+<link rel="preload" href="/assets/site/fonts/Manrope-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <style>
 body{margin:0}
@@ -62,16 +61,7 @@ if (/[?&]debug=1/.test(location.search)) { window.__errs = []; var push = functi
   addEventListener('unhandledrejection', function (e) { push('rejection: ' + (e.reason && (e.reason.stack || e.reason.message) || e.reason)); });
   var ce = console.error; console.error = function () { push('console.error: ' + Array.prototype.join.call(arguments, ' ')); ce.apply(console, arguments); }; }
 </script>
-<script type="importmap">
-{
-  "imports": {
-    "preact": "https://esm.sh/preact@10.24.3",
-    "preact/hooks": "https://esm.sh/preact@10.24.3/hooks",
-    "htm": "https://esm.sh/htm@3.1.1",
-    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.45.4"
-  }
-}
-</script>
+<!-- importmap yoxdur: modullar tam URL ilə idxal olunur (iOS < 16.4 importmap dəstəkləmir) -->
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script type="module" src="./app.js"></script>
 </head>
