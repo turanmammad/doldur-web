@@ -1,0 +1,59 @@
+/* Doldur — stansiya / şəhər / operator səhifələri (tools/build_seo_pages.py).
+   site.css tokenləri üzərində qurulur; yalnız bu səhifələrə aid əlavələr. */
+.pg{max-width:1040px;margin:0 auto;padding:36px 20px 72px}
+.pg .crumbs{margin-bottom:14px}
+.pg h1{font-weight:800;font-size:40px;line-height:1.1;margin:6px 0 10px}
+.pg h2{font-weight:700;font-size:24px;letter-spacing:-.01em;margin:0 0 14px}
+.pg h3{font-weight:700;font-size:17px;margin:0 0 8px}
+.pg p{margin:10px 0;color:var(--muted);line-height:1.65;text-wrap:pretty}
+.pg p b,.pg li b{color:var(--text);font-weight:600}
+.pg a.u{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.pg .blk{margin-top:34px}
+.sub{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--muted);margin:0 0 6px}
+.sub a{color:var(--accent-text)}
+.sub .dot{color:var(--faint)}
+.tag-ac{background:var(--ac-bg);color:var(--ac-text)}
+.tag-warn{background:var(--amber-bg);color:var(--amber-text)}
+.tag-mut{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.answer{padding:18px 20px;margin:18px 0 6px;border-left:4px solid var(--accent)}
+.answer .eyebrow{margin-bottom:6px}
+.answer p{margin:0;color:var(--text);font-size:16px}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.kpi{padding:14px 16px}
+.kpi b{display:block;font-family:var(--f-mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--faint)}
+.tbl{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface)}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.45}
+.tbl th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border-strong);font-weight:600;background:var(--surface2);white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--muted)}
+.tbl td a{color:var(--text);font-weight:500}
+.tbl td a:hover{color:var(--accent-text)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .n{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.near{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.near a{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+.near a:hover{border-color:var(--accent-border)}
+.near .d{font-family:var(--f-mono);font-size:13px;color:var(--faint);white-space:nowrap}
+.near .m{font-size:12px;color:var(--faint);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips a{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:14px}
+.chips a:hover{border-color:var(--accent-border)}
+.chips .c{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+.stamp{font-family:var(--f-mono);font-size:12px;color:var(--faint);margin-top:28px}
+.oph{display:flex;align-items:center;gap:14px}
+.oph img{width:56px;height:56px;border-radius:14px;border:1px solid var(--border);background:#fff}
+.pg .faq{margin-top:4px}
+.pg ul.plain{margin:8px 0;padding-left:20px;color:var(--muted);line-height:1.7}
+.grp{margin-top:22px}
+.grp h3 a{color:var(--text)}
+@media (max-width:959px){.two{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.pg{padding:24px 16px 56px}.pg h1{font-size:30px}.pg h2{font-size:21px}.acts .btn{flex:1 1 100%}
+  .tbl.cards table,.tbl.cards tbody,.tbl.cards tr,.tbl.cards td{display:block;width:100%}
+  .tbl.cards thead{display:none}
+  .tbl.cards tr{padding:10px 12px;border-bottom:1px solid var(--border)}
+  .tbl.cards tr:last-child{border-bottom:none}
+  .tbl.cards td{padding:2px 0;border:none}
+  .tbl.cards td[data-l]::before{content:attr(data-l) ": ";color:var(--faint)}
+  .tbl.cards .n{text-align:left}}
