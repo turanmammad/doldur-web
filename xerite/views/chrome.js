@@ -18,7 +18,7 @@ export const FooterView = (v) => (v.showFooter ? html`
         </div>
         <nav aria-label="Məhsul" style="flex:1 1 140px;display:flex;flex-direction:column;gap:8px;font-size:14px">
           <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:${v.c.faint}">Məhsul</span>
-          ${linkBtn(v, v.goMap, 'Xəritə')}${linkBtn(v, v.goRoute, 'Marşrut planı')}${linkBtn(v, v.goOps, 'Operatorlar')}
+          <a href="/" style="color:${v.c.text};padding:4px 0">Ana səhifə</a>${linkBtn(v, v.goMap, 'Xəritə')}${linkBtn(v, v.goRoute, 'Marşrut planı')}${linkBtn(v, v.goOps, 'Operatorlar')}
         </nav>
         <nav aria-label="Resurslar" style="flex:1 1 140px;display:flex;flex-direction:column;gap:8px;font-size:14px">
           <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:${v.c.faint}">Resurslar</span>

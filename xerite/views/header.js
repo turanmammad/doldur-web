@@ -4,11 +4,12 @@ export const HeaderView = (v) => html`
 
   <header style="position:sticky;top:0;z-index:40;background:${v.c.header};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid ${v.c.border}">
     <div style="max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <button onClick=${v.goMap} aria-label="Doldur — xəritəyə qayıt" style="cursor:pointer;background:none;border:none;padding:4px 2px;display:flex;align-items:center;gap:9px;flex-shrink:0">
+      <a href="/" aria-label="Doldur — ana səhifə" style="padding:4px 2px;display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none">
         <span aria-hidden="true" style="width:13px;height:24px;border-radius:4px;border:1.5px solid #12E28C;position:relative;overflow:hidden;display:inline-block"><span style="position:absolute;left:0;right:0;bottom:0;height:62%;background:#12E28C"></span></span>
         <span aria-hidden="true" style="position:relative;font-family:'Manrope',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;line-height:1"><span style="color:${v.c.ghost}">Doldur</span><span style="position:absolute;inset:0;color:${v.c.text};clip-path:inset(50% 0 0 0)">Doldur</span></span>
-      </button>
+      </a>
       <nav aria-label="Əsas menyu" class="dn-scroll d-nav" style="display:flex;gap:2px;overflow-x:auto;flex:1 1 420px;min-width:0">
+        <a href="/" style="white-space:nowrap;min-height:40px;padding:0 14px;border-radius:10px;font-size:14px;font-weight:500;color:${v.c.muted};display:flex;align-items:center;gap:6px;text-decoration:none"><span aria-hidden="true">←</span>Ana səhifə</a>
         ${(v.navs || []).map((n) => html`
           <button onClick=${n.go} aria-current=${n.cur} style="cursor:pointer;white-space:nowrap;min-height:40px;padding:0 14px;border-radius:10px;border:none;font-size:14px;font-weight:500;background:${n.bg};color:${n.color}">${n.label}</button>
         `)}
