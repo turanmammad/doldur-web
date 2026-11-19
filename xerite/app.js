@@ -96,6 +96,7 @@ class App extends Component {
     this._poll = setInterval(() => { if (document.visibilityState === 'visible' && Date.now() - this.state.stationsAt >= POLL_MS - 2000) this.loadStations(); }, 30000);
 
     this.applyUrl(true);
+    api.track('app_open');
     this.loadStations();
     api.vehicleCatalog().then((r) => { if (r.data) this.setState({ catalog: r.data }); });
     api.costConfig().then((r) => { if (r.data) this.setState({ config: L.configFromJson(r.data) }); });
@@ -301,6 +302,7 @@ class App extends Component {
   // ------------------------------------------------------------- stansiya
   pick(id, opts) {
     const r = this.rowById(id);
+    if (id !== this.state.sel) api.track('station_opened', { prefilled: !!r, source: opts && opts.noPush ? 'link' : 'map' });
     this.setState({ sel: id, detail: null, detailErr: null, connSel: null, reviews: null, navOpen: false, reviewOpen: false, revWorked: null, revReasons: [], revText: '', page: 'map' }, () => {
       if (!(opts && opts.noPush)) this.pushUrl(false);
       this.focusSelOnMap();
@@ -429,6 +431,7 @@ class App extends Component {
     });
     if (r.error) { this.setState({ planLoading: false, planErr: r.error }); return; }
     const plan = r.data;
+    api.track('route_planned', { stops: plan && plan.stops ? plan.stops.filter((x) => x.kind === 'charge').length : 0, feasible: !!(plan && plan.feasible !== false), strategy: 'fastest' });
     this.setState({ planLoading: false, plan, planErr: plan && plan.feasible === false ? { code: plan.reason_code || 'no_reachable_stations', plan } : null });
   }
 
@@ -450,6 +453,7 @@ class App extends Component {
       const r = await api.verifyEmailCode(s.email, s.code);
       if (r.error) { this.setState({ loginBusy: false, loginErr: AUTH_ERR[r.error.code] || 'Kod qəbul olunmadı. Yoxla və yenidən yaz.' }); return; }
       this.setState({ loginBusy: false, loginStep: 0, code: '' });
+      api.track('login', { provider: 'email' });
       this.toast('Xoş gəldin');
       this.go('profile');
     }
@@ -469,6 +473,7 @@ class App extends Component {
       this.setState({ loginErr: (provider === 'google' ? 'Google' : 'Apple') + ' ilə giriş alınmadı. E-poçt kodu ilə daxil ola bilərsən.' });
       return;
     }
+    api.track('login', { provider });
     this.toast('Xoş gəldin'); this.go('profile');
   }
   loadScript(src) {
@@ -904,6 +909,7 @@ class App extends Component {
       toggleFavSel: () => s.sel && this.toggleFav(s.sel),
       shareSel: () => { if (this._selShareRow) this.setState({ share: this.shareFor('st', this._selShareRow), copied: false }); },
       navOpen: s.navOpen, toggleNav: () => this.setState({ navOpen: !s.navOpen }),
+      navTapped: (ab) => api.track('navigate_tapped', { app: ab }),
       socCur: String(s.socCur), socTgt: String(s.socTgt),
       socCurOpts: [5, 10, 15, 20, 25, 30, 40, 50, 60, 70].map((x) => ({ v: String(x), label: x + '%' })),
       socTgtOpts: [50, 60, 70, 80, 90, 100].map((x) => ({ v: String(x), label: x + '%' })),

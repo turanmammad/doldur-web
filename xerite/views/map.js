@@ -172,7 +172,7 @@ const detailPanel = (v) => {
       <div style="background:${v.c.surface};border:1px solid ${v.c.border};border-radius:14px;padding:8px;display:flex;flex-direction:column;animation:dIn .16s ease-out">
         <span style="font-size:12px;color:${v.c.muted};padding:6px 10px">Hansı tətbiqdə açılsın? Yeni pəncərədə açılır.</span>
         ${sel.navLinks.map((nl) => html`
-          <a href=${nl.href} target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;min-height:48px;padding:0 10px;border-radius:10px;color:${v.c.text};font-size:15px;font-weight:500">
+          <a href=${nl.href} onClick=${() => v.navTapped(nl.ab)} target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;min-height:48px;padding:0 10px;border-radius:10px;color:${v.c.text};font-size:15px;font-weight:500">
             <span aria-hidden="true" style="width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:11px;font-weight:600;background:${nl.bg};color:${nl.fg}">${nl.ab}</span>
             <span style="flex:1">${nl.label}</span>
             <span aria-hidden="true" style="color:${v.c.faint}">↗</span>

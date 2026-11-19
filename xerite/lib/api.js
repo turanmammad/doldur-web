@@ -20,6 +20,22 @@ async function norm(error) {
   if (!code && /Failed to fetch|NetworkError|Load failed/i.test(error.message || '')) code = 'offline';
   return { code, status, message: error.message || String(error), body };
 }
+/**
+ * 19.11.2026 — veb hadisələri (mobil tətbiqlə eyni `log_events`, platform 'web').
+ * Cihaz nömrəsi və DNT/bot/host yoxlaması `/assets/site/track.js`-dəndir (sayt ilə ortaq);
+ * o yüklənməyibsə heç nə göndərilmir. Girişlisənsə JWT ilə gedir → hesaba bağlanır (tətbiqdəki kimi).
+ */
+export function track(name, props) {
+  try {
+    if (typeof window.doldurDeviceId !== 'function' || !window.doldurTrackOff || window.doldurTrackOff()) return;
+    sb.rpc('log_events', {
+      p_device_id: window.doldurDeviceId(),
+      p_events: [{ name, ts: new Date().toISOString(), props: props || {} }],
+      p_platform: 'web', p_app_version: null,
+    }).then(() => {}, () => {});
+  } catch (e) { /* analitika heç vaxt UI-ni sındırmır */ }
+}
+
 async function run(p) {
   try {
     const { data, error } = await p;
