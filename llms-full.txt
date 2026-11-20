@@ -11,19 +11,19 @@
 - Stansiya sayı yalnız operatorun öz mənbəsi verəndə göstərilir (iVolt, ELEKTRA AZ, Electrify.az); soket sayından hesablanmır.
 - «Şarj məntəqəsi» — məkanın sinonimidir (dövlət reyestrinin termini).
 
-## Əsas faktlar (20.11.2026 16:29 Bakı vaxtı, Doldur bazası)
+## Əsas faktlar (20.11.2026 19:00 Bakı vaxtı, Doldur bazası)
 
-- Aktiv şarj məkanı: 567 (DC olan: 490; yalnız AC: 77); aktiv soket: 1229.
+- Aktiv şarj məkanı: 524 (DC olan: 449; yalnız AC: 75); aktiv soket: 1170.
 - Ümumi stansiya sayı verilmir: stansiya səviyyəsi yalnız bəzi operatorların mənbəsində var (aşağıda operator üzrə).
-- Adlı operatorlar: 10 əsas operator (≥3 məkan); 132 məkanda operator göstərilməyib.
-- Tarif: 298 məkanda qeydə alınıb, aralıq 0,25–0,40 ₼/kWh. Tarif qeydə alındığı tarixlə saxlanılır; köhnə ola bilər.
+- Adlı operatorlar: 10 əsas operator (≥3 məkan); 109 məkanda operator göstərilməyib.
+- Tarif: 296 məkanda qeydə alınıb, aralıq 0,25–0,40 ₼/kWh. Tarif qeydə alındığı tarixlə saxlanılır; köhnə ola bilər.
 - Canlı status: 174 məkanda (iVolt, ELEKTRA AZ, Electrify.az). Digərlərində status «bilinmir».
 - Bu fayl və statik səhifələr canlı status (boş/məşğul) və konkret məkanın qiymətini VERMİR — onlar Doldur xəritəsində və tətbiqindədir.
 
 ## Səhifələr
 
 - [Veb xəritə](https://doldur.pro-tech.az/xerite/): şarj məkanları, canlı status, qiymət, tam xərc, marşrut planı
-- [Bütün məkanlar](https://doldur.pro-tech.az/stansiya/): 567 məkan ərazilər üzrə
+- [Bütün məkanlar](https://doldur.pro-tech.az/stansiya/): 524 məkan ərazilər üzrə
 - [Şəhərlər](https://doldur.pro-tech.az/seher/): şəhər üzrə məkan və soket sayı, ən güclü məkanlar, operatorlar
 - [Operatorlar](https://doldur.pro-tech.az/operator/): operator üzrə məkan/stansiya/soket sayı, tarif aralığı, canlı status, tətbiq linkləri
 - [Bloq](https://doldur.pro-tech.az/bloq/): şarj qiymətləri, soket növləri, marşrut bələdçiləri
@@ -32,15 +32,15 @@
 
 ## Şəhərlər
 
-- [Bakı](https://doldur.pro-tech.az/seher/baki/): 337 məkan, 752 soket, DC olan məkan 312
+- [Bakı](https://doldur.pro-tech.az/seher/baki/): 301 məkan, 702 soket, DC olan məkan 278
 - [Abşeron rayonu](https://doldur.pro-tech.az/seher/abseron/): 24 məkan, 84 soket, DC olan məkan 18
 - [Sumqayıt](https://doldur.pro-tech.az/seher/sumqayit/): 18 məkan, 51 soket, DC olan məkan 16
 - [Gəncə](https://doldur.pro-tech.az/seher/gence/): 16 məkan, 31 soket, DC olan məkan 11
-- [Şamaxı](https://doldur.pro-tech.az/seher/samaxi/): 11 məkan, 20 soket, DC olan məkan 9
 - [Qusar](https://doldur.pro-tech.az/seher/qusar/): 10 məkan, 17 soket, DC olan məkan 7
+- [Şamaxı](https://doldur.pro-tech.az/seher/samaxi/): 10 məkan, 19 soket, DC olan məkan 8
 - [Qəbələ](https://doldur.pro-tech.az/seher/qebele/): 9 məkan, 16 soket, DC olan məkan 7
-- [Lənkəran](https://doldur.pro-tech.az/seher/lenkeran/): 7 məkan, 14 soket, DC olan məkan 4
 - [Hacıqabul](https://doldur.pro-tech.az/seher/haciqabul/): 6 məkan, 10 soket, DC olan məkan 6
+- [Lənkəran](https://doldur.pro-tech.az/seher/lenkeran/): 6 məkan, 13 soket, DC olan məkan 3
 - [Naxçıvan](https://doldur.pro-tech.az/seher/naxcivan/): 6 məkan, 12 soket, DC olan məkan 6
 - [İsmayıllı](https://doldur.pro-tech.az/seher/ismayilli/): 5 məkan, 12 soket, DC olan məkan 3
 - [Yevlax](https://doldur.pro-tech.az/seher/yevlax/): 5 məkan, 6 soket, DC olan məkan 4
@@ -61,16 +61,16 @@
 
 ## Operatorlar
 
-- [iVolt](https://doldur.pro-tech.az/operator/ivolt/): 105 məkan, 263 stansiya (102 məkanda), 357 soket; tarif aralığı 0,26–0,30 ₼/kWh; canlı status var
-- [Azərişıq](https://doldur.pro-tech.az/operator/azerisiq/): 84 məkan, stansiya sayı mənbədə yoxdur, 132 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,26 ₼/kWh; canlı status yox
-- [ELEKTRA AZ](https://doldur.pro-tech.az/operator/elektra/): 66 məkan, 99 stansiya, 177 soket; tarif aralığı 0,28–0,35 ₼/kWh; canlı status var
-- [TOK](https://doldur.pro-tech.az/operator/tok/): 53 məkan, stansiya sayı mənbədə yoxdur, 98 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı bazada yoxdur; canlı status yox
+- [iVolt](https://doldur.pro-tech.az/operator/ivolt/): 102 məkan, 263 stansiya, 352 soket; tarif aralığı 0,28–0,30 ₼/kWh; canlı status var
+- [Azərişıq](https://doldur.pro-tech.az/operator/azerisiq/): 74 məkan, stansiya sayı mənbədə yoxdur, 120 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,26 ₼/kWh; canlı status yox
+- [ELEKTRA AZ](https://doldur.pro-tech.az/operator/elektra/): 67 məkan, 99 stansiya (66 məkanda), 178 soket; tarif aralığı 0,28–0,35 ₼/kWh; canlı status var
+- [TOK](https://doldur.pro-tech.az/operator/tok/): 52 məkan, stansiya sayı mənbədə yoxdur, 99 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı bazada yoxdur; canlı status yox
 - [Charge.az](https://doldur.pro-tech.az/operator/charge-az/): 42 məkan, stansiya sayı mənbədə yoxdur, 136 soket; tarif aralığı 0,25–0,29 ₼/kWh; canlı status yox
-- [Touch Station](https://doldur.pro-tech.az/operator/touch-station/): 39 məkan, stansiya sayı mənbədə yoxdur, 57 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,40 ₼/kWh; canlı status yox
-- [Gofar](https://doldur.pro-tech.az/operator/gofar/): 26 məkan, stansiya sayı mənbədə yoxdur, 26 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı bazada yoxdur; canlı status yox
+- [Touch Station](https://doldur.pro-tech.az/operator/touch-station/): 35 məkan, stansiya sayı mənbədə yoxdur, 53 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,40 ₼/kWh; canlı status yox
+- [Gofar](https://doldur.pro-tech.az/operator/gofar/): 24 məkan, stansiya sayı mənbədə yoxdur, 24 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı bazada yoxdur; canlı status yox
 - [Electrify.az](https://doldur.pro-tech.az/operator/electrify-az/): 8 məkan, 23 stansiya, 30 soket; tarif aralığı 0,28–0,30 ₼/kWh; canlı status var
 - [ENRG.az](https://doldur.pro-tech.az/operator/enrg/): 7 məkan, stansiya sayı mənbədə yoxdur, 10 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,40 ₼/kWh; canlı status yox
-- [Sigma Charge](https://doldur.pro-tech.az/operator/sigma/): 4 məkan, stansiya sayı mənbədə yoxdur, 7 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,30 ₼/kWh; canlı status yox
+- [Sigma Charge](https://doldur.pro-tech.az/operator/sigma/): 3 məkan, stansiya sayı mənbədə yoxdur, 6 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,30 ₼/kWh; canlı status yox
 
 ## Tətbiq
 
@@ -79,11 +79,11 @@
 
 ## Fiş növləri — soket sayı
 
-- GB/T: 653 soket
-- CCS2: 261 soket
-- Növü bilinmir: 142 soket
-- Type 2: 108 soket
-- CHAdeMO: 59 soket
+- GB/T: 645 soket
+- CCS2: 255 soket
+- Növü bilinmir: 120 soket
+- Type 2: 99 soket
+- CHAdeMO: 45 soket
 - Type 1: 4 soket
 - NACS (Tesla): 2 soket
 
@@ -92,8 +92,8 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 ## Operator detalları
 
 ### iVolt
-- Say: 105 məkan, 263 stansiya (102 məkanda), 357 soket; DC olan məkan: 71
-- Tarif aralığı: 0,26–0,30 ₼ /kWh (104 məkanda qeydə alınıb)
+- Say: 102 məkan, 263 stansiya, 352 soket; DC olan məkan: 69
+- Tarif aralığı: 0,28–0,30 ₼ /kWh (102 məkanda qeydə alınıb)
 - Canlı status: var
 - Telefon: +994 12 404 23 23
 - App Store: https://apps.apple.com/az/app/ivolt/id6502763303
@@ -101,7 +101,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 - Səhifə: https://doldur.pro-tech.az/operator/ivolt/
 
 ### Azərişıq
-- Say: 84 məkan, stansiya sayı mənbədə yoxdur, 132 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 82
+- Say: 74 məkan, stansiya sayı mənbədə yoxdur, 120 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 72
 - Tarif aralığı: 0,26 ₼ /kWh (44 məkanda qeydə alınıb)
 - Canlı status: yox
 - Telefon: 199
@@ -110,7 +110,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 - Səhifə: https://doldur.pro-tech.az/operator/azerisiq/
 
 ### ELEKTRA AZ (bazada «E-lektra»)
-- Say: 66 məkan, 99 stansiya, 177 soket; DC olan məkan: 64
+- Say: 67 məkan, 99 stansiya (66 məkanda), 178 soket; DC olan məkan: 65
 - Tarif aralığı: 0,28–0,35 ₼ /kWh (66 məkanda qeydə alınıb)
 - Canlı status: var
 - Başlatma: tətbiqlə, QR kodla
@@ -120,7 +120,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 - Səhifə: https://doldur.pro-tech.az/operator/elektra/
 
 ### TOK
-- Say: 53 məkan, stansiya sayı mənbədə yoxdur, 98 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 53
+- Say: 52 məkan, stansiya sayı mənbədə yoxdur, 99 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 52
 - Tarif aralığı: bazada yoxdur /kWh (0 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə
@@ -140,7 +140,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 - Səhifə: https://doldur.pro-tech.az/operator/charge-az/
 
 ### Touch Station
-- Say: 39 məkan, stansiya sayı mənbədə yoxdur, 57 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 33
+- Say: 35 məkan, stansiya sayı mənbədə yoxdur, 53 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 29
 - Tarif aralığı: 0,40 ₼ /kWh (33 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə
@@ -148,7 +148,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 - Səhifə: https://doldur.pro-tech.az/operator/touch-station/
 
 ### Gofar
-- Say: 26 məkan, stansiya sayı mənbədə yoxdur, 26 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 18
+- Say: 24 məkan, stansiya sayı mənbədə yoxdur, 24 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 16
 - Tarif aralığı: bazada yoxdur /kWh (0 məkanda qeydə alınıb)
 - Canlı status: yox
 - Telefon: +994 12 311 30 47
@@ -174,7 +174,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 - Səhifə: https://doldur.pro-tech.az/operator/enrg/
 
 ### Sigma Charge
-- Say: 4 məkan, stansiya sayı mənbədə yoxdur, 7 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 4
+- Say: 3 məkan, stansiya sayı mənbədə yoxdur, 6 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 3
 - Tarif aralığı: 0,30 ₼ /kWh (2 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə, QR kodla
@@ -201,7 +201,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 
 - Şəhər/ərazi məkanın koordinatına görə ən yaxın yaşayış məntəqəsi mərkəzinə (15 km-ə qədər) bağlanır; inzibati sərhəd deyil.
 - Qiymət enerji haqqıdır (₼/kWh); parkinq və gözləmə haqqı ayrıca ola bilər.
-- Məlumat tarixi: 20.11.2026 16:29 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
+- Məlumat tarixi: 20.11.2026 19:00 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
 
 ## Əlaqə
 
