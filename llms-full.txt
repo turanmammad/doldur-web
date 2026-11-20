@@ -11,13 +11,13 @@
 - Stansiya sayı yalnız operatorun öz mənbəsi verəndə göstərilir (iVolt, ELEKTRA AZ, Electrify.az); soket sayından hesablanmır.
 - «Şarj məntəqəsi» — məkanın sinonimidir (dövlət reyestrinin termini).
 
-## Əsas faktlar (20.11.2026 21:27 Bakı vaxtı, Doldur bazası)
+## Əsas faktlar (20.11.2026 21:33 Bakı vaxtı, Doldur bazası)
 
 - Aktiv şarj məkanı: 523 (DC olan: 448; yalnız AC: 75); aktiv soket: 1178.
 - Ümumi stansiya sayı verilmir: stansiya səviyyəsi yalnız bəzi operatorların mənbəsində var (aşağıda operator üzrə).
 - Adlı operatorlar: 10 əsas operator (≥3 məkan); 109 məkanda operator göstərilməyib.
 - Tarif: 295 məkanda qeydə alınıb, aralıq 0,25–0,40 ₼/kWh. Tarif qeydə alındığı tarixlə saxlanılır; köhnə ola bilər.
-- Canlı status: 173 məkanda (iVolt, ELEKTRA AZ, Electrify.az). Digərlərində status «bilinmir».
+- Canlı status: 174 məkanda (iVolt, ELEKTRA AZ, Electrify.az). Digərlərində status «bilinmir».
 - Bu fayl və statik səhifələr canlı status (boş/məşğul) və konkret məkanın qiymətini VERMİR — onlar Doldur xəritəsində və tətbiqindədir.
 
 ## Səhifələr
@@ -201,7 +201,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 
 - Şəhər/ərazi məkanın koordinatına görə ən yaxın yaşayış məntəqəsi mərkəzinə (15 km-ə qədər) bağlanır; inzibati sərhəd deyil.
 - Qiymət enerji haqqıdır (₼/kWh); parkinq və gözləmə haqqı ayrıca ola bilər.
-- Məlumat tarixi: 20.11.2026 21:27 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
+- Məlumat tarixi: 20.11.2026 21:33 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
 
 ## Əlaqə
 
