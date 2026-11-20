@@ -9,6 +9,12 @@ export const OpsView = (v) => (v.pOps ? html`
       <p style="margin:0;color:${v.c.muted};font-size:16px;max-width:620px;text-wrap:pretty">Doldur şarj satmır — məlumat verir və səni operatorun öz tətbiqinə yönləndirir. Rəqəmlər bu an Doldur bazasındakı şarj məkanlarından sayılır; tarifi operatorun tətbiqində yoxla.</p>
     </div>
     ${v.opsLoading ? html`<div style="color:${v.c.muted};font-size:14px">Operatorlar yüklənir…</div>` : null}
+    ${v.opsErr ? html`
+      <div role="alert" style="background:${v.c.redBg};color:${v.c.redText};border-radius:14px;padding:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px">
+        <span style="flex:1 1 200px">Operator məlumatı yüklənmədi. İnternet bağlantısını yoxla.</span>
+        <button onClick=${v.retryOps} style="cursor:pointer;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid ${v.c.border};background:${v.c.surface};color:${v.c.text};font-size:14px">Yenidən cəhd et</button>
+      </div>
+    ` : null}
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">
       ${v.ops.map((op) => html`
         <article key=${op.id} style="background:${v.c.surface};border:1px solid ${v.c.border};border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">

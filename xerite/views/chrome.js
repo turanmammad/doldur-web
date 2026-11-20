@@ -83,6 +83,12 @@ export const CarPickerView = (v) => (v.carPicker ? html`
       <input id="d-carq" type="search" value=${v.carQ} onInput=${v.onCarQ} placeholder="Marka və ya model: BYD, Zeekr 001…" autocomplete="off" style="width:100%;min-height:46px;padding:0 14px;border-radius:10px;border:1px solid ${v.c.border};background:${v.c.surface2};color:${v.c.text};font-size:15px" />
       <div style="overflow:auto;display:flex;flex-direction:column;gap:6px;min-height:120px">
         ${v.catalogLoading ? html`<span style="color:${v.c.muted};font-size:14px">Kataloq yüklənir…</span>` : null}
+        ${v.catalogErr ? html`
+          <div role="alert" style="background:${v.c.redBg};color:${v.c.redText};border-radius:14px;padding:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px">
+            <span style="flex:1 1 200px">Maşın kataloqu yüklənmədi. İnternet bağlantısını yoxla.</span>
+            <button onClick=${v.retryCatalog} style="cursor:pointer;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid ${v.c.border};background:${v.c.surface};color:${v.c.text};font-size:14px">Yenidən cəhd et</button>
+          </div>
+        ` : null}
         ${v.carOptsEmpty ? html`<span style="color:${v.c.muted};font-size:14px">Bu adla model tapılmadı.</span>` : null}
         ${v.carOpts.map((cc) => html`
           <button onClick=${cc.go} aria-pressed=${cc.on} style="cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 12px;border-radius:12px;background:${cc.on ? v.c.accentSoft : v.c.surface};border:1.5px solid ${cc.on ? '#12E28C' : v.c.border};color:${v.c.text}">

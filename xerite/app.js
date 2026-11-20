@@ -69,7 +69,7 @@ class App extends Component {
       user: null, profile: null, uvs: [], favIds: [], favs: null, hist: null, monthly: null, accLoading: false,
       loginStep: 0, email: '', code: '', loginBusy: false, loginErr: null,
       carId: LS.get('car', null), socCur: LS.get('socCur', 20), socTgt: LS.get('socTgt', 80),
-      stations: [], stationsAt: 0, loadErr: null, loading: true, catalog: null, config: L.DEFAULT_CONFIG, operators: [],
+      stations: [], stationsAt: 0, loadErr: null, loading: true, catalog: null, catalogErr: null, config: L.DEFAULT_CONFIG, operators: [], opsErr: null,
       geo: null, geoBusy: false, scale: { w: '48px', t: '' },
       carPicker: false, carQ: '', opsOpen: null, delOpen: false, delText: '', delBusy: false, googleReady: false,
     };
@@ -79,6 +79,8 @@ class App extends Component {
     this.mapRef = (el) => { if (el) { this.dmap.attach(el); this.ensureMap(); } };
     this.gRef = (el) => { this.gHost = el; if (el) this.renderGoogle(); };
     this._rowsKey = null;
+    this._uid = null; // cari hesab (W2: gecikmiş cavab yoxlaması)
+    this._psSeq = { from: 0, to: 0 }; // ünvan təklifi sorğu sayğacı (W3)
     // Yalnız lokal yoxlama bayrağı (URL normallaşdırılmazdan ƏVVƏL oxunur).
     this._debugAutoCalc = location.hostname === '127.0.0.1' && /[?&]debug=1/.test(location.search) && /[?&]autocalc=1/.test(location.search);
     this._rows = [];
@@ -98,9 +100,9 @@ class App extends Component {
     this.applyUrl(true);
     api.track('app_open');
     this.loadStations();
-    api.vehicleCatalog().then((r) => { if (r.data) this.setState({ catalog: r.data }); });
+    this.loadCatalog();
     api.costConfig().then((r) => { if (r.data) this.setState({ config: L.configFromJson(r.data) }); });
-    api.operators().then((r) => { if (r.data) this.setState({ operators: r.data }); });
+    this.loadOperators();
     fetch(new URL('./posts.json', import.meta.url)).then((r) => r.json()).then((p) => this.setState({ posts: p.posts || [] })).catch(() => this.setState({ posts: [] }));
     // Məkan icazəsi ARTIQ verilibsə səssizcə al (soruşma pəncərəsi açılmır).
     try { navigator.permissions && navigator.permissions.query({ name: 'geolocation' }).then((p) => { if (p.state === 'granted') this.locate(true); }).catch(() => {}); } catch (e) { /* yoxdur */ }
@@ -137,28 +139,49 @@ class App extends Component {
     this.setState({ stations: r.data || [], stationsAt: Date.now(), loadErr: null, loading: false });
   }
 
+  // Kataloq / operatorlar: xəta olanda «yüklənir…» əbədi qalmasın — xəta + «Yenidən cəhd et» (W1).
+  async loadCatalog() {
+    this.setState({ catalogErr: null });
+    const r = await api.vehicleCatalog();
+    if (r.data) this.setState({ catalog: r.data, catalogErr: null });
+    else this.setState({ catalogErr: r.error || { code: 'empty' } });
+  }
+  async loadOperators() {
+    this.setState({ opsErr: null });
+    const r = await api.operators();
+    if (r.data) this.setState({ operators: r.data, opsErr: null });
+    else this.setState({ opsErr: r.error || { code: 'empty' } });
+  }
+
   onSession(session) {
     const user = session ? session.user : null;
     const prev = this.state.user;
     if ((prev && prev.id) === (user && user.id)) return;
-    this.setState({ user, profile: null, uvs: [], favIds: [], favs: null, hist: null, monthly: null });
+    // W2: cari hesab id-si SİNXRON saxlanır — gecikmiş cavab hesab dəyişibsə yeni hesabın ekranına yazılmır.
+    const uid = user ? user.id : null;
+    this._uid = uid;
+    this.setState({ user, profile: null, uvs: [], favIds: [], favs: null, hist: null, monthly: null, accLoading: false, histErr: null });
     if (user) {
-      api.profile(user.id).then((r) => r.data && this.setState({ profile: r.data }));
-      api.userVehicles().then((r) => r.data && this.setState({ uvs: r.data }));
+      api.profile(uid).then((r) => { if (r.data && this._uid === uid) this.setState({ profile: r.data }); });
+      api.userVehicles().then((r) => { if (r.data && this._uid === uid) this.setState({ uvs: r.data }); });
       this.loadFavs();
       if (this.state.page === 'hist') this.loadHist();
       if (this.state.page === 'login') this.go('profile');
     }
   }
   async loadFavs() {
+    const uid = this._uid;
     const r = await api.favoriteStations();
+    if (this._uid !== uid) return; // hesab dəyişib (W2)
     if (r.data) this.setState({ favs: r.data, favIds: r.data.map((s) => s.id) });
     else this.setState({ favs: [] });
   }
   async loadHist() {
     if (!this.state.user) return;
+    const uid = this._uid;
     this.setState({ accLoading: true });
     const [h, m] = await Promise.all([api.history(0, 50), api.monthlySummary(6)]);
+    if (this._uid !== uid) return; // hesab dəyişib (W2)
     this.setState({ hist: h.data || [], monthly: m.data || [], accLoading: false, histErr: h.error || null });
   }
 
@@ -328,7 +351,9 @@ class App extends Component {
 
   async toggleFav(id) {
     if (!this.state.user) { this.toast('Favoritlər üçün daxil ol'); this.go('login'); return; }
+    const uid = this._uid;
     const r = await api.toggleFavorite(id);
+    if (this._uid !== uid) return; // hesab dəyişib (W2)
     if (r.error) { this.toast('Alınmadı — yenidən cəhd et'); return; }
     const on = r.data === true;
     this.setState({ favIds: on ? [...new Set([...this.state.favIds, id])] : this.state.favIds.filter((x) => x !== id) });
@@ -362,7 +387,8 @@ class App extends Component {
         url: base + '?s=' + encodeURIComponent(r.id), text: r.name + ' — ' + r.powerT + ' kW ' + r.kind + (r.priceT ? ', ' + r.priceT : '') + '. Doldur-da bax:',
         cover: r.isDc ? 'linear-gradient(135deg,#7A3A0C,#FF7A1A)' : 'linear-gradient(135deg,#1B3D7A,#4A8CFF)', glyph: r.powerT };
     }
-    if (kind === 'post') return { head: 'Yazını paylaş', title: obj.title, sub: obj.cat + ' · ' + obj.read, url: base + '?p=post&slug=' + encodeURIComponent(obj.slug), text: obj.title, cover: obj.cover, glyph: obj.cat.slice(0, 2).toUpperCase() };
+    // S7: yazının kanonik səhifəsi (posts.json `url` = /bloq/<slug>/) paylaşılır, ?p=post dublikatı yox.
+    if (kind === 'post') return { head: 'Yazını paylaş', title: obj.title, sub: obj.cat + ' · ' + obj.read, url: obj.url ? location.origin + obj.url : base + '?p=post&slug=' + encodeURIComponent(obj.slug), text: obj.title, cover: obj.cover, glyph: obj.cat.slice(0, 2).toUpperCase() };
     if (kind === 'route') return { head: 'Marşrutu paylaş', title: obj.title, sub: obj.sub, url: this.urlFor(Object.assign({}, this.state, { page: 'route' })), text: obj.title + ' — ' + obj.sub + '. Doldur marşrut planı:', cover: 'linear-gradient(135deg,#7A4416,#E8963C)', glyph: 'km' };
     return { head: 'Doldur-u paylaş', title: 'Doldur — EV şarj xəritəsi', sub: 'Bütün operatorlar · tam xərc · pulsuz', url: base, text: 'Azərbaycanda ən sərfəli EV şarj stansiyasını tap:', cover: 'linear-gradient(135deg,#0B1518,#12E28C)', glyph: 'D' };
   }
@@ -387,9 +413,11 @@ class App extends Component {
   async placeSearch(which, q) {
     this.setState(which === 'from' ? { rFromQ: q, rFrom: null } : { rToQ: q, rTo: null });
     clearTimeout(this['_ps' + which]);
+    const seq = ++this._psSeq[which]; // W3: yeni yazı yola düşmüş köhnə sorğunu köhnəldir
     if (q.trim().length < 3) { this.setState({ rSug: Object.assign({}, this.state.rSug, { [which]: [] }) }); return; }
     this['_ps' + which] = setTimeout(async () => {
       const r = await this.places(q.trim());
+      if (seq !== this._psSeq[which]) return; // daha yeni yazı/seçim var — köhnə cavab təklifləri üstələmir
       const seen = new Set();
       const list = (r.data || []).filter((x) => { const k = x.label + '|' + x.latitude + '|' + x.longitude; if (seen.has(k)) return false; seen.add(k); return true; })
         .map((x) => ({ label: x.label, lat: x.latitude, lng: x.longitude, kind: x.kind }));
@@ -404,6 +432,7 @@ class App extends Component {
     return this._placeCache.get(k);
   }
   choosePlace(which, p) {
+    clearTimeout(this['_ps' + which]); this._psSeq[which]++; // gedən axtarış seçimdən sonra təklifləri yenidən açmasın (W3)
     const patch = which === 'from' ? { rFrom: p, rFromQ: p.label } : { rTo: p, rToQ: p.label };
     patch.rSug = Object.assign({}, this.state.rSug, { [which]: [] });
     patch.plan = null; patch.planErr = null;
@@ -543,7 +572,7 @@ class App extends Component {
     this.setState({ carId: id, carPicker: false, carQ: '', plan: null, planErr: null });
     const m = this.car;
     const u = this.state.user;
-    if (u) api.saveUserVehicle(u.id, id).then((r) => { if (!r.error) api.userVehicles().then((x) => x.data && this.setState({ uvs: x.data })); });
+    if (u) api.saveUserVehicle(u.id, id).then((r) => { if (!r.error) api.userVehicles().then((x) => { if (x.data && this._uid === u.id) this.setState({ uvs: x.data }); }); });
     setTimeout(() => { const mm = this.car; this.toast((mm ? this.carName(mm) : 'Maşın') + ' seçildi — xərclər yeniləndi'); }, 0);
     return m;
   }
@@ -779,6 +808,8 @@ class App extends Component {
     const rFromL = s.rFrom ? s.rFrom.label : (s.rFromQ || 'Başlanğıc'), rToL = s.rTo ? s.rTo.label : (s.rToQ || 'Hədəf');
 
     // ---- operatorlar
+    // Operator siyahısı və ya stansiyalar gəlmədisə «yüklənir…» yox, xəta + «Yenidən cəhd et».
+    const opsFailed = (!!s.opsErr && !s.operators.length) || (!!s.loadErr && !s.stations.length);
     const stats = L.operatorStats(s.stations);
     const statsByName = new Map(stats.map((o) => [opKey(o.name), o]));
     const ops = s.operators.filter((o) => !L.isUnknownOperator(o.name, o.slug)).map((o) => {
@@ -944,7 +975,8 @@ class App extends Component {
       shareRoute: () => this.setState({ share: this.shareFor('route', { title: rFromL + ' → ' + rToL + ' elektromobillə', sub: routeSub || 'Doldur marşrut planı' }), copied: false }),
 
       // operatorlar
-      ops, unknownOpCount, opsLoading: !s.operators.length || !s.stations.length,
+      ops, unknownOpCount, opsErr: opsFailed, opsLoading: !opsFailed && (!s.operators.length || !s.stations.length),
+      retryOps: () => { if (s.opsErr) this.loadOperators(); if (s.loadErr) { this.setState({ loading: true }); this.loadStations(); } },
 
       // bloq
       cats: catNames.map((k) => Object.assign({ label: k, on: s.cat === k, go: () => this.setState({ cat: k }) }, chip(s.cat === k))),
@@ -990,7 +1022,8 @@ class App extends Component {
       stopProp: (e) => e.stopPropagation(), selectAll: (e) => { try { e.target.select(); } catch (x) { /* yox */ } },
       nativeShare: () => { try { if (navigator.share) navigator.share({ title: share.title, text: share.text, url: share.url }).catch(() => {}); else this.toast('Bu brauzer sistem paylaşmasını dəstəkləmir — linki kopyala'); } catch (e) { this.toast('Linki kopyala'); } },
       carPicker: s.carPicker, closeCarPicker: () => this.setState({ carPicker: false }), carQ: s.carQ, onCarQ: (e) => this.setState({ carQ: e.target.value }),
-      carOpts, catalogLoading: !s.catalog, carOptsEmpty: !!s.catalog && !carOpts.length,
+      carOpts, catalogLoading: !s.catalog && !s.catalogErr, catalogErr: !s.catalog && !!s.catalogErr, retryCatalog: () => this.loadCatalog(),
+      carOptsEmpty: !!s.catalog && !carOpts.length,
       toastOn: !!s.toast, toastMsg: s.toast,
     };
     this._lastVals = vals;

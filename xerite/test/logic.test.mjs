@@ -52,6 +52,15 @@ t('Təzəlik: null → mətn yoxdur; 61 dəq → köhnə ola bilər', () => {
   const f = L.freshness('2026-11-18T10:59:00Z', now);
   assert.equal(f.stale, true); assert.match(f.text, /köhnə ola bilər/);
 });
+t('Təzəlik həddi 15 dəq (tətbiq staleThreshold + server expire_stale_statuses ilə eyni, S3)', () => {
+  const now = Date.parse('2026-11-18T12:00:00Z');
+  assert.equal(L.FRESH_MIN, 15);
+  assert.equal(L.freshness('2026-11-18T11:46:00Z', now).stale, false); // 14 dəq
+  assert.equal(L.freshness('2026-11-18T11:45:00Z', now).stale, false); // düz 15 dəq — tətbiqdə də `age > 15` deyil
+  const f16 = L.freshness('2026-11-18T11:44:00Z', now);               // 16 dəq
+  assert.equal(f16.stale, true); assert.equal(f16.text, '16 dəq əvvəl — köhnə ola bilər');
+  assert.equal(L.freshness('2026-11-18T11:20:00Z', now).stale, true);  // 40 dəq (köhnə hədd 60 idi → «təzə» görünürdü)
+});
 t('Məhdud giriş: yalnız «Yalnız…» ilə başlayan qeyd', () => {
   assert.equal(L.accessRestricted('Yalnız sakinlər üçün'), true);
   assert.equal(L.accessRestricted('Kafe var · WC var'), false);

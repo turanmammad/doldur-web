@@ -33,7 +33,7 @@
   var LOGO = { 'ivolt': 'ivolt', 'e-lektra': 'elektra', 'electrify.az': 'electrify_az', 'charge.az': 'charge_az',
     'azərişıq': 'azerisiq', 'tok': 'tok', 'touch station': 'touch_station', 'gofar': 'gofar', 'enrg.az': 'enrg', 'sigma charge': 'sigma' };
   var NAME = { 'e-lektra': 'ELEKTRA AZ' };
-  var FRESH_MIN = 60; // veb tətbiqin «köhnə ola bilər» həddi (lib/logic.js)
+  var FRESH_MIN = 15; // «təzə» status həddi: xerite/lib/logic.js FRESH_MIN = tətbiqin staleThreshold-u = server expire_stale_statuses
 
   function money(v) { return v.toFixed(2).replace('.', ',') + ' ₼'; }
   function opName(n) { var k = (n || '').trim().toLowerCase(); return NAME[k] || n || 'Operator'; }

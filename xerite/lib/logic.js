@@ -110,14 +110,20 @@ export function initials(name) {
 
 // ------------------------------------------------------------- təzəlik ----
 
-/** status_updated_at → { text, stale } ; null → null (mətn göstərilmir). */
+/** Status «təzə» həddi (dəq): tətbiqin Station.staleThreshold-u (15 dəq) və serverin expire_stale_statuses-i ilə eyni. */
+export const FRESH_MIN = 15;
+
+/** status_updated_at → { text, stale } ; null → null (mətn göstərilmir). FRESH_MIN-dən köhnə → stale. */
 export function freshness(iso, nowMs) {
   if (!iso) return null;
   const t = Date.parse(iso);
   if (!Number.isFinite(t)) return null;
-  const min = Math.max(0, Math.floor(((nowMs == null ? Date.now() : nowMs) - t) / 60000));
+  const ageMs = (nowMs == null ? Date.now() : nowMs) - t;
+  const min = Math.max(0, Math.floor(ageMs / 60000));
   if (min < 1) return { text: 'indicə yeniləndi', stale: false, min };
-  if (min < 60) return { text: min + ' dəq əvvəl yeniləndi', stale: false, min };
+  if (min < 60) return ageMs > FRESH_MIN * 60000
+    ? { text: min + ' dəq əvvəl — köhnə ola bilər', stale: true, min }
+    : { text: min + ' dəq əvvəl yeniləndi', stale: false, min };
   const h = Math.floor(min / 60);
   if (h < 24) return { text: h + ' saat əvvəl — köhnə ola bilər', stale: true, min };
   return { text: Math.floor(h / 24) + ' gün əvvəl — köhnə ola bilər', stale: true, min };
