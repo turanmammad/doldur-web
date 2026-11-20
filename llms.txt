@@ -11,7 +11,7 @@
 - Stansiya sayı yalnız operatorun öz mənbəsi verəndə göstərilir (iVolt, ELEKTRA AZ, Electrify.az); soket sayından hesablanmır.
 - «Şarj məntəqəsi» — məkanın sinonimidir (dövlət reyestrinin termini).
 
-## Əsas faktlar (20.11.2026 21:33 Bakı vaxtı, Doldur bazası)
+## Əsas faktlar (20.11.2026 22:05 Bakı vaxtı, Doldur bazası)
 
 - Aktiv şarj məkanı: 523 (DC olan: 448; yalnız AC: 75); aktiv soket: 1178.
 - Ümumi stansiya sayı verilmir: stansiya səviyyəsi yalnız bəzi operatorların mənbəsində var (aşağıda operator üzrə).
