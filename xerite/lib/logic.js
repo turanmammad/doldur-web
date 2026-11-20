@@ -366,6 +366,46 @@ export function dateTimeShort(iso) {
   return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear() + ' · ' + p(d.getHours()) + ':' + p(d.getMinutes());
 }
 
+// ------------------------------------------------- say və terminologiya ----
+//
+// 20.11 (Turanın qərarı): MƏKAN = bazadakı `stations` sətri (xəritədəki marker/siyahı sətri)
+// · STANSİYA = şarj cihazı (post) · SOKET = fiziki çıxış. Rəqəmin yanında yalnız bu üç söz.
+// Stansiya sayı yalnız mənbə verəndə (`post_count`, 0119); soketdən HESABLANMIR.
+
+/** Canlı status: mənbə operator adapteri/OCPI-dir VƏ ən azı bir soketin statusu `unknown` deyil.
+ *  (Əvvəl `status_source || status_updated_at` idi → Charge.az «Bəli» görünürdü, 136/136 soket unknown.) */
+export const LIVE_SOURCES = new Set(['operator_adapter', 'ocpi']);
+export function hasLiveStatus(s) {
+  if (!s || !LIVE_SOURCES.has(s.status_source)) return false;
+  return (s.connectors || []).some((c) => (c.status || 'unknown') !== 'unknown');
+}
+
+/** Rəqəm + 3-cü şəxs mənsubiyyət şəkilçisi oxunuşa görə: 8-i, 2-si, 3-ü, 6-sı, 9-u, 40-ı, 100-ü. */
+export function possN(n) {
+  const ONES = ['', 'i', 'si', 'ü', 'ü', 'i', 'sı', 'si', 'i', 'u'];
+  const TENS = ['', 'u', 'si', 'u', 'ı', 'si', 'ı', 'i', 'i', 'ı'];
+  n = Math.abs(Math.round(n));
+  const o = n % 10, t = Math.floor(n / 10) % 10, h = Math.floor(n / 100) % 10;
+  return n + '-' + (o ? ONES[o] : t ? TENS[t] : h ? 'ü' : 'i');
+}
+
+/** Soket sayı (qruplaşdırılmış konnektorların `count` cəmi). */
+export const socketCount = (connectors) => (connectors || []).reduce((a, c) => a + (c.count > 0 ? c.count : 1), 0);
+
+/** Məkan kartı: «21 stansiya · 31 soket» (post_count məlumdursa) və ya «31 soket». */
+export function stationUnitsText(postCount, connectors) {
+  const k = socketCount(connectors);
+  return (typeof postCount === 'number' && postCount > 0 ? postCount + ' stansiya · ' : '') + k + ' soket';
+}
+
+/** Qrup sətri (eyni fiş + cərəyan + güc): «10 soketdən 8-i boş». Tək soketdə null (status etiketi kifayətdir);
+ *  status bilinmirsə (hamısı `unknown`) yalnız «10 soket» — «0-ı boş» yazılmır. */
+export function groupFreeText(count, available, unknown) {
+  if (!(count > 1)) return null;
+  if (available == null || unknown >= count) return count + ' soket';
+  return count + ' soketdən ' + possN(available) + ' boş';
+}
+
 // ---------------------------------------------------- operator statistikası --
 
 /**
@@ -376,13 +416,16 @@ export function operatorStats(stations) {
   const by = new Map();
   for (const s of stations || []) {
     const name = s.operator_name || '';
-    if (!by.has(s.operator_id)) by.set(s.operator_id, { id: s.operator_id, name, stations: 0, dc: 0, ac: 0, live: 0, prices: [], noPrice: 0, available: 0 });
+    // `stations` = MƏKAN sayıdır (sahə adı geriyə uyğunluq üçün saxlanıb)
+    if (!by.has(s.operator_id)) by.set(s.operator_id, { id: s.operator_id, name, stations: 0, sockets: 0, postsKnown: 0, posts: 0, dc: 0, ac: 0, live: 0, prices: [], noPrice: 0, available: 0 });
     const o = by.get(s.operator_id);
     o.stations++;
     const cs = s.connectors || [];
+    o.sockets += socketCount(cs);
+    if (typeof s.post_count === 'number' && s.post_count > 0) { o.postsKnown++; o.posts += s.post_count; }
     if (cs.some((c) => c.current_kind === 'dc')) o.dc++;
     if (cs.some((c) => c.current_kind === 'ac')) o.ac++;
-    if (s.status_source === 'operator_adapter' || s.status_updated_at) o.live++;
+    if (hasLiveStatus(s)) o.live++;
     if (stationStatus(cs) === 'available') o.available++;
     if (tariffShowsNumber(s.tariff)) o.prices.push(s.tariff.price_per_kwh); else o.noPrice++;
   }

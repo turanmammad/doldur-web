@@ -6,7 +6,7 @@ export const OpsView = (v) => (v.pOps ? html`
     <div style="display:flex;flex-direction:column;gap:8px">
       <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:${v.c.accentText}">Tərəfsiz müqayisə</span>
       <h1 class="d-h1" style="margin:0;font-family:'Manrope',sans-serif;font-weight:700;font-size:40px;letter-spacing:-0.02em;line-height:1.1">Bütün operatorlar, tək xəritə</h1>
-      <p style="margin:0;color:${v.c.muted};font-size:16px;max-width:620px;text-wrap:pretty">Doldur şarj satmır — məlumat verir və səni operatorun öz tətbiqinə yönləndirir. Rəqəmlər bu an Doldur bazasındakı stansiyalardan sayılır; tarifi operatorun tətbiqində yoxla.</p>
+      <p style="margin:0;color:${v.c.muted};font-size:16px;max-width:620px;text-wrap:pretty">Doldur şarj satmır — məlumat verir və səni operatorun öz tətbiqinə yönləndirir. Rəqəmlər bu an Doldur bazasındakı şarj məkanlarından sayılır; tarifi operatorun tətbiqində yoxla.</p>
     </div>
     ${v.opsLoading ? html`<div style="color:${v.c.muted};font-size:14px">Operatorlar yüklənir…</div>` : null}
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">
@@ -22,7 +22,7 @@ export const OpsView = (v) => (v.pOps ? html`
           <dl style="margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div style="display:flex;flex-direction:column;gap:2px"><dt style="font-size:12px;color:${v.c.muted}">Tarif, /kWh</dt><dd style="margin:0;font-family:'Geist Mono',monospace;font-size:15px;font-weight:600">${op.price}</dd>${op.priceNote ? html`<dd style="margin:0;font-size:11px;color:${v.c.faint}">${op.priceNote}</dd>` : null}</div>
             <div style="display:flex;flex-direction:column;gap:2px"><dt style="font-size:12px;color:${v.c.muted}">Xəritədə</dt><dd style="margin:0;font-family:'Geist Mono',monospace;font-size:15px;font-weight:600">${op.count}</dd></div>
-            <div style="display:flex;flex-direction:column;gap:2px"><dt style="font-size:12px;color:${v.c.muted}">Növ (stansiya)</dt><dd style="margin:0;font-size:14px">${op.kinds}</dd></div>
+            <div style="display:flex;flex-direction:column;gap:2px"><dt style="font-size:12px;color:${v.c.muted}">Növ (məkan)</dt><dd style="margin:0;font-size:14px">${op.kinds}</dd></div>
             <div style="display:flex;flex-direction:column;gap:2px"><dt style="font-size:12px;color:${v.c.muted}">Canlı status</dt><dd style="margin:0;font-size:14px;color:${op.liveOn ? v.c.accentText : v.c.text}">${op.live}</dd></div>
           </dl>
           <div style="display:flex;gap:8px;margin-top:auto">
@@ -38,6 +38,6 @@ export const OpsView = (v) => (v.pOps ? html`
         </article>
       `)}
     </div>
-    ${v.unknownOpCount ? html`<p style="margin:0;font-size:13px;color:${v.c.faint}">Daha ${v.unknownOpCount} stansiyanın operatoru mənbədə göstərilməyib — onlar xəritədə var, bu siyahıda yoxdur.</p>` : null}
+    ${v.unknownOpCount ? html`<p style="margin:0;font-size:13px;color:${v.c.faint}">Daha ${v.unknownOpCount} məkanın operatoru mənbədə göstərilməyib — onlar xəritədə var, bu siyahıda yoxdur.</p>` : null}
   </main>
 ` : null);

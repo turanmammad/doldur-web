@@ -69,6 +69,35 @@ t('Əl ilə hesablama: 60,5 kWh, 20→80%, 0,30 ₼ → 60,5×0,6/0,9×0,30 = 12
   assert.equal(L.money(e.total), '12,10 ₼');
   assert.equal(e.lines.length, 1);
 });
+t('Canlı status: Charge.az kimi bütün soketləri unknown olan məkan → canlı DEYİL (bilinən status + adapter mənbəyi lazımdır)', () => {
+  const unk = (n) => ({ type: 'gbt', current_kind: 'dc', power_kw: 60, count: n, status: 'unknown', count_unknown: n, count_available: 0 });
+  // Charge.az: status_source/status_updated_at olsa belə, statuslar unknown-dursa «Bəli» yox
+  assert.equal(L.hasLiveStatus({ status_source: 'operator_adapter', status_updated_at: '2026-11-20T12:00:00Z', connectors: [unk(4)] }), false);
+  assert.equal(L.hasLiveStatus({ status_source: null, status_updated_at: '2026-11-20T12:00:00Z', connectors: [C('ccs2', 'dc', 60, 'available')] }), false);
+  assert.equal(L.hasLiveStatus({ status_source: 'operator_adapter', connectors: [unk(2), C('ccs2', 'dc', 60, 'occupied')] }), true);
+  assert.equal(L.hasLiveStatus({ status_source: 'ocpi', connectors: [C('ccs2', 'dc', 60, 'offline')] }), true);
+  // operatorStats: Charge.az 2 məkan → live 0; iVolt 1 məkan → live 1
+  const st = [
+    { operator_id: 'cz', operator_name: 'Charge.az', status_source: 'operator_adapter', status_updated_at: '2026-11-20T12:00:00Z', connectors: [unk(3)], tariff: null },
+    { operator_id: 'cz', operator_name: 'Charge.az', status_source: null, status_updated_at: null, connectors: [unk(1)], tariff: null },
+    { operator_id: 'iv', operator_name: 'iVolt', status_source: 'operator_adapter', post_count: 10, connectors: [{ ...C('ccs2', 'dc', 180, 'available'), count: 20 }], tariff: null },
+  ];
+  const s = Object.fromEntries(L.operatorStats(st).map((o) => [o.name, o]));
+  assert.equal(s['Charge.az'].live, 0);
+  assert.equal(s['Charge.az'].stations, 2); assert.equal(s['Charge.az'].sockets, 4); assert.equal(s['Charge.az'].postsKnown, 0);
+  assert.equal(s.iVolt.live, 1); assert.equal(s.iVolt.posts, 10); assert.equal(s.iVolt.sockets, 20);
+});
+t('Say mətnləri: «S stansiya · K soket» yalnız post_count varsa; qrup «10 soketdən 8-i boş»', () => {
+  const g = [{ count: 20 }, { count: 11 }];
+  assert.equal(L.stationUnitsText(21, g), '21 stansiya · 31 soket');
+  assert.equal(L.stationUnitsText(null, g), '31 soket');
+  assert.equal(L.stationUnitsText(undefined, [{}, {}, {}]), '3 soket'); // detal: hər soket ayrıca sətir
+  assert.equal(L.groupFreeText(10, 8, 0), '10 soketdən 8-i boş');
+  assert.equal(L.groupFreeText(4, 0, 4), '4 soket'); // hamısı unknown → «0-ı boş» YOX
+  assert.equal(L.groupFreeText(1, 1, 0), null);
+  assert.deepEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(L.possN),
+    ['1-i', '2-si', '3-ü', '4-ü', '5-i', '6-sı', '7-si', '8-i', '9-u', '10-u', '17-si', '20-si', '30-u', '40-ı', '50-si', '60-ı', '70-i', '80-i', '90-ı', '100-ü']);
+});
 t('Format', () => {
   assert.equal(L.money(9.316), '9,32 ₼');
   assert.equal(L.dur(42), '42 dəq');

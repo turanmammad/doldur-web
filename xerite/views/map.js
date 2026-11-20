@@ -188,10 +188,10 @@ const detailPanel = (v) => {
       </div>
     ` : null}
 
-    <section aria-label="Konnektorlar" style="background:${v.c.surface};border:1px solid ${v.c.border};border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px">
-      <h3 style="margin:0;font-family:'Manrope',sans-serif;font-weight:700;font-size:17px">Konnektorlar</h3>
+    <section aria-label="Soketlər" style="background:${v.c.surface};border:1px solid ${v.c.border};border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Manrope',sans-serif;font-weight:700;font-size:17px">Soketlər</h3>${sel.unitsT ? html`<span style="font-family:'Geist Mono',monospace;font-size:12px;color:${v.c.muted}">${sel.unitsT}</span>` : null}</div>
       ${sel.car && sel.conns.length > 1 ? html`<span style="font-size:12px;color:${v.c.faint};margin-top:-4px">Xərci başqa konnektor üçün görmək istəsən, ona toxun.</span>` : null}
-      ${!sel.conns.length ? html`<span style="font-size:14px;color:${v.c.faint}">Konnektor məlumatı yoxdur.</span>` : null}
+      ${!sel.conns.length ? html`<span style="font-size:14px;color:${v.c.faint}">Soket məlumatı yoxdur.</span>` : null}
       ${sel.conns.map((cn) => html`
         <button onClick=${cn.pick} aria-pressed=${cn.on} style="cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:52px;padding:8px 12px;border-radius:10px;background:${v.c.surface2};border:1.5px solid ${cn.on && sel.car ? '#12E28C' : 'transparent'};color:${v.c.text}">
           <span style="font-family:'Geist Mono',monospace;font-size:13px;font-weight:600;min-width:64px">${cn.t}</span>

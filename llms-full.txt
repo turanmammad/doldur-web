@@ -1,86 +1,99 @@
 # Doldur
 
-> Doldur — Azərbaycanda elektromobil (EV) şarj stansiyalarının xəritəsi və şarj xərci hesablayıcısı. Bütün operatorların stansiyaları bir xəritədə: tarif (₼/kWh), fiş növü, güc, canlı status (operator verəndə) və maşına görə tam xərc. Brauzerdə (doldur.pro-tech.az/xerite/) və pulsuz iOS/Android tətbiqində. Protech LLC məhsuludur. Doldur şarj satmır, şarjı başlatmır, ödəniş qəbul etmir.
+> Doldur — Azərbaycanda elektromobil (EV) şarj məkanlarının xəritəsi və şarj xərci hesablayıcısı. Bütün operatorların şarj məkanları bir xəritədə: tarif (₼/kWh), fiş növü, güc, canlı status (operator verəndə) və maşına görə tam xərc. Brauzerdə (doldur.pro-tech.az/xerite/) və pulsuz iOS/Android tətbiqində. Protech LLC məhsuludur. Doldur şarj satmır, şarjı başlatmır, ödəniş qəbul etmir.
 
-## Əsas faktlar (18.11.2026 17:58 Bakı vaxtı, Doldur bazası)
+## Anlayışlar (sayların vahidi)
 
-- Aktiv şarj stansiyası: 563 (DC olan: 489; yalnız AC: 74).
-- Adlı operatorlar: 10 əsas operator (≥3 stansiya); 132 stansiyada operator göstərilməyib.
-- Tarif: 294 stansiyada qeydə alınıb, aralıq 0,25–0,40 ₼/kWh. Tarif qeydə alındığı tarixlə verilir; köhnə ola bilər.
-- Canlı status: 169 stansiyada (iVolt, ELEKTRA AZ, Electrify.az). Digərlərində status «bilinmir».
-- Status hər 5 dəqiqədən bir yenilənir; statik səhifələrdə yalnız «son yoxlama vaxtı» göstərilir.
+- Məkan — şarj ünvanı/yeri; Doldur bazasında bir sətir. Bir məkanda bir və ya bir neçə stansiya ola bilər. (RU: локация, EN: location)
+- Stansiya — şarj cihazı (post, charge point). Bir stansiyada bir neçə soket ola bilər. (RU: зарядная станция, EN: charger)
+- Soket — stansiyanın fiziki çıxışı (kabel / tapança). (RU: разъём, EN: connector)
+- Fiş növü — soketin standartı: CCS2, GB/T, Type 2, CHAdeMO və s.
+- Stansiya sayı yalnız operatorun öz mənbəsi verəndə göstərilir (iVolt, ELEKTRA AZ, Electrify.az); soket sayından hesablanmır.
+- «Şarj məntəqəsi» — məkanın sinonimidir (dövlət reyestrinin termini).
+
+## Əsas faktlar (20.11.2026 16:29 Bakı vaxtı, Doldur bazası)
+
+- Aktiv şarj məkanı: 567 (DC olan: 490; yalnız AC: 77); aktiv soket: 1229.
+- Ümumi stansiya sayı verilmir: stansiya səviyyəsi yalnız bəzi operatorların mənbəsində var (aşağıda operator üzrə).
+- Adlı operatorlar: 10 əsas operator (≥3 məkan); 132 məkanda operator göstərilməyib.
+- Tarif: 298 məkanda qeydə alınıb, aralıq 0,25–0,40 ₼/kWh. Tarif qeydə alındığı tarixlə saxlanılır; köhnə ola bilər.
+- Canlı status: 174 məkanda (iVolt, ELEKTRA AZ, Electrify.az). Digərlərində status «bilinmir».
+- Bu fayl və statik səhifələr canlı status (boş/məşğul) və konkret məkanın qiymətini VERMİR — onlar Doldur xəritəsində və tətbiqindədir.
 
 ## Səhifələr
 
-- [Veb xəritə](https://doldur.pro-tech.az/xerite/): stansiyalar, canlı status, tam xərc, marşrut planı
-- [Bütün stansiyalar](https://doldur.pro-tech.az/stansiya/): 563 stansiya ərazilər üzrə
-- [Şəhərlər](https://doldur.pro-tech.az/seher/): şəhər üzrə say, tarif, ən ucuz və ən güclü stansiyalar
-- [Operatorlar](https://doldur.pro-tech.az/operator/): operator üzrə say, tarif aralığı, canlı status, tətbiq linkləri
+- [Veb xəritə](https://doldur.pro-tech.az/xerite/): şarj məkanları, canlı status, qiymət, tam xərc, marşrut planı
+- [Bütün məkanlar](https://doldur.pro-tech.az/stansiya/): 567 məkan ərazilər üzrə
+- [Şəhərlər](https://doldur.pro-tech.az/seher/): şəhər üzrə məkan və soket sayı, ən güclü məkanlar, operatorlar
+- [Operatorlar](https://doldur.pro-tech.az/operator/): operator üzrə məkan/stansiya/soket sayı, tarif aralığı, canlı status, tətbiq linkləri
 - [Bloq](https://doldur.pro-tech.az/bloq/): şarj qiymətləri, soket növləri, marşrut bələdçiləri
 - [Ana səhifə](https://doldur.pro-tech.az/) · [Məxfilik](https://doldur.pro-tech.az/mexfilik/) · [Şərtlər](https://doldur.pro-tech.az/sertler/)
 - [Tam fakt vərəqi](https://doldur.pro-tech.az/llms-full.txt)
 
 ## Şəhərlər
 
-- [Bakı](https://doldur.pro-tech.az/seher/baki/): 337 stansiya, DC 312, tarif 0,25–0,40 ₼
-- [Abşeron rayonu](https://doldur.pro-tech.az/seher/abseron/): 24 stansiya, DC 18, tarif 0,26–0,40 ₼
-- [Sumqayıt](https://doldur.pro-tech.az/seher/sumqayit/): 18 stansiya, DC 16, tarif 0,25–0,40 ₼
-- [Gəncə](https://doldur.pro-tech.az/seher/gence/): 16 stansiya, DC 11, tarif 0,27–0,40 ₼
-- [Şamaxı](https://doldur.pro-tech.az/seher/samaxi/): 11 stansiya, DC 9, tarif 0,26–0,40 ₼
-- [Qusar](https://doldur.pro-tech.az/seher/qusar/): 10 stansiya, DC 7, tarif 0,28–0,35 ₼
-- [Qəbələ](https://doldur.pro-tech.az/seher/qebele/): 9 stansiya, DC 7, tarif 0,28–0,29 ₼
-- [Lənkəran](https://doldur.pro-tech.az/seher/lenkeran/): 7 stansiya, DC 4, tarif 0,28–0,40 ₼
-- [Hacıqabul](https://doldur.pro-tech.az/seher/haciqabul/): 6 stansiya, DC 6, tarif 0,26–0,28 ₼
-- [Naxçıvan](https://doldur.pro-tech.az/seher/naxcivan/): 6 stansiya, DC 6, tarif 0,26 ₼
-- [İsmayıllı](https://doldur.pro-tech.az/seher/ismayilli/): 5 stansiya, DC 3, tarif 0,28–0,30 ₼
-- [Yevlax](https://doldur.pro-tech.az/seher/yevlax/): 5 stansiya, DC 4, tarif 0,40 ₼
-- [Ağdaş](https://doldur.pro-tech.az/seher/agdas/): 4 stansiya, DC 3, tarif 0,27–0,40 ₼
-- [Ağsu](https://doldur.pro-tech.az/seher/agsu/): 4 stansiya, DC 3, tarif 0,30–0,40 ₼
-- [Quba](https://doldur.pro-tech.az/seher/quba/): 4 stansiya, DC 4, tarif 0,28–0,30 ₼
-- [Kürdəmir](https://doldur.pro-tech.az/seher/kurdemir/): 3 stansiya, DC 3, tarif 0,27 ₼
-- [Laçın](https://doldur.pro-tech.az/seher/lacin/): 3 stansiya, DC 3, tarif 0,26–0,30 ₼
-- [Mingəçevir](https://doldur.pro-tech.az/seher/mingecevir/): 3 stansiya, DC 3, tarif 0,26–0,28 ₼
-- [Nabran](https://doldur.pro-tech.az/seher/nabran/): 3 stansiya, DC 3, tarif 0,30–0,40 ₼
-- [Naftalan](https://doldur.pro-tech.az/seher/naftalan/): 3 stansiya, DC 0, tarif yoxdur
-- [Qobustan](https://doldur.pro-tech.az/seher/qobustan/): 3 stansiya, DC 2, tarif 0,28–0,30 ₼
-- [Salyan](https://doldur.pro-tech.az/seher/salyan/): 3 stansiya, DC 3, tarif yoxdur
-- [Şəki](https://doldur.pro-tech.az/seher/seki/): 3 stansiya, DC 1, tarif 0,40 ₼
-- [Xankəndi](https://doldur.pro-tech.az/seher/xankendi/): 3 stansiya, DC 1, tarif 0,28–0,29 ₼
-- [Xocalı](https://doldur.pro-tech.az/seher/xocali/): 3 stansiya, DC 3, tarif 0,26 ₼
+- [Bakı](https://doldur.pro-tech.az/seher/baki/): 337 məkan, 752 soket, DC olan məkan 312
+- [Abşeron rayonu](https://doldur.pro-tech.az/seher/abseron/): 24 məkan, 84 soket, DC olan məkan 18
+- [Sumqayıt](https://doldur.pro-tech.az/seher/sumqayit/): 18 məkan, 51 soket, DC olan məkan 16
+- [Gəncə](https://doldur.pro-tech.az/seher/gence/): 16 məkan, 31 soket, DC olan məkan 11
+- [Şamaxı](https://doldur.pro-tech.az/seher/samaxi/): 11 məkan, 20 soket, DC olan məkan 9
+- [Qusar](https://doldur.pro-tech.az/seher/qusar/): 10 məkan, 17 soket, DC olan məkan 7
+- [Qəbələ](https://doldur.pro-tech.az/seher/qebele/): 9 məkan, 16 soket, DC olan məkan 7
+- [Lənkəran](https://doldur.pro-tech.az/seher/lenkeran/): 7 məkan, 14 soket, DC olan məkan 4
+- [Hacıqabul](https://doldur.pro-tech.az/seher/haciqabul/): 6 məkan, 10 soket, DC olan məkan 6
+- [Naxçıvan](https://doldur.pro-tech.az/seher/naxcivan/): 6 məkan, 12 soket, DC olan məkan 6
+- [İsmayıllı](https://doldur.pro-tech.az/seher/ismayilli/): 5 məkan, 12 soket, DC olan məkan 3
+- [Yevlax](https://doldur.pro-tech.az/seher/yevlax/): 5 məkan, 6 soket, DC olan məkan 4
+- [Ağdaş](https://doldur.pro-tech.az/seher/agdas/): 4 məkan, 8 soket, DC olan məkan 3
+- [Ağsu](https://doldur.pro-tech.az/seher/agsu/): 4 məkan, 8 soket, DC olan məkan 3
+- [Quba](https://doldur.pro-tech.az/seher/quba/): 4 məkan, 7 soket, DC olan məkan 4
+- [Kürdəmir](https://doldur.pro-tech.az/seher/kurdemir/): 3 məkan, 8 soket, DC olan məkan 3
+- [Laçın](https://doldur.pro-tech.az/seher/lacin/): 3 məkan, 9 soket, DC olan məkan 3
+- [Mingəçevir](https://doldur.pro-tech.az/seher/mingecevir/): 3 məkan, 5 soket, DC olan məkan 3
+- [Nabran](https://doldur.pro-tech.az/seher/nabran/): 3 məkan, 9 soket, DC olan məkan 3
+- [Naftalan](https://doldur.pro-tech.az/seher/naftalan/): 3 məkan, 3 soket, DC olan məkan 0
+- [Qobustan](https://doldur.pro-tech.az/seher/qobustan/): 3 məkan, 5 soket, DC olan məkan 2
+- [Salyan](https://doldur.pro-tech.az/seher/salyan/): 3 məkan, 6 soket, DC olan məkan 3
+- [Şəki](https://doldur.pro-tech.az/seher/seki/): 3 məkan, 3 soket, DC olan məkan 1
+- [Şəmkir](https://doldur.pro-tech.az/seher/semkir/): 3 məkan, 6 soket, DC olan məkan 2
+- [Xankəndi](https://doldur.pro-tech.az/seher/xankendi/): 3 məkan, 4 soket, DC olan məkan 1
+- [Xocalı](https://doldur.pro-tech.az/seher/xocali/): 3 məkan, 4 soket, DC olan məkan 3
 
 ## Operatorlar
 
-- [iVolt](https://doldur.pro-tech.az/operator/ivolt/): 101 stansiya, tarif 0,26–0,30 ₼, canlı status var
-- [Azərişıq](https://doldur.pro-tech.az/operator/azerisiq/): 84 stansiya, tarif 0,26 ₼, canlı status yox
-- [ELEKTRA AZ](https://doldur.pro-tech.az/operator/elektra/): 66 stansiya, tarif 0,28–0,35 ₼, canlı status var
-- [TOK](https://doldur.pro-tech.az/operator/tok/): 53 stansiya, tarif bazada yoxdur, canlı status yox
-- [Charge.az](https://doldur.pro-tech.az/operator/charge-az/): 42 stansiya, tarif 0,25–0,29 ₼, canlı status yox
-- [Touch Station](https://doldur.pro-tech.az/operator/touch-station/): 39 stansiya, tarif 0,40 ₼, canlı status yox
-- [Gofar](https://doldur.pro-tech.az/operator/gofar/): 26 stansiya, tarif bazada yoxdur, canlı status yox
-- [Electrify.az](https://doldur.pro-tech.az/operator/electrify-az/): 8 stansiya, tarif 0,28–0,30 ₼, canlı status var
-- [ENRG.az](https://doldur.pro-tech.az/operator/enrg/): 7 stansiya, tarif 0,40 ₼, canlı status yox
-- [Sigma Charge](https://doldur.pro-tech.az/operator/sigma/): 4 stansiya, tarif 0,30 ₼, canlı status yox
+- [iVolt](https://doldur.pro-tech.az/operator/ivolt/): 105 məkan, 263 stansiya (102 məkanda), 357 soket; tarif aralığı 0,26–0,30 ₼/kWh; canlı status var
+- [Azərişıq](https://doldur.pro-tech.az/operator/azerisiq/): 84 məkan, stansiya sayı mənbədə yoxdur, 132 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,26 ₼/kWh; canlı status yox
+- [ELEKTRA AZ](https://doldur.pro-tech.az/operator/elektra/): 66 məkan, 99 stansiya, 177 soket; tarif aralığı 0,28–0,35 ₼/kWh; canlı status var
+- [TOK](https://doldur.pro-tech.az/operator/tok/): 53 məkan, stansiya sayı mənbədə yoxdur, 98 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı bazada yoxdur; canlı status yox
+- [Charge.az](https://doldur.pro-tech.az/operator/charge-az/): 42 məkan, stansiya sayı mənbədə yoxdur, 136 soket; tarif aralığı 0,25–0,29 ₼/kWh; canlı status yox
+- [Touch Station](https://doldur.pro-tech.az/operator/touch-station/): 39 məkan, stansiya sayı mənbədə yoxdur, 57 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,40 ₼/kWh; canlı status yox
+- [Gofar](https://doldur.pro-tech.az/operator/gofar/): 26 məkan, stansiya sayı mənbədə yoxdur, 26 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı bazada yoxdur; canlı status yox
+- [Electrify.az](https://doldur.pro-tech.az/operator/electrify-az/): 8 məkan, 23 stansiya, 30 soket; tarif aralığı 0,28–0,30 ₼/kWh; canlı status var
+- [ENRG.az](https://doldur.pro-tech.az/operator/enrg/): 7 məkan, stansiya sayı mənbədə yoxdur, 10 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,40 ₼/kWh; canlı status yox
+- [Sigma Charge](https://doldur.pro-tech.az/operator/sigma/): 4 məkan, stansiya sayı mənbədə yoxdur, 7 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); tarif aralığı 0,30 ₼/kWh; canlı status yox
 
 ## Tətbiq
 
 - [Google Play](https://play.google.com/store/apps/details?id=az.doldur)
 - [App Store](https://apps.apple.com/az/app/id6804632387)
 
-## Fiş (soket) növləri — yuva sayı
+## Fiş növləri — soket sayı
 
-- GB/T: 643
-- CCS2: 263
-- Növü bilinmir: 142
-- Type 2: 108
-- CHAdeMO: 59
-- Type 1: 4
-- NACS (Tesla): 2
+- GB/T: 653 soket
+- CCS2: 261 soket
+- Növü bilinmir: 142 soket
+- Type 2: 108 soket
+- CHAdeMO: 59 soket
+- Type 1: 4 soket
+- NACS (Tesla): 2 soket
+
+Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operator göstərilməyib» qrupunda soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər.
 
 ## Operator detalları
 
 ### iVolt
-- Stansiya: 101; DC: 70; yuva: 351
-- Tarif: 0,26–0,30 ₼ /kWh (100 stansiyada)
+- Say: 105 məkan, 263 stansiya (102 məkanda), 357 soket; DC olan məkan: 71
+- Tarif aralığı: 0,26–0,30 ₼ /kWh (104 məkanda qeydə alınıb)
 - Canlı status: var
 - Telefon: +994 12 404 23 23
 - App Store: https://apps.apple.com/az/app/ivolt/id6502763303
@@ -88,8 +101,8 @@
 - Səhifə: https://doldur.pro-tech.az/operator/ivolt/
 
 ### Azərişıq
-- Stansiya: 84; DC: 82; yuva: 132
-- Tarif: 0,26 ₼ /kWh (44 stansiyada)
+- Say: 84 məkan, stansiya sayı mənbədə yoxdur, 132 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 82
+- Tarif aralığı: 0,26 ₼ /kWh (44 məkanda qeydə alınıb)
 - Canlı status: yox
 - Telefon: 199
 - App Store: https://apps.apple.com/az/app/az%C9%99ri%C5%9F%C4%B1q-vep-ev-charging/id6639613345
@@ -97,8 +110,8 @@
 - Səhifə: https://doldur.pro-tech.az/operator/azerisiq/
 
 ### ELEKTRA AZ (bazada «E-lektra»)
-- Stansiya: 66; DC: 64; yuva: 175
-- Tarif: 0,28–0,35 ₼ /kWh (66 stansiyada)
+- Say: 66 məkan, 99 stansiya, 177 soket; DC olan məkan: 64
+- Tarif aralığı: 0,28–0,35 ₼ /kWh (66 məkanda qeydə alınıb)
 - Canlı status: var
 - Başlatma: tətbiqlə, QR kodla
 - Telefon: +994 51 215 78 99
@@ -107,8 +120,8 @@
 - Səhifə: https://doldur.pro-tech.az/operator/elektra/
 
 ### TOK
-- Stansiya: 53; DC: 53; yuva: 98
-- Tarif: bazada yoxdur /kWh (0 stansiyada)
+- Say: 53 məkan, stansiya sayı mənbədə yoxdur, 98 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 53
+- Tarif aralığı: bazada yoxdur /kWh (0 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə
 - Telefon: +994 50 202 72 44
@@ -117,8 +130,8 @@
 - Səhifə: https://doldur.pro-tech.az/operator/tok/
 
 ### Charge.az
-- Stansiya: 42; DC: 32; yuva: 136
-- Tarif: 0,25–0,29 ₼ /kWh (37 stansiyada)
+- Say: 42 məkan, stansiya sayı mənbədə yoxdur, 136 soket; DC olan məkan: 32
+- Tarif aralığı: 0,25–0,29 ₼ /kWh (37 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə
 - Telefon: +994 12 526 99 99
@@ -127,16 +140,16 @@
 - Səhifə: https://doldur.pro-tech.az/operator/charge-az/
 
 ### Touch Station
-- Stansiya: 39; DC: 33; yuva: 57
-- Tarif: 0,40 ₼ /kWh (33 stansiyada)
+- Say: 39 məkan, stansiya sayı mənbədə yoxdur, 57 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 33
+- Tarif aralığı: 0,40 ₼ /kWh (33 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə
 - App Store: https://apps.apple.com/az/app/touch-charging-stations/id1596919793
 - Səhifə: https://doldur.pro-tech.az/operator/touch-station/
 
 ### Gofar
-- Stansiya: 26; DC: 18; yuva: 26
-- Tarif: bazada yoxdur /kWh (0 stansiyada)
+- Say: 26 məkan, stansiya sayı mənbədə yoxdur, 26 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 18
+- Tarif aralığı: bazada yoxdur /kWh (0 məkanda qeydə alınıb)
 - Canlı status: yox
 - Telefon: +994 12 311 30 47
 - App Store: https://apps.apple.com/az/app/gofar/id6590616389
@@ -144,15 +157,15 @@
 - Səhifə: https://doldur.pro-tech.az/operator/gofar/
 
 ### Electrify.az
-- Stansiya: 8; DC: 6; yuva: 30
-- Tarif: 0,28–0,30 ₼ /kWh (8 stansiyada)
+- Say: 8 məkan, 23 stansiya, 30 soket; DC olan məkan: 6
+- Tarif aralığı: 0,28–0,30 ₼ /kWh (8 məkanda qeydə alınıb)
 - Canlı status: var
 - App Store: https://apps.apple.com/az/app/electrify-az/id6474780106
 - Səhifə: https://doldur.pro-tech.az/operator/electrify-az/
 
 ### ENRG.az
-- Stansiya: 7; DC: 4; yuva: 10
-- Tarif: 0,40 ₼ /kWh (4 stansiyada)
+- Say: 7 məkan, stansiya sayı mənbədə yoxdur, 10 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 4
+- Tarif aralığı: 0,40 ₼ /kWh (4 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: QR kodla
 - Telefon: +994 99 850 55 00
@@ -161,8 +174,8 @@
 - Səhifə: https://doldur.pro-tech.az/operator/enrg/
 
 ### Sigma Charge
-- Stansiya: 4; DC: 4; yuva: 7
-- Tarif: 0,30 ₼ /kWh (2 stansiyada)
+- Say: 4 məkan, stansiya sayı mənbədə yoxdur, 7 soket (soket sayı dövlət reyestrinə görədir, dəqiq olmaya bilər); DC olan məkan: 4
+- Tarif aralığı: 0,30 ₼ /kWh (2 məkanda qeydə alınıb)
 - Canlı status: yox
 - Başlatma: tətbiqlə, QR kodla
 - App Store: https://apps.apple.com/az/app/sigma-charge/id6476268128
@@ -171,7 +184,7 @@
 
 ## Doldur necə işləyir
 
-- Stansiya datası operatorların açıq mənbələrindən və dövlət reyestrindən toplanır; canlı status yalnız operator açıq verəndə var.
+- Şarj məkanlarının datası operatorların açıq mənbələrindən və dövlət reyestrindən toplanır; canlı status yalnız operator açıq verəndə var.
 - Maşının modelini seçirsən (87 marka, 438 model kataloqu) — Doldur batareya həcminə və tarifə görə tam şarj xərcini və müddətini hesablayır.
 - Marşrut planı batareya faizinə görə yol üstü şarj dayanacaqlarını təklif edir.
 - Xəritə və hesablama qeydiyyatsızdır; hesab yalnız şarj jurnalı, favoritlər və rəylər üçündür.
@@ -181,13 +194,14 @@
 - Şarj satmır və ödəniş qəbul etmir — ödəniş operatorun öz tətbiqindədir.
 - Şarjı uzaqdan başlatmır və stansiyanı rezerv etmir.
 - Canlı status verməyən operatorlar üçün «boşdur» təxmin etmir — «bilinmir» yazır.
-- Tarif zəmanəti vermir: tarif qeydə alındığı tarixlə göstərilir, operator dəyişə bilər.
+- Stansiya sayını soket sayından təxmin etmir.
+- Tarif zəmanəti vermir: tarif qeydə alındığı tarixlə saxlanılır, operator dəyişə bilər.
 
 ## Metodologiya
 
-- Şəhər/ərazi stansiyanın koordinatına görə ən yaxın yaşayış məntəqəsi mərkəzinə (15 km-ə qədər) bağlanır; inzibati sərhəd deyil.
+- Şəhər/ərazi məkanın koordinatına görə ən yaxın yaşayış məntəqəsi mərkəzinə (15 km-ə qədər) bağlanır; inzibati sərhəd deyil.
 - Qiymət enerji haqqıdır (₼/kWh); parkinq və gözləmə haqqı ayrıca ola bilər.
-- Məlumat tarixi: 18.11.2026 17:58 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
+- Məlumat tarixi: 20.11.2026 16:29 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
 
 ## Əlaqə
 

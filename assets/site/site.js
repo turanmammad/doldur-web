@@ -1,4 +1,4 @@
-// Doldur sayt — tema açarı + «bu an ən ucuz boş DC» canlı kartı.
+// Doldur sayt — tema açarı + «bu an ən ucuz boş DC» canlı kartı (20.11: məkan · stansiya · soket terminologiyası).
 // Səhifə JS-siz də tam mənalıdır: kartın statik variantı HTML-dədir (ölçmə tarixi ilə),
 // burada yalnız relay keşindən (doldur-relay, 300 s) təzə məlumatla əvəzlənir.
 (function () {
@@ -40,7 +40,21 @@
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function initials(n) { var p = (n || '?').replace(/[^\p{L}\p{N} ]/gu, ' ').trim().split(/\s+/); return (p.length > 1 ? p[0][0] + p[1][0] : p[0].slice(0, 2)).toUpperCase(); }
 
-  /** Ən ucuz boş DC: təzə tarif, son 60 dəqiqədə yenilənmiş status, boş DC yuva, giriş məhdudiyyəti yoxdur. */
+  /** Rəqəmdən sonra 3-cü şəxs mənsubiyyət şəkilçisi: 8-i, 2-si, 3-ü, 6-sı, 9-u, 40-ı (oxunuşa görə). */
+  function poss(n) {
+    var ONES = ['', 'i', 'si', 'ü', 'ü', 'i', 'sı', 'si', 'i', 'u'];
+    var TENS = ['', 'u', 'si', 'u', 'ı', 'si', 'ı', 'i', 'i', 'ı'];
+    n = Math.abs(Math.round(n));
+    var suf = n % 10 ? ONES[n % 10] : (Math.floor(n / 10) % 10 ? TENS[Math.floor(n / 10) % 10] : (Math.floor(n / 100) % 10 ? 'ü' : 'i'));
+    return n + '-' + suf;
+  }
+
+  /**
+   * Ən ucuz boş DC: təzə tarif, son FRESH_MIN dəqiqədə yenilənmiş status, giriş məhdudiyyəti yoxdur.
+   * Terminologiya (20.11): MƏKAN = siyahı sətri · STANSİYA = şarj cihazı · SOKET.
+   * Stansiya sayı məlumdursa (`dc_posts`, 0119): DC stansiya YALNIZ bütün DC soketləri boşdursa boş sayılır
+   * (`dc_posts_free`) → «DC: 10 stansiyadan 8-i boş». Bilinmirsə → «N boş DC soket». Soketdən stansiya hesablanmır.
+   */
   function pick(list, now) {
     var out = [];
     list.forEach(function (s) {
@@ -54,7 +68,10 @@
         if (c.current_kind === 'dc' && c.count_available > 0) { free += c.count_available; if (c.power_kw > kw) kw = c.power_kw; }
       });
       if (!free) return;
-      out.push({ id: s.id, name: s.name, op: s.operator_name, price: t.price_per_kwh, kw: kw, free: free, age: Math.round(age) });
+      var posts = typeof s.dc_posts === 'number' && s.dc_posts > 0 && typeof s.dc_posts_free === 'number';
+      if (posts && !s.dc_posts_free) return; // boş soket var, amma tam boş stansiya yoxdur
+      var freeT = posts ? 'DC: ' + s.dc_posts + ' stansiyadan ' + poss(s.dc_posts_free) + ' boş' : free + ' boş DC soket';
+      out.push({ id: s.id, name: s.name, op: s.operator_name, price: t.price_per_kwh, kw: kw, freeT: freeT, age: Math.round(age) });
     });
     out.sort(function (a, b) { return a.price - b.price || b.kw - a.kw || a.name.localeCompare(b.name, 'az'); });
     return out;
@@ -72,8 +89,8 @@
     main.appendChild(el('span', 'st-name', x.name));
     var meta = el('span', 'st-meta');
     meta.appendChild(el('span', null, opName(x.op)));
-    meta.appendChild(el('span', 'tag tag-dc', 'DC ' + Math.round(x.kw) + ' kW'));
-    meta.appendChild(el('span', 'tag tag-ok', x.free + ' boş'));
+    meta.appendChild(el('span', 'tag tag-ok', x.freeT));
+    meta.appendChild(el('span', 'tag tag-dc', Math.round(x.kw) + ' kW-a qədər'));
     main.appendChild(meta);
     var pr = el('span', 'st-price');
     pr.appendChild(el('b', null, x.price.toFixed(2).replace('.', ',') + ' ₼'));
@@ -101,9 +118,9 @@
       top.slice(0, 3).forEach(function (x) { ul.appendChild(row(x)); });
       var d = new Date(now);
       var hh = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
-      title.textContent = 'Bu an ən ucuz boş DC stansiyalar';
+      title.textContent = 'Bu an ən ucuz boş DC məkanlar';
       stamp.textContent = 'canlı · ' + hh;
-      if (foot) foot.textContent = 'Boş DC yuvası olan ' + top.length + ' stansiya içindən. Status son ' + FRESH_MIN + ' dəqiqədə operatordan gəlib; tarif operatorun açıq məlumatıdır.';
+      if (foot) foot.textContent = 'Boş DC stansiyası və ya soketi olan ' + top.length + ' məkan içindən. Status son ' + FRESH_MIN + ' dəqiqədə operatordan gəlib; tarif operatorun açıq məlumatıdır. «kW-a qədər» — boş DC soketlərin ən böyük gücü.';
       card.setAttribute('data-state', 'live');
     })
     .catch(function () { clearTimeout(timer); /* statik variant qalır */ });

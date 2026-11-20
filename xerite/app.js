@@ -689,9 +689,8 @@ class App extends Component {
         socksT: [...new Set(cs.map((k) => L.CONNECTOR_LABEL[k.type] || '—'))].join(' / '), carSocks: car ? L.carSocketsLabel(car) : '',
         conns: cs.map((k) => {
           const f = car ? L.fitOf(k, car) : null, st2 = L.statusOf(k.status);
-          const cnt = k.count && k.count > 1 ? k.count : null;
           return { t: L.CONNECTOR_LABEL[k.type] || 'Naməlum soket', cur: k.current_kind === 'dc' ? 'DC' : 'AC', kw: (k.power_estimated ? '≈' : '') + L.kwText(k.power_kw || 0),
-            count: cnt ? (k.count_available != null ? k.count_available + ' boş / ' + cnt : '×' + cnt) : null,
+            count: L.groupFreeText(k.count, k.count_available, k.count_unknown),
             match: !!(f && f.kind === 'native'), unknownType: !!(f && f.kind === 'typeUnknown'), noFit: !!car && !f,
             label: st2.label, color: st2.color, on: selConn && selConn.id === k.id,
             pick: () => this.setState({ connSel: k.id }) };
@@ -705,6 +704,8 @@ class App extends Component {
         appStore: opInfo && opInfo.app_store_url, playStore: opInfo && opInfo.play_store_url,
         reviews, reviewCount: reviews.length, reviewsLoading: s.reviews == null,
         dcCount,
+        // «21 stansiya · 31 soket» — stansiya sayı yalnız mənbə verəndə (post_count; detal və ya siyahı sətrindən)
+        unitsT: L.stationUnitsText(d.post_count != null ? d.post_count : (selRow && selRow.s && selRow.s.post_count), cs),
         navLinks: [
           { label: 'Google Xəritə', ab: 'G', bg: dark ? '#1E3136' : '#E3EDFF', fg: dark ? '#7FAEFF' : '#1E4FA8', href: 'https://www.google.com/maps/dir/?api=1&destination=' + ll + '&travelmode=driving' },
           { label: 'Waze', ab: 'W', bg: dark ? '#1E3136' : '#E1F4FB', fg: dark ? '#6FD3F5' : '#0B6A8A', href: 'https://waze.com/ul?ll=' + ll + '&navigate=yes' },
@@ -784,10 +785,13 @@ class App extends Component {
       const st = statsByName.get(opKey(o.name)) || { stations: 0, dc: 0, ac: 0, live: 0, priced: 0, noPrice: 0 };
       const range = L.priceRangeText(st);
       return {
-        id: o.name, n: o.name, ab: L.initials(o.name), icon: iconUrl(o.name, o.slug), count: st.stations + ' stansiya',
-        price: range || '—', priceNote: st.stations ? (st.priced ? st.priced + '/' + st.stations + ' stansiyada tarif var' : 'Tarif bazada yoxdur') : '',
+        // `st.stations` = MƏKAN sayı. Stansiya sayı yalnız mənbə verəndə; əks halda soket sayı.
+        id: o.name, n: o.name, ab: L.initials(o.name), icon: iconUrl(o.name, o.slug),
+        count: st.stations + ' məkan · ' + (st.postsKnown && st.postsKnown === st.stations ? st.posts + ' stansiya'
+          : st.postsKnown ? st.posts + ' stansiya (' + st.postsKnown + ' məkanda)' : (st.sockets || 0) + ' soket'),
+        price: range || '—', priceNote: st.stations ? (st.priced ? st.priced + '/' + st.stations + ' məkanda tarif var' : 'Tarif bazada yoxdur') : '',
         kinds: [st.dc ? 'DC ' + st.dc : null, st.ac ? 'AC ' + st.ac : null].filter(Boolean).join(' · ') || '—',
-        live: st.live > 0 ? 'Bəli · ' + st.live + ' stansiya' : 'Xeyr', liveOn: st.live > 0,
+        live: st.live > 0 ? 'Bəli · ' + st.live + ' məkan' : 'Xeyr', liveOn: st.live > 0,
         phone: o.support_phone, phoneHref: o.support_phone ? 'tel:' + o.support_phone.replace(/[^\d+]/g, '') : null,
         appStore: o.app_store_url, playStore: o.play_store_url, hasApp: !!(o.app_store_url || o.play_store_url), appOpen: s.opsOpen === o.name,
         toggleApp: () => this.setState({ opsOpen: s.opsOpen === o.name ? null : o.name }),
@@ -901,7 +905,7 @@ class App extends Component {
       sockChips: [['all', 'Hər soket'], ['ccs2', 'CCS2'], ['gbt', 'GB/T'], ['type2', 'Type 2']].map(([k, label]) => Object.assign({ label, on: s.sock === k, go: () => this.setState({ sock: k, listLimit: 50 }) }, chip(s.sock === k))),
       list: listShown.map(rowView), listEmpty: !s.loading && !s.loadErr && !list.length, moreCount: Math.max(0, list.length - listShown.length),
       showMore: () => this.setState({ listLimit: s.listLimit + 50 }),
-      countText: list.length + ' stansiya · ' + (car ? SORT_LABEL[s.sort] : ({ best: 'boş olanlar əvvəl', cost: 'tarifi ucuz olan əvvəl' }[s.sort] || SORT_LABEL[s.sort])) + (s.onlyCompat && car ? ' · uyğun soket' : '') + (s.geo ? '' : ' · məsafə Bakı mərkəzindən'),
+      countText: list.length + ' məkan · ' + (car ? SORT_LABEL[s.sort] : ({ best: 'boş olanlar əvvəl', cost: 'tarifi ucuz olan əvvəl' }[s.sort] || SORT_LABEL[s.sort])) + (s.onlyCompat && car ? ' · uyğun soket' : '') + (s.geo ? '' : ' · məsafə Bakı mərkəzindən'),
       opFilterName, clearOp: () => this.setState({ opFilter: null }, () => this.pushUrl(true)),
       resetFilters: () => this.setState({ q: '', type: 'all', sock: 'all', onlyFree: false, onlyCompat: false, opFilter: null }),
       hasCar: !!car, carShort: car ? this.carName(car) : 'Maşın seç', carSocks: car ? L.carSocketsLabel(car) : '',
@@ -1004,16 +1008,16 @@ class App extends Component {
     if (k === 'live_prices') {
       if (!ctx.ready) return [['note', 'Canlı rəqəmlər yüklənir…']];
       const rows = ctx.stats.filter((o) => !L.isUnknownOperator(o.name) && o.stations > 0).map((o) => [o.name, L.priceRangeText(o) ? L.priceRangeText(o) + '/kWh' : 'bazada yoxdur', o.priced + ' / ' + o.stations]);
-      return [['t', ['Operator', 'Tarif (₼/kWh)', 'Tarifli / cəmi stansiya'], rows]];
+      return [['t', ['Operator', 'Tarif (₼/kWh)', 'Tarifli / cəmi məkan'], rows]];
     }
     if (k === 'live_summary') {
       if (!ctx.ready) return [['note', 'Canlı rəqəmlər yüklənir…']];
       const st = ctx.stations;
       const priced = st.filter((x) => L.tariffShowsNumber(x.tariff)).map((x) => x.tariff.price_per_kwh).sort((a, b) => a - b);
       const med = priced.length ? (priced.length % 2 ? priced[(priced.length - 1) / 2] : (priced[priced.length / 2 - 1] + priced[priced.length / 2]) / 2) : null;
-      const txt = 'Bu səhifə açılan anda Doldur bazasında ' + st.length + ' aktiv stansiya var; onlardan ' + priced.length + '-də tarif məlumatı mövcuddur' +
+      const txt = 'Bu səhifə açılan anda Doldur bazasında ' + st.length + ' aktiv şarj məkanı var; onlardan ' + priced.length + '-də tarif məlumatı mövcuddur' +
         (priced.length ? ' — ən aşağı ' + L.num(priced[0], 2) + ' ₼, ən yuxarı ' + L.num(priced[priced.length - 1], 2) + ' ₼, median ' + L.num(med, 2) + ' ₼/kWh.' : '.') +
-        ' Qalan ' + (st.length - priced.length) + ' stansiyada qiymət bilinmir — tətbiq onlar üçün rəqəm uydurmur.';
+        ' Qalan ' + (st.length - priced.length) + ' məkanda qiymət bilinmir — tətbiq onlar üçün rəqəm uydurmur.';
       return [['p', txt]];
     }
     if (k === 'live_sockets') {
@@ -1021,7 +1025,7 @@ class App extends Component {
       const keys = [['ccs2', 'dc', 'CCS2'], ['gbt', 'dc', 'GB/T DC'], ['gbt', 'ac', 'GB/T AC'], ['type2', 'ac', 'Type 2'], ['chademo', 'dc', 'CHAdeMO']];
       const rows = keys.map(([t, cur, label]) => [label, cur.toUpperCase(), String(ctx.stations.filter((x) => (x.connectors || []).some((k2) => k2.type === t && k2.current_kind === cur)).length)]);
       const unk = ctx.stations.filter((x) => (x.connectors || []).some((k2) => k2.type === 'unknown')).length;
-      return [['t', ['Soket', 'Cərəyan', 'Stansiya sayı'], rows], ['note', 'Cəmi ' + ctx.stations.length + ' aktiv stansiya; bir stansiyada bir neçə soket ola bilər. ' + unk + ' stansiyada ən az bir konnektorun növü mənbədə göstərilməyib.']];
+      return [['t', ['Soket', 'Cərəyan', 'Məkan sayı'], rows], ['note', 'Cəmi ' + ctx.stations.length + ' aktiv şarj məkanı; bir məkanda bir neçə soket ola bilər. ' + unk + ' məkanda ən az bir soketin növü mənbədə göstərilməyib.']];
     }
     if (k === 'live_example') {
       if (!ctx.ready) return [];
