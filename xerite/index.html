@@ -62,6 +62,7 @@ if (/[?&]debug=1/.test(location.search)) { window.__errs = []; var push = functi
   var ce = console.error; console.error = function () { push('console.error: ' + Array.prototype.join.call(arguments, ' ')); ce.apply(console, arguments); }; }
 </script>
 <!-- importmap yoxdur: modullar tam URL ilə idxal olunur (iOS < 16.4 importmap dəstəkləmir) -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://doldur.pro-tech.az/xerite/#app","name":"Doldur — EV şarj xəritəsi","url":"https://doldur.pro-tech.az/xerite/","inLanguage":"az","applicationCategory":"TravelApplication","operatingSystem":"Web","description":"Azərbaycanda elektromobil şarj məkanları bir xəritədə: canlı status, tarif, maşınına uyğun soket və tam xərc hesabı.","offers":{"@type":"Offer","price":"0","priceCurrency":"AZN"},"publisher":{"@id":"https://doldur.pro-tech.az/#org"}}</script>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="/assets/site/track.js?v=2df12f94" defer></script>
 <script type="module" src="./app.js"></script>

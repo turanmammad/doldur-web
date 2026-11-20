@@ -552,6 +552,8 @@ class App extends Component {
     }
   }
   async logout() {
+    // 20.11: gündəlik «giriş-çıxış» hesabatı üçün (0122) — çıxışdan ƏVVƏL, hələ JWT ilə hesaba bağlı.
+    api.track('logout', { reason: 'user' });
     await api.signOut();
     this.setState({ user: null, profile: null, favIds: [], favs: null, hist: null, monthly: null });
     this.toast('Hesabdan çıxdın');
@@ -561,6 +563,7 @@ class App extends Component {
     this.setState({ delBusy: true });
     const r = await api.deleteAccount();
     if (r.error) { this.setState({ delBusy: false }); this.toast('Hesab silinmədi — yenidən cəhd et və ya info@pro-tech.az-a yaz.'); return; }
+    api.track('logout', { reason: 'account_deleted' });
     await api.signOut();
     this.setState({ delBusy: false, delOpen: false, delText: '', user: null, profile: null });
     this.toast('Hesab silindi');
