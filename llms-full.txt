@@ -11,7 +11,7 @@
 - Stansiya sayı yalnız operatorun öz mənbəsi verəndə göstərilir (iVolt, ELEKTRA AZ, Electrify.az); soket sayından hesablanmır.
 - «Şarj məntəqəsi» — məkanın sinonimidir (dövlət reyestrinin termini).
 
-## Əsas faktlar (20.11.2026 22:11 Bakı vaxtı, Doldur bazası)
+## Əsas faktlar (20.11.2026 22:13 Bakı vaxtı, Doldur bazası)
 
 - Aktiv şarj məkanı: 560 (DC olan: 485; yalnız AC: 75); aktiv soket: 1228.
 - Ümumi stansiya sayı verilmir: stansiya səviyyəsi yalnız bəzi operatorların mənbəsində var (aşağıda operator üzrə).
@@ -210,7 +210,7 @@ Qeyd: Azərişıq, TOK, Touch Station, Gofar, ENRG.az, Sigma Charge və «Operat
 
 - Şəhər/ərazi məkanın koordinatına görə ən yaxın yaşayış məntəqəsi mərkəzinə (15 km-ə qədər) bağlanır; inzibati sərhəd deyil.
 - Qiymət enerji haqqıdır (₼/kWh); parkinq və gözləmə haqqı ayrıca ola bilər.
-- Məlumat tarixi: 20.11.2026 22:11 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
+- Məlumat tarixi: 20.11.2026 22:13 (Bakı). Mənbə: Doldur bazası (doldur-relay keşi).
 
 ## Əlaqə
 
